@@ -4,7 +4,7 @@
   - [Álvaro Ortega Medina](https://github.com/alvortmed)
   - [Marta Verdugo Martínez](https://github.com/martaverdugo6)
   - [Enrique García Velasco](https://github.com/enriquegv7)
-- **Project description**: Analysis of the relationship between the 3 best leagues in the world: League Santander, the Premier League and Serie A
+- **Project description**: Analysis of the relationship between the students in Andalusia, libraries and sports
 - **Repository**: [gti-sos/SOS1819-05](https://github.com/gti-sos/SOS1819-05)
 - **URL**: http://sos1819-05.herokuapp.com/
 -  **APIs**:
