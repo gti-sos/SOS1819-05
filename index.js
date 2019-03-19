@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var app = express();
 
 app.use(bodyParser.json());
+
 app.use("/",express.static(__dirname+"/public"));
 
 var port = process.env.PORT || 8080;
@@ -316,6 +317,7 @@ app.delete("/studentsAndalucia/:city", (req,res)=>{
    }
     
 });
+
 
 app.listen(port, () =>{
     console.log("Magic server ready on port " + port);
