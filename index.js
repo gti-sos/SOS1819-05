@@ -67,7 +67,8 @@ var athletesPerformanceSportInitial = athletesPerformanceSport;
 //LOADINITIALDATA
 app.get("/athletes-performance-sport/loadInitialData",(req,res)=>{
     if(athletesPerformanceSport.length == 0){
-        res.send(athletesPerformanceSportInitial);
+        athletesPerformanceSport = athletesPerformanceSportInitial;
+        res.send(athletesPerformanceSport);
         console.log("La fuente de datos ha sido inicializada");
     }else{
         res.send(athletesPerformanceSport);
