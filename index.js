@@ -321,6 +321,127 @@ app.delete("/studentsAndalucia/:city", (req,res)=>{
 });
 
 
+
+/*---------------------------------------*/
+/*------------API ENRIQUE------------------*/
+/*---------------------------------------*/
+
+var libraries = [{
+    city: "almeria",
+    year: "2017", 
+    number : "97", 
+    activities: "79",
+    service: "96,62" 
+}, {
+    city: "cadiz",
+    year: "2017", 
+    number: "76", 
+    activitites: "58",
+    service: "99,76" 
+}];
+
+// GET /libraries/
+
+app.get("/libraries-stats", (req,res)=>{
+    res.send(libraries);
+});
+
+
+// POST /libraries/
+
+app.post("/libraries-stats", (req,res)=>{
+    
+    var newLlibraries = req.body;
+    
+    libraries.push(newLlibraries)
+    
+    res.sendStatus(201);
+});
+
+
+// DELETE /libraries/
+
+app.delete("/libraries-stats", (req,res)=>{
+    
+    libraries =  [];
+
+    res.sendStatus(200);
+});
+
+
+// GET /libraries-stats/almeria
+
+app.get("/libraries-stats/:city", (req,res)=>{
+
+    var city = req.params.city;
+
+    var filteredLibraries = libraries.filter((c) =>{
+       return c.city == city; 
+    })
+    
+    if (filteredLibraries.length >= 1){
+        res.send(filteredLibraries[0]);
+    }else{
+        res.sendStatus(404);
+    }
+
+});
+
+
+// PUT /libraries-stats/almeria
+
+app.put("/libraries-stats/:city", (req,res)=>{
+
+    var city = req.params.city;
+    var updatedLibraries = req.body;
+    var found = false;
+
+    var updatedLibraries = libraries.map((c) =>{
+    
+        if(c.city == city){
+            found = true;
+            return updatedLibraries;
+        }else{
+            return c;            
+        }
+ 
+    });
+    
+    if (found == false){
+        res.sendStatus(404);
+    }else{
+        libraries = updatedLibraries;
+        res.sendStatus(200);
+    }
+
+});
+
+
+// DELETE /libraries/almeria
+
+app.delete("/libraries-stats/:city", (req,res)=>{
+
+    var city = req.params.city;
+    var found = false;
+
+    var updatedLibraries = libraries.filter((c) =>{
+        
+            if(c.city == city)  
+                found = true;
+        
+            return c.city != city;
+    });
+    
+    if (found == false){
+        res.sendStatus(404);
+    }else{
+        libraries = updatedLibraries;
+        res.sendStatus(200);
+    }
+
+});
+
+
 app.listen(port, () =>{
     console.log("Magic server ready on port " + port);
 });
