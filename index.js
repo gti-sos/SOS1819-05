@@ -1,6 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var app = express();
+var API_PATH = "/api/v1";
 
 app.use(bodyParser.json());
 
@@ -65,7 +66,7 @@ var athletesPerformanceSport = [
 var athletesPerformanceSportInitial = athletesPerformanceSport;
 
 //LOADINITIALDATA
-app.get("/athletes-performance-sport/loadInitialData",(req,res)=>{
+app.get(API_PATH + "/athletes-performance-sport/loadInitialData",(req,res)=>{
     if(athletesPerformanceSport.length == 0){
         athletesPerformanceSport = athletesPerformanceSportInitial;
         res.send(athletesPerformanceSport);
@@ -76,30 +77,30 @@ app.get("/athletes-performance-sport/loadInitialData",(req,res)=>{
 });
 
 //GET RECURSO COMPLETO
-app.get("/athletes-performance-sport", (req,res)=>{
+app.get(API_PATH +"/athletes-performance-sport", (req,res)=>{
     console.log("/GET al recurso completo");
     res.send(athletesPerformanceSport);
 });
 //POST AL RECURSO COMPLETO
-app.post("/athletes-performance-sport",(req,res)=>{
+app.post(API_PATH +"/athletes-performance-sport",(req,res)=>{
     var athlete = req.body;
     console.log("new /POST");
     res.sendStatus(201);
     athletesPerformanceSport.push(athlete);
 });
 //PUT INCORRECTO
-app.put("/athletes-performance-sport",(req,res)=>{
+app.put(API_PATH +"/athletes-performance-sport",(req,res)=>{
    res.sendStatus(405);
    console.log("/PUT no permitido");
 });
 //DELETE AL RECURSO COMPLETO
-app.delete("/athletes-performance-sport",(req,res)=>{
+app.delete(API_PATH +"/athletes-performance-sport",(req,res)=>{
     console.log("/DELETE al recurso completo");
     res.sendStatus(200);
     athletesPerformanceSport = [];
 });
 //GET A UN RECURSO CONCRETO
-app.get("/athletes-performance-sport/:city", (req,res)=>{
+app.get(API_PATH +"/athletes-performance-sport/:city", (req,res)=>{
     var city = req.params.city;
     
     var filteredCity = athletesPerformanceSport.filter((c)=>{
@@ -114,12 +115,12 @@ app.get("/athletes-performance-sport/:city", (req,res)=>{
     console.log("/GET a un recurso concreto");
 });
 //POST INCORRECTO
-app.post("/athletes-performance-sport/:city",(req,res)=>{
+app.post(API_PATH +"/athletes-performance-sport/:city",(req,res)=>{
    res.sendStatus(405);
    console.log("/POST no permitido");
 });
 //PUT DE UN RECURSO CONCRETO
-app.put("/athletes-performance-sport/:city",(req,res)=>{
+app.put(API_PATH +"/athletes-performance-sport/:city",(req,res)=>{
     var city = req.params.city;
     var updatedAthlete = req.body;
     var found = false;
@@ -142,7 +143,7 @@ app.put("/athletes-performance-sport/:city",(req,res)=>{
     console.log("new /PUT");
 });
 //DELETE DE UN RECURSO CONCRETO
-app.delete("/athletes-performance-sport/:city",(req,res)=>{
+app.delete(API_PATH +"/athletes-performance-sport/:city",(req,res)=>{
     var city = req.params.city;
     var found = false;
    
@@ -228,13 +229,13 @@ app.get("/studentsAndalucia/loadInitialData",(req,res)=>{
 
 //GET /studentsAndalucia/
 
-app.get("/studentsAndalucia", (req,res)=>{
+app.get(API_PATH +"/studentsAndalucia", (req,res)=>{
     res.send(studentsAndalucia);
 });
 
 //POST /studentsAndalucia/
 
-app.post("/studentsAndalucia", (req,res)=>{
+app.post(API_PATH +"/studentsAndalucia", (req,res)=>{
    var newStudentsAndalucia = req.body;
    
    studentsAndalucia.push(newStudentsAndalucia);
@@ -246,7 +247,7 @@ app.post("/studentsAndalucia", (req,res)=>{
 
 //DELETE /studentsAndalucia/
 
-app.delete("/studentsAndalucia", (req,res)=>{
+app.delete(API_PATH +"/studentsAndalucia", (req,res)=>{
  
     studentsAndalucia = [];
     
@@ -257,7 +258,7 @@ app.delete("/studentsAndalucia", (req,res)=>{
 
 //GET /studentsAndalucia/2017/malaga
 
-app.get("/studentsAndalucia/:city", (req,res)=>{
+app.get(API_PATH +"/studentsAndalucia/:city", (req,res)=>{
     
     var city = req.params.city;
 
@@ -275,7 +276,7 @@ app.get("/studentsAndalucia/:city", (req,res)=>{
 
 //PUT /studentsAndalucia/malaga
 
-app.put("/studentsAndalucia/:city", (req,res)=>{
+app.put(API_PATH +"/studentsAndalucia/:city", (req,res)=>{
     
     var city = req.params.city;
     var updateStudents = req.body;
@@ -317,7 +318,7 @@ app.put("/studentsAndalucia/",(req,res)=>{
 
 //DELETE /studentsAndalucia/malaga
 
-app.delete("/studentsAndalucia/:city", (req,res)=>{
+app.delete(API_PATH +"/studentsAndalucia/:city", (req,res)=>{
     
     var city = req.params.city;
     var found = false;
@@ -365,14 +366,14 @@ var libraries = [{
 
 // GET /libraries/
 
-app.get("/libraries-stats", (req,res)=>{
+app.get(API_PATH +"/libraries-stats", (req,res)=>{
     res.send(libraries);
 });
 
 
 // POST /libraries/
 
-app.post("/libraries-stats", (req,res)=>{
+app.post(API_PATH +"/libraries-stats", (req,res)=>{
     
     var newLlibraries = req.body;
     
@@ -384,7 +385,7 @@ app.post("/libraries-stats", (req,res)=>{
 
 // DELETE /libraries/
 
-app.delete("/libraries-stats", (req,res)=>{
+app.delete(API_PATH +"/libraries-stats", (req,res)=>{
     
     libraries =  [];
 
@@ -394,7 +395,7 @@ app.delete("/libraries-stats", (req,res)=>{
 
 // GET /libraries-stats/almeria
 
-app.get("/libraries-stats/:city", (req,res)=>{
+app.get(API_PATH +"/libraries-stats/:city", (req,res)=>{
 
     var city = req.params.city;
 
@@ -413,7 +414,7 @@ app.get("/libraries-stats/:city", (req,res)=>{
 
 // PUT /libraries-stats/almeria
 
-app.put("/libraries-stats/:city", (req,res)=>{
+app.put(API_PATH +"/libraries-stats/:city", (req,res)=>{
 
     var city = req.params.city;
     var updatedLibraries = req.body;
@@ -442,7 +443,7 @@ app.put("/libraries-stats/:city", (req,res)=>{
 
 // DELETE /libraries/almeria
 
-app.delete("/libraries-stats/:city", (req,res)=>{
+app.delete(API_PATH +"/libraries-stats/:city", (req,res)=>{
 
     var city = req.params.city;
     var found = false;
