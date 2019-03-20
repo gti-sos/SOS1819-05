@@ -215,6 +215,18 @@ var studentsAndalucia = [{
     vocationalTraining: "2.457"
 }];
 
+var studentsAndaluciaInitial = studentsAndalucia;
+
+//LOADINITIALDATA
+app.get("/studentsAndalucia/loadInitialData",(req,res)=>{
+    if(studentsAndalucia.length == 0){
+        studentsAndalucia = studentsAndaluciaInitial;
+        res.send(studentsAndalucia);
+    }else{
+        res.send(studentsAndalucia);
+    }
+});
+
 //GET /studentsAndalucia/
 
 app.get(API_PATH +"/students-andalucia", (req,res)=>{
@@ -228,7 +240,7 @@ app.post(API_PATH +"/students-andalucia", (req,res)=>{
    
    studentsAndalucia.push(newStudentsAndalucia);
    
-   res.sendStatus(200);
+   res.sendStatus(201);
     
 });
 
@@ -239,7 +251,7 @@ app.delete(API_PATH +"/students-andalucia", (req,res)=>{
  
     studentsAndalucia = [];
     
-   res.sendStatus(201);
+   res.sendStatus(200);
     
 });
 
@@ -290,6 +302,18 @@ app.put(API_PATH +"/students-andalucia/:city", (req,res)=>{
        res.sendStatus(200);
    }
     
+});
+
+//POST incorrecto
+app.post("/studentsAndalucia/:city",(req,res)=>{
+   res.sendStatus(405);
+   console.log("/POST no permitido");
+});
+
+//PUT incorrecto
+app.put("/studentsAndalucia/",(req,res)=>{
+   res.sendStatus(405);
+   console.log("/PUT no permitido");
 });
 
 //DELETE /studentsAndalucia/malaga
