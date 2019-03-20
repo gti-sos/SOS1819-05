@@ -217,13 +217,13 @@ var studentsAndalucia = [{
 
 //GET /studentsAndalucia/
 
-app.get(API_PATH +"/studentsAndalucia", (req,res)=>{
+app.get(API_PATH +"/students-andalucia", (req,res)=>{
     res.send(studentsAndalucia);
 });
 
 //POST /studentsAndalucia/
 
-app.post(API_PATH +"/studentsAndalucia", (req,res)=>{
+app.post(API_PATH +"/students-andalucia", (req,res)=>{
    var newStudentsAndalucia = req.body;
    
    studentsAndalucia.push(newStudentsAndalucia);
@@ -235,7 +235,7 @@ app.post(API_PATH +"/studentsAndalucia", (req,res)=>{
 
 //DELETE /studentsAndalucia/
 
-app.delete(API_PATH +"/studentsAndalucia", (req,res)=>{
+app.delete(API_PATH +"/students-andalucia", (req,res)=>{
  
     studentsAndalucia = [];
     
@@ -246,7 +246,7 @@ app.delete(API_PATH +"/studentsAndalucia", (req,res)=>{
 
 //GET /studentsAndalucia/2017/malaga
 
-app.get(API_PATH +"/studentsAndalucia/:city", (req,res)=>{
+app.get(API_PATH +"/students-andalucia/:city", (req,res)=>{
     
     var city = req.params.city;
 
@@ -264,7 +264,7 @@ app.get(API_PATH +"/studentsAndalucia/:city", (req,res)=>{
 
 //PUT /studentsAndalucia/malaga
 
-app.put(API_PATH +"/studentsAndalucia/:city", (req,res)=>{
+app.put(API_PATH +"/students-andalucia/:city", (req,res)=>{
     
     var city = req.params.city;
     var updateStudents = req.body;
@@ -294,7 +294,7 @@ app.put(API_PATH +"/studentsAndalucia/:city", (req,res)=>{
 
 //DELETE /studentsAndalucia/malaga
 
-app.delete(API_PATH +"/studentsAndalucia/:city", (req,res)=>{
+app.delete(API_PATH +"/students-andalucia/:city", (req,res)=>{
     
     var city = req.params.city;
     var found = false;
