@@ -1,6 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var app = express();
+var API_PATH = "/api/v1";
 
 app.use(bodyParser.json());
 
@@ -65,7 +66,7 @@ var athletesPerformanceSport = [
 var athletesPerformanceSportInitial = athletesPerformanceSport;
 
 //LOADINITIALDATA
-app.get("/athletes-performance-sport/loadInitialData",(req,res)=>{
+app.get(API_PATH + "/athletes-performance-sport/loadInitialData",(req,res)=>{
     if(athletesPerformanceSport.length == 0){
         athletesPerformanceSport = athletesPerformanceSportInitial;
         res.send(athletesPerformanceSport);
@@ -76,30 +77,30 @@ app.get("/athletes-performance-sport/loadInitialData",(req,res)=>{
 });
 
 //GET RECURSO COMPLETO
-app.get("/athletes-performance-sport", (req,res)=>{
+app.get(API_PATH +"/athletes-performance-sport", (req,res)=>{
     console.log("/GET al recurso completo");
     res.send(athletesPerformanceSport);
 });
 //POST AL RECURSO COMPLETO
-app.post("/athletes-performance-sport",(req,res)=>{
+app.post(API_PATH +"/athletes-performance-sport",(req,res)=>{
     var athlete = req.body;
     console.log("new /POST");
     res.sendStatus(201);
     athletesPerformanceSport.push(athlete);
 });
 //PUT INCORRECTO
-app.put("/athletes-performance-sport",(req,res)=>{
+app.put(API_PATH +"/athletes-performance-sport",(req,res)=>{
    res.sendStatus(405);
    console.log("/PUT no permitido");
 });
 //DELETE AL RECURSO COMPLETO
-app.delete("/athletes-performance-sport",(req,res)=>{
+app.delete(API_PATH +"/athletes-performance-sport",(req,res)=>{
     console.log("/DELETE al recurso completo");
     res.sendStatus(200);
     athletesPerformanceSport = [];
 });
 //GET A UN RECURSO CONCRETO
-app.get("/athletes-performance-sport/:city", (req,res)=>{
+app.get(API_PATH +"/athletes-performance-sport/:city", (req,res)=>{
     var city = req.params.city;
     
     var filteredCity = athletesPerformanceSport.filter((c)=>{
@@ -114,12 +115,12 @@ app.get("/athletes-performance-sport/:city", (req,res)=>{
     console.log("/GET a un recurso concreto");
 });
 //POST INCORRECTO
-app.post("/athletes-performance-sport/:city",(req,res)=>{
+app.post(API_PATH +"/athletes-performance-sport/:city",(req,res)=>{
    res.sendStatus(405);
    console.log("/POST no permitido");
 });
 //PUT DE UN RECURSO CONCRETO
-app.put("/athletes-performance-sport/:city",(req,res)=>{
+app.put(API_PATH +"/athletes-performance-sport/:city",(req,res)=>{
     var city = req.params.city;
     var updatedAthlete = req.body;
     var found = false;
@@ -142,7 +143,7 @@ app.put("/athletes-performance-sport/:city",(req,res)=>{
     console.log("new /PUT");
 });
 //DELETE DE UN RECURSO CONCRETO
-app.delete("/athletes-performance-sport/:city",(req,res)=>{
+app.delete(API_PATH +"/athletes-performance-sport/:city",(req,res)=>{
     var city = req.params.city;
     var found = false;
    
