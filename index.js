@@ -218,7 +218,7 @@ var studentsAndalucia = [{
 var studentsAndaluciaInitial = studentsAndalucia;
 
 //LOADINITIALDATA
-app.get("/studentsAndalucia/loadInitialData",(req,res)=>{
+app.get(API_PATH +"/studentsAndalucia/loadInitialData",(req,res)=>{
     if(studentsAndalucia.length == 0){
         studentsAndalucia = studentsAndaluciaInitial;
         res.send(studentsAndalucia);
