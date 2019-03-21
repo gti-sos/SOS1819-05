@@ -305,13 +305,13 @@ app.put(API_PATH +"/students-andalucia/:city", (req,res)=>{
 });
 
 //POST incorrecto
-app.post(API_PATH +"/studentsAndalucia/:city",(req,res)=>{
+app.post(API_PATH +"/students-andalucia/:city",(req,res)=>{
    res.sendStatus(405);
    console.log("/POST no permitido");
 });
 
 //PUT incorrecto
-app.put(API_PATH +"/studentsAndalucia/",(req,res)=>{
+app.put(API_PATH +"/students-andalucia/",(req,res)=>{
    res.sendStatus(405);
    console.log("/PUT no permitido");
 });
