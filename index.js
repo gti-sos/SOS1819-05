@@ -393,6 +393,19 @@ app.delete(API_PATH +"/libraries-stats", (req,res)=>{
 });
 
 
+//POST incorrecto
+app.post(API_PATH +"/libraries-stats/:city",(req,res)=>{
+   res.sendStatus(405);
+   console.log("/POST no permitido");
+});
+
+//PUT incorrecto
+app.put(API_PATH +"/libraries-stats/",(req,res)=>{
+   res.sendStatus(405);
+   console.log("/PUT no permitido");
+});
+
+
 // GET /libraries-stats/almeria
 
 app.get(API_PATH +"/libraries-stats/:city", (req,res)=>{
