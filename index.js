@@ -167,52 +167,52 @@ app.delete(API_PATH +"/athletes-performance-sport/:city",(req,res)=>{
 /*---------------------------------------*/
 var studentsAndalucia = [{
     city: "almeria",
-    year: "2017",
-    esoStudent: "31.925",
-    highSchoolStudent: "10.618",
-    vocationalTraining: "1.045"
+    year: 2017,
+    esoStudent: 31.925,
+    highSchoolStudent: 10.618,
+    vocationalTraining: 1.045
 },{
     city: "cadiz",
-    year: "2017",
-    esoStudent: "60.230",
-    highSchoolStudent: "21.499",
-    vocationalTraining: "2.219"
+    year: 2017,
+    esoStudent: 60.230,
+    highSchoolStudent: 21.499,
+    vocationalTraining: 2.219
 },{
     city: "cordoba",
-    year: "2017",
-    esoStudent: "34.346",
-    highSchoolStudent: "12.904",
-    vocationalTraining: "1.446"
+    year: 2017,
+    esoStudent: 34.346,
+    highSchoolStudent: 12.904,
+    vocationalTraining: 1.446
 },{
     city: "granada",
-    year: "2017",
-    esoStudent: "40.821",
-    highSchoolStudent: "15.536",
-    vocationalTraining: "1.564"
+    year: 2017,
+    esoStudent: 40.821,
+    highSchoolStudent: 15.536,
+    vocationalTraining: 1.564
 },{
     city: "huelva",
-    year: "2017",
-    esoStudent: "23.958",
-    highSchoolStudent: "7.638",
-    vocationalTraining: "1.020"
+    year: 2017,
+    esoStudent: 23.958,
+    highSchoolStudent: 7.638,
+    vocationalTraining: 1.020
 },{
     city: "jaen",
-    year: "2017",
-    esoStudent: "28.106",
-    highSchoolStudent: "10.759",
-    vocationalTraining: "966"
+    year: 2017,
+    esoStudent: 28.106,
+    highSchoolStudent: 10.759,
+    vocationalTraining: 966
 },{
     city: "malaga",
-    year: "2017",
-    esoStudent: "72.710",
-    highSchoolStudent: "25.868",
-    vocationalTraining: "2.275"
+    year: 2017,
+    esoStudent: 72.710,
+    highSchoolStudent: 25.868,
+    vocationalTraining: 2.275
 },{
     city: "sevilla",
-    year: "2017",
-    esoStudent: "92.661",
-    highSchoolStudent: "32.807",
-    vocationalTraining: "2.457"
+    year: 2017,
+    esoStudent: 92.661,
+    highSchoolStudent: 32.807,
+    vocationalTraining: 2.457
 }];
 
 var studentsAndaluciaInitial = studentsAndalucia;
