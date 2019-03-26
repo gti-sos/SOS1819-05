@@ -8,10 +8,10 @@ const MongoClient = require("mongodb").MongoClient;
 const uri_mvm = "mongodb+srv://test:test@sos-iyxd4.mongodb.net/sos?retryWrites=true";
 const client_mvm = new MongoClient(uri_mvm, { useNewUrlParser: true });
 
-var students;
+var studentsAndalucia;
 
 client_mvm.connect(err => {
-  students = client_mvm.db("sos1819").collection("students-andalucia");
+  studentsAndalucia = client_mvm.db("sos1819").collection("students-andalucia");
   console.log("Connected!");
 });
 
@@ -181,7 +181,7 @@ app.delete(API_PATH +"/athletes-performance-sport/:city",(req,res)=>{
 /*------------------------------------------------------------------------------------*/
 /*--------------------------------------API MARTA-------------------------------------*/
 /*------------------------------------------------------------------------------------*/
-var studentsAndalucia = [{
+var students = [{
     city: "almeria",
     year: 2017,
     esoStudent: 31.925,
@@ -247,7 +247,7 @@ app.get(API_PATH +"/students-andalucia/loadInitialData",(req,res)=>{
 
 app.get(API_PATH +"/students-andalucia", (req,res)=>{
     
-    students.find({}).toArray((err, studentsArray)=>{
+    studentsAndalucia.find({}).toArray((err, studentsArray)=>{
        
        res.send(studentsArray); 
     });
@@ -260,7 +260,7 @@ app.get(API_PATH +"/students-andalucia", (req,res)=>{
 app.post(API_PATH +"/students-andalucia", (req,res)=>{
    var newStudentsAndalucia = req.body;
    
-   studentsAndalucia.push(newStudentsAndalucia);
+   studentsAndalucia.insert(newStudentsAndalucia);
    
    res.sendStatus(201);
     
