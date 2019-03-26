@@ -17,21 +17,6 @@ client_mvm.connect(err => {
 
 
 
-
-const uri_egv ="mongodb+egv://test:test@sos-iyxd4.mongodb.net/test?retryWrites=true";
-const client_egv = new MongoClient(uri_egv, { useNewUrlParser: true });
-
-var libraries;
-
-client_egv.connect(err => {
-  libraries = client_egv.db("sos1819").collection("libraries-stats");
-  console.log("Connected!");
-});
-
-
-
-
-
 app.use(bodyParser.json());
 
 app.use("/",express.static(__dirname+"/public"));
@@ -483,7 +468,7 @@ app.post(API_PATH +"/libraries-stats", (req,res)=>{
     
     var newLlibraries = req.body;
     
-    libraries.push(newLlibraries)
+    libraries.insert(newLlibraries);
     
     res.sendStatus(201);
 });
@@ -493,16 +478,6 @@ app.delete(API_PATH +"/libraries-stats", (req,res)=>{
     libraries =  [];
 
     res.sendStatus(200);
-});
-//POST incorrecto
-app.post(API_PATH +"/libraries-stats/:city",(req,res)=>{
-   res.sendStatus(405);
-   console.log("/POST no permitido");
-});
-//PUT incorrecto
-app.put(API_PATH +"/libraries-stats/",(req,res)=>{
-   res.sendStatus(405);
-   console.log("/PUT no permitido");
 });
 // GET /libraries-stats/almeria
 app.get(API_PATH +"/libraries-stats/:city", (req,res)=>{
@@ -564,6 +539,16 @@ app.delete(API_PATH +"/libraries-stats/:city", (req,res)=>{
         libraries = updatedLibraries;
         res.sendStatus(200);
     }
+});
+//POST incorrecto
+app.post(API_PATH +"/libraries-stats/:city",(req,res)=>{
+   res.sendStatus(405);
+   console.log("/POST no permitido");
+});
+//PUT incorrecto
+app.put(API_PATH +"/libraries-stats/",(req,res)=>{
+   res.sendStatus(405);
+   console.log("/PUT no permitido");
 });
 
 
