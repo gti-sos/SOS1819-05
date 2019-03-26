@@ -390,7 +390,9 @@ app.put(API_PATH +"/students-andalucia/",(req,res)=>{
    res.sendStatus(405);
 });
 
-
+app.get("/api/v1/students-andalucia/docs/", (req, res) => {
+    res.redirect("https://documenter.getpostman.com/view/6870023/S17qS957");
+});
 
 
 
