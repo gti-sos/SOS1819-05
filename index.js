@@ -235,12 +235,15 @@ var studentsAndaluciaInitial = studentsAndalucia;
 
 //LOADINITIALDATA
 app.get(API_PATH +"/students-andalucia/loadInitialData",(req,res)=>{
-    if(studentsAndalucia.length == 0){
-        studentsAndalucia = studentsAndaluciaInitial;
-        res.send(studentsAndalucia);
-    }else{
-        res.send(studentsAndalucia);
-    }
+    studentsAndalucia.find({}).toArray((err, studentsArray)=>{
+        
+        if(studentsArray.length == 0){
+            studentsAndalucia.insert(studentsAndaluciaInitial);
+            res.send(studentsAndalucia);
+        }else{
+            res.send(studentsAndalucia);
+        }
+    });   
 });
 
 //GET /studentsAndalucia/
@@ -271,7 +274,7 @@ app.post(API_PATH +"/students-andalucia", (req,res)=>{
 
 app.delete(API_PATH +"/students-andalucia", (req,res)=>{
  
-    studentsAndalucia = [];
+    studentsAndalucia.remove({});
     
    res.sendStatus(200);
     
@@ -283,16 +286,17 @@ app.delete(API_PATH +"/students-andalucia", (req,res)=>{
 app.get(API_PATH +"/students-andalucia/:city", (req,res)=>{
     
     var city = req.params.city;
-
-   var filteredStudents = studentsAndalucia.filter((c)=>{
-       return c.city == city;
-   })
+    
+    studentsAndalucia.find({"city": city}).toArray((err, studentsArray)=>{
+       
+        res.send(studentsArray); 
+    });
    
-   if(filteredStudents.length >= 1){
-       res.send(filteredStudents[0]);
-   }else{
-       res.sendStatus(404);
-   }
+    if(studentsArray.length >= 1){
+        res.send(studentsArray);
+    }else{
+        res.sendStatus(404);
+    }
     
 });
 
