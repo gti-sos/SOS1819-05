@@ -3,7 +3,7 @@ var bodyParser = require("body-parser");
 var app = express();
 var API_PATH = "/api/v1";
 
-/*const MongoClient = require("mongodb").MongoClient;
+const MongoClient = require("mongodb").MongoClient;
 
 const uri_mvm ="mongodb+srv://test:test@sos-iyxd4.mongodb.net/test?retryWrites=true";
 const client_mvm = new MongoClient(uri_mvm, { useNewUrlParser: true });
@@ -15,16 +15,17 @@ client_mvm.connect(err => {
   console.log("Connected!");
 });
 
-*/
 
-const MongoClient = require("mongodb").MongoClient;
-const uri = "mongodb+srv://test:true@sos-brah9.mongodb.net/sos?retryWrites=true";
-const client = new MongoClient(uri, { useNewUrlParser: true });
+
+
+
+const uri_egv = "mongodb+srv://test:test@sos-brah9.mongodb.net/test?retryWrites=true";
+const client_egv = new MongoClient(uri_egv, { useNewUrlParser: true });
 
 var librariestats;
 
-client.connect(err => {
-  librariestats = client.db("test").collection("librarie-stats");
+client_egv.connect(err => {
+  librariestats = client_egv.db("sos1819").collection("libraries-stats");
   console.log("connected");
 });
 
@@ -409,9 +410,16 @@ app.get("/api/v1/students-andalucia/docs/", (req, res) => {
 
 
 
+
+
+
 /*---------------------------------------*/
 /*------------API ENRIQUE------------------*/
 /*---------------------------------------*/
+
+
+//LOADINITIALDATA
+app.get(API_PATH +"/libraries-stats/loadInitialData",(req,res)=>{
 
 var libraries = [{
     city: "Almeria",
@@ -423,137 +431,166 @@ var libraries = [{
     city: "Cadiz",
     year: 2017, 
     number: 76, 
-    activitites: 58,
+    activities: 58,
     service: 99.76
 }, {
     city: "Cordoba",
     year: 2017, 
     number: 95, 
-    activitites: 77,
+    activities: 77,
     service: 99.80 
 }, {
     city: "Granada",
     year: 2017, 
     number: 122, 
-    activitites: 97,
+    activities: 97,
     service: 89.65 
 }, {
     city: "Huelva",
     year: 2017, 
     number: 81, 
-    activitites: 70,
+    activities: 70,
     service: 96.62
 }, {
     city: "Jaen",
     year: 2017, 
     number: 105, 
-    activitites: 69,
+    activities: 69,
     service: 95.03 
 }, {
     city: "Malaga",
     year: 2017, 
     number: 152, 
-    activitites: 121,
+    activities: 121,
     service: 98.80 
 }, {
     city: "Sevilla",
     year: 2017, 
     number: 133, 
-    activitites: 110,
+    activities: 110,
     service: 98.77 
 }];
 
-var librariesInitial = libraries;
-
-//LOADINITIALDATA
-app.get(API_PATH +"/libraries-stats/loadInitialData",(req,res)=>{
-    if(libraries.length == 0){
-        libraries = librariesInitial;
-        res.send(libraries);
-    }else{
-        res.send(libraries);
-    }
+    librariestats.find({}).toArray((err, librariesArray) => {
+        
+        if(librariesArray.length == 0){
+            librariestats.insert(libraries);
+            res.sendStatus(200);
+        }
+        else {
+            res.sendStatus(409);
+        }
+    });  
 });
 // GET /libraries/
 app.get(API_PATH +"/libraries-stats", (req,res)=>{
-    res.send(libraries);
+    librariestats.find({}).toArray((err, librariesArray)=>{
+        if(err)
+            console.log("Error: "+err);
+    
+        res.send(librariesArray); 
+    });
 });
 // POST /libraries/
 app.post(API_PATH +"/libraries-stats", (req,res)=>{
     
-    var newLlibraries = req.body;
-    
-    libraries.insert(newLlibraries);
-    
-    res.sendStatus(201);
+    var newLibrarieStats= req.body;
+   var city = req.body.city;
+   
+   librariestats.find({"city":city}).toArray((err, librariesArray)=>{
+        if(err)
+            console.log(err);
+            
+        if(librariesArray !=0){
+            
+            res.sendStatus(409);
+            
+        }else if (!newLibrarieStats.city || !newLibrarieStats.year 
+        ||!newLibrarieStats.number || !newLibrarieStats.activities 
+        ||!newLibrarieStats.service || Object.keys(newLibrarieStats).length != 6){
+            
+            res.sendStatus(400);
+        }else{
+        
+            librariestats.insert(newLibrarieStats);
+   
+            res.sendStatus(201);
+        }
+   });
 });
 // DELETE /libraries/
 app.delete(API_PATH +"/libraries-stats", (req,res)=>{
     
-    libraries =  [];
-
+    librariestats.remove({});
+    
     res.sendStatus(200);
 });
 // GET /libraries-stats/almeria
 app.get(API_PATH +"/libraries-stats/:city", (req,res)=>{
-
-    var city = req.params.city;
-
-    var filteredLibraries = libraries.filter((c) =>{
-       return c.city == city; 
-    })
     
-    if (filteredLibraries.length >= 1){
-        res.send(filteredLibraries[0]);
-    }else{
-        res.sendStatus(404);
-    }
+    var city = req.params.city;
+    
+    librariestats.find({"city": city}).toArray((err, librariesArray)=>{
+        if(err)
+            console.log("Error: "+err);
+        
+        if(librariesArray ==0){
+            res.sendStatus(404);
+        }else{
+            res.send(librariesArray);
+        }
+    });
+    
 });
 // PUT /libraries-stats/almeria
 app.put(API_PATH +"/libraries-stats/:city", (req,res)=>{
 
-    var city = req.params.city;
-    var updatedLibraries = req.body;
-    var found = false;
-
-    var updatedLibraries = libraries.map((c) =>{
-    
-        if(c.city == city){
-            found = true;
-            return updatedLibraries;
+ var city = req.params.city;
+    var updateStats = req.body;
+   
+   
+    librariestats.find({"city":city}).toArray((err, librariesArray)=>{
+        if(err)
+            console.log(err);
+        
+        
+        if (librariesArray==0){
+            
+            res.sendStatus(404);
+            
+        }else if (!updateStats.city || !updateStats.year 
+        ||!updateStats.number || !updateStats.activities 
+        ||!updateStats.service || Object.keys(updateStats).length != 6 || req.body.city != city){
+            
+            res.sendStatus(400);
+            
         }else{
-            return c;            
+            
+            librariestats.updateOne({ "city": city }, { $set: updateStats });
+            res.sendStatus(200);
+            
         }
- 
     });
-    
-    if (found == false){
-        res.sendStatus(404);
-    }else{
-        libraries = updatedLibraries;
-        res.sendStatus(200);
-    }
 });
 // DELETE /libraries/almeria
 app.delete(API_PATH +"/libraries-stats/:city", (req,res)=>{
 
-    var city = req.params.city;
-    var found = false;
+        var city = req.params.city;
 
-    var updatedLibraries = libraries.filter((c) =>{
-        
-            if(c.city == city)  
-                found = true;
-        
-            return c.city != city;
+    librariestats.find({"city": city}).toArray((err, librariesArray)=>{
+        if(err)
+            console.log(err);
+                
+        if (librariesArray==0){
+            
+            res.sendStatus(404);
+            
+        }else{
+            
+            librariestats.deleteOne({"city":city});
+            res.sendStatus(200);
+        }
     });
-    
-    if (found == false){
-        res.sendStatus(404);
-    }else{
-        libraries = updatedLibraries;
-        res.sendStatus(200);
-    }
 });
 //POST incorrecto
 app.post(API_PATH +"/libraries-stats/:city",(req,res)=>{
