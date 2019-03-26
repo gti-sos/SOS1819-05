@@ -351,17 +351,53 @@ app.delete(API_PATH +"/students-andalucia/:city", (req,res)=>{
 /*---------------------------------------*/
 
 var libraries = [{
-    city: "almeria",
-    year: "2017", 
-    number : "97", 
-    activities: "79",
-    service: "96,62" 
+    city: "Almeria",
+    year: 2017, 
+    number : 97, 
+    activities: 79,
+    service: 96.62
 }, {
-    city: "cadiz",
-    year: "2017", 
-    number: "76", 
-    activitites: "58",
-    service: "99,76" 
+    city: "Cadiz",
+    year: 2017, 
+    number: 76, 
+    activitites: 58,
+    service: 99.76
+}, {
+    city: "Cordoba",
+    year: 2017, 
+    number: 95, 
+    activitites: 77,
+    service: 99.80 
+}, {
+    city: "Granada",
+    year: 2017, 
+    number: 122, 
+    activitites: 97,
+    service: 89.65 
+}, {
+    city: "Huelva",
+    year: 2017, 
+    number: 81, 
+    activitites: 70,
+    service: 96.62
+}, {
+    city: "Jaen",
+    year: 2017, 
+    number: 105, 
+    activitites: 69,
+    service: 95.03 
+}, {
+    city: "Malaga",
+    year: 2017, 
+    number: 152, 
+    activitites: 121,
+    service: 98.80 
+}, {
+    city: "Sevilla",
+    year: 2017, 
+    number: 133, 
+    activitites: 110,
+    service: 98.77 
 }];
 
 // GET /libraries/
