@@ -3,7 +3,7 @@ var bodyParser = require("body-parser");
 var app = express();
 var API_PATH = "/api/v1";
 
-const MongoClient = require("mongodb").MongoClient;
+/*const MongoClient = require("mongodb").MongoClient;
 
 const uri_mvm ="mongodb+srv://test:test@sos-iyxd4.mongodb.net/test?retryWrites=true";
 const client_mvm = new MongoClient(uri_mvm, { useNewUrlParser: true });
@@ -13,6 +13,19 @@ var studentsAndalucia;
 client_mvm.connect(err => {
   studentsAndalucia = client_mvm.db("sos1819").collection("students-andalucia");
   console.log("Connected!");
+});
+
+*/
+
+const MongoClient = require("mongodb").MongoClient;
+const uri = "mongodb+srv://test:true@sos-brah9.mongodb.net/sos?retryWrites=true";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+
+var librariestats;
+
+client.connect(err => {
+  librariestats = client.db("test").collection("librarie-stats");
+  console.log("connected");
 });
 
 
