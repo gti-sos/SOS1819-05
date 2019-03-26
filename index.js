@@ -404,7 +404,7 @@ var librariesInitial = libraries;
 
 //LOADINITIALDATA
 app.get(API_PATH +"/libraries-stats/loadInitialData",(req,res)=>{
-    if(studentsAndalucia.length == 0){
+    if(libraries.length == 0){
         libraries = librariesInitial;
         res.send(libraries);
     }else{
