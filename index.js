@@ -5,7 +5,7 @@ var API_PATH = "/api/v1";
 
 const MongoClient = require("mongodb").MongoClient;
 
-const uri_mvm = "mongodb+srv://test:test@sos-nwznc.mongodb.net/sos?retryWrites=true";
+const uri_mvm = "mongodb+srv://test:test@sos-iyxd4.mongodb.net/sos?retryWrites=true";
 const client_mvm = new MongoClient(uri_mvm, { useNewUrlParser: true });
 
 var students;
@@ -178,9 +178,9 @@ app.delete(API_PATH +"/athletes-performance-sport/:city",(req,res)=>{
 });
 
 
-/*---------------------------------------*/
-/*------------API MARTA------------------*/
-/*---------------------------------------*/
+/*------------------------------------------------------------------------------------*/
+/*--------------------------------------API MARTA-------------------------------------*/
+/*------------------------------------------------------------------------------------*/
 var studentsAndalucia = [{
     city: "almeria",
     year: 2017,
@@ -246,7 +246,13 @@ app.get(API_PATH +"/students-andalucia/loadInitialData",(req,res)=>{
 //GET /studentsAndalucia/
 
 app.get(API_PATH +"/students-andalucia", (req,res)=>{
-    res.send(studentsAndalucia);
+    
+    students.find({}).toArray((err, studentsArray)=>{
+       
+       res.send(studentsArray); 
+    });
+    
+    
 });
 
 //POST /studentsAndalucia/
