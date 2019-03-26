@@ -400,6 +400,18 @@ var libraries = [{
     service: 98.77 
 }];
 
+var librariesInitial = libraries;
+
+//LOADINITIALDATA
+app.get(API_PATH +"/libraries-stats/loadInitialData",(req,res)=>{
+    if(studentsAndalucia.length == 0){
+        libraries = librariesInitial;
+        res.send(libraries);
+    }else{
+        res.send(libraries);
+    }
+});
+
 // GET /libraries/
 
 app.get(API_PATH +"/libraries-stats", (req,res)=>{
