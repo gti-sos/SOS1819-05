@@ -190,51 +190,51 @@ app.get(API_PATH +"/students-andalucia/loadInitialData",(req,res)=>{
         var students = [{
         city: "almeria",
         year: 2017,
-        esoStudent: 31.925,
-        highSchoolStudent: 10.618,
-        vocationalTraining: 1.045
+        eso: 31925,
+        high: 10618,
+        vocational: 1045
     },{
         city: "cadiz",
         year: 2017,
-        esoStudent: 60.230,
-        highSchoolStudent: 21.499,
-        vocationalTraining: 2.219
+        eso: 60230,
+        high: 21499,
+        vocational: 2219
     },{
         city: "cordoba",
         year: 2017,
-        esoStudent: 34.346,
-        highSchoolStudent: 12.904,
-        vocationalTraining: 1.446
+        eso: 34346,
+        high: 12904,
+        vocational: 1446
     },{
         city: "granada",
         year: 2017,
-        esoStudent: 40.821,
-        highSchoolStudent: 15.536,
-        vocationalTraining: 1.564
+        eso: 40821,
+        high: 15536,
+        vocational: 1564
     },{
         city: "huelva",
         year: 2017,
-        esoStudent: 23.958,
-        highSchoolStudent: 7.638,
-        vocationalTraining: 1.020
+        eso: 23958,
+        high: 7638,
+        vocational: 1020
     },{
         city: "jaen",
         year: 2017,
-        esoStudent: 28.106,
-        highSchoolStudent: 10.759,
-        vocationalTraining: 966
+        eso: 28106,
+        high: 10759,
+        vocational: 966
     },{
         city: "malaga",
         year: 2017,
-        esoStudent: 72.710,
-        highSchoolStudent: 25.868,
-        vocationalTraining: 2.275
+        eso: 72710,
+        high: 25868,
+        vocational: 2275
     },{
         city: "sevilla",
         year: 2017,
-        esoStudent: 92.661,
-        highSchoolStudent: 32.807,
-        vocationalTraining: 2.457
+        eso: 92661,
+        high: 32807,
+        vocational: 2457
     }];
     
     studentsAndalucia.find({}).toArray((err, studentsArray) => {
@@ -267,10 +267,31 @@ app.get(API_PATH +"/students-andalucia", (req,res)=>{
 
 app.post(API_PATH +"/students-andalucia", (req,res)=>{
    var newStudentsAndalucia = req.body;
+   var city = req.body.city;
    
-   studentsAndalucia.insert(newStudentsAndalucia);
+   studentsAndalucia.find({"city":city}).toArray((err, studentsArray)=>{
+        if(err)
+            console.log(err);
+            
+        if(studentsArray !=0){
+            
+            res.sendStatus(409);
+            
+        }else if (!newStudentsAndalucia.city || !newStudentsAndalucia.year 
+        ||!newStudentsAndalucia.eso || !newStudentsAndalucia.high 
+        ||!newStudentsAndalucia.vocational || Object.keys(newStudentsAndalucia).length != 6){
+            
+            res.sendStatus(400);
+        }else{
+        
+            studentsAndalucia.insert(newStudentsAndalucia);
    
-   res.sendStatus(201);
+            res.sendStatus(201);
+        }
+       
+   });
+   
+
     
 });
 
@@ -322,10 +343,9 @@ app.put(API_PATH +"/students-andalucia/:city", (req,res)=>{
             
             res.sendStatus(404);
             
-        }else if (req.body.hasOwnProperty("city") == false || req.body.hasOwnProperty("year") == false 
-        || req.body.hasOwnProperty("eso-student") == false || req.body.hasOwnProperty("high-school-student") == false 
-        || req.body.hasOwnProperty("vocational-training") == false || Object.keys(updateStudents).length != 6 
-        || req.body.city != city){
+        }else if (!updateStudents.city || !updateStudents.year 
+        ||!updateStudents.eso || !updateStudents.high 
+        ||!updateStudents.vocational || Object.keys(updateStudents).length != 6){
             
             res.sendStatus(400);
             
