@@ -5,7 +5,7 @@ var API_PATH = "/api/v1";
 
 const MongoClient = require("mongodb").MongoClient;
 
-const uri_mvm = "mongodb+srv://test:test@sos-iyxd4.mongodb.net/sos?retryWrites=true";
+const uri_mvm = "mongodb+srv://test:test@sos-iyxd4.mongodb.net/test?retryWrites=true";
 const client_mvm = new MongoClient(uri_mvm, { useNewUrlParser: true });
 
 var studentsAndalucia;
@@ -181,67 +181,73 @@ app.delete(API_PATH +"/athletes-performance-sport/:city",(req,res)=>{
 /*------------------------------------------------------------------------------------*/
 /*--------------------------------------API MARTA-------------------------------------*/
 /*------------------------------------------------------------------------------------*/
-var students = [{
-    city: "almeria",
-    year: 2017,
-    esoStudent: 31.925,
-    highSchoolStudent: 10.618,
-    vocationalTraining: 1.045
-},{
-    city: "cadiz",
-    year: 2017,
-    esoStudent: 60.230,
-    highSchoolStudent: 21.499,
-    vocationalTraining: 2.219
-},{
-    city: "cordoba",
-    year: 2017,
-    esoStudent: 34.346,
-    highSchoolStudent: 12.904,
-    vocationalTraining: 1.446
-},{
-    city: "granada",
-    year: 2017,
-    esoStudent: 40.821,
-    highSchoolStudent: 15.536,
-    vocationalTraining: 1.564
-},{
-    city: "huelva",
-    year: 2017,
-    esoStudent: 23.958,
-    highSchoolStudent: 7.638,
-    vocationalTraining: 1.020
-},{
-    city: "jaen",
-    year: 2017,
-    esoStudent: 28.106,
-    highSchoolStudent: 10.759,
-    vocationalTraining: 966
-},{
-    city: "malaga",
-    year: 2017,
-    esoStudent: 72.710,
-    highSchoolStudent: 25.868,
-    vocationalTraining: 2.275
-},{
-    city: "sevilla",
-    year: 2017,
-    esoStudent: 92.661,
-    highSchoolStudent: 32.807,
-    vocationalTraining: 2.457
-}];
 
-var studentsAndaluciaInitial = students;
+
 
 //LOADINITIALDATA
 app.get(API_PATH +"/students-andalucia/loadInitialData",(req,res)=>{
+    
+        var students = [{
+        city: "almeria",
+        year: 2017,
+        esoStudent: 31.925,
+        highSchoolStudent: 10.618,
+        vocationalTraining: 1.045
+    },{
+        city: "cadiz",
+        year: 2017,
+        esoStudent: 60.230,
+        highSchoolStudent: 21.499,
+        vocationalTraining: 2.219
+    },{
+        city: "cordoba",
+        year: 2017,
+        esoStudent: 34.346,
+        highSchoolStudent: 12.904,
+        vocationalTraining: 1.446
+    },{
+        city: "granada",
+        year: 2017,
+        esoStudent: 40.821,
+        highSchoolStudent: 15.536,
+        vocationalTraining: 1.564
+    },{
+        city: "huelva",
+        year: 2017,
+        esoStudent: 23.958,
+        highSchoolStudent: 7.638,
+        vocationalTraining: 1.020
+    },{
+        city: "jaen",
+        year: 2017,
+        esoStudent: 28.106,
+        highSchoolStudent: 10.759,
+        vocationalTraining: 966
+    },{
+        city: "malaga",
+        year: 2017,
+        esoStudent: 72.710,
+        highSchoolStudent: 25.868,
+        vocationalTraining: 2.275
+    },{
+        city: "sevilla",
+        year: 2017,
+        esoStudent: 92.661,
+        highSchoolStudent: 32.807,
+        vocationalTraining: 2.457
+    }];
+    
     studentsAndalucia.find({}).toArray((err, studentsArray)=>{
-        
-        if(studentsArray.length == 0){
-            studentsAndalucia.insert(studentsAndaluciaInitial);
-            res.send(studentsArray);
-        }else{
-            res.send(studentsArray);
+        if(studentsArray == 0){
+            
+            studentsAndalucia.insert(students);
+            
+            studentsAndalucia.find({}).toArray((err, studentsArray)=>{
+                if(err)
+                    console.log("Error: "+err);
+                
+                res.send(studentsArray);
+            });
         }
     });   
 });
