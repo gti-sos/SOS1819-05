@@ -231,7 +231,7 @@ var students = [{
     vocationalTraining: 2.457
 }];
 
-var studentsAndaluciaInitial = studentsAndalucia;
+var studentsAndaluciaInitial = students;
 
 //LOADINITIALDATA
 app.get(API_PATH +"/students-andalucia/loadInitialData",(req,res)=>{
@@ -239,9 +239,9 @@ app.get(API_PATH +"/students-andalucia/loadInitialData",(req,res)=>{
         
         if(studentsArray.length == 0){
             studentsAndalucia.insert(studentsAndaluciaInitial);
-            res.send(studentsAndalucia);
+            res.send(studentsArray);
         }else{
-            res.send(studentsAndalucia);
+            res.send(studentsArray);
         }
     });   
 });
