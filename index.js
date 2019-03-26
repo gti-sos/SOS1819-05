@@ -18,6 +18,19 @@ client_mvm.connect(err => {
 
 
 
+const uri_egv ="mongodb+egv://test:test@sos-iyxd4.mongodb.net/test?retryWrites=true";
+const client_egv = new MongoClient(uri_egv, { useNewUrlParser: true });
+
+var libraries;
+
+client_egv.connect(err => {
+  libraries = client_egv.db("sos1819").collection("libraries-stats");
+  console.log("Connected!");
+});
+
+
+
+
 
 app.use(bodyParser.json());
 
@@ -461,16 +474,11 @@ app.get(API_PATH +"/libraries-stats/loadInitialData",(req,res)=>{
         res.send(libraries);
     }
 });
-
 // GET /libraries/
-
 app.get(API_PATH +"/libraries-stats", (req,res)=>{
     res.send(libraries);
 });
-
-
 // POST /libraries/
-
 app.post(API_PATH +"/libraries-stats", (req,res)=>{
     
     var newLlibraries = req.body;
@@ -479,33 +487,24 @@ app.post(API_PATH +"/libraries-stats", (req,res)=>{
     
     res.sendStatus(201);
 });
-
-
 // DELETE /libraries/
-
 app.delete(API_PATH +"/libraries-stats", (req,res)=>{
     
     libraries =  [];
 
     res.sendStatus(200);
 });
-
-
 //POST incorrecto
 app.post(API_PATH +"/libraries-stats/:city",(req,res)=>{
    res.sendStatus(405);
    console.log("/POST no permitido");
 });
-
 //PUT incorrecto
 app.put(API_PATH +"/libraries-stats/",(req,res)=>{
    res.sendStatus(405);
    console.log("/PUT no permitido");
 });
-
-
 // GET /libraries-stats/almeria
-
 app.get(API_PATH +"/libraries-stats/:city", (req,res)=>{
 
     var city = req.params.city;
@@ -519,12 +518,8 @@ app.get(API_PATH +"/libraries-stats/:city", (req,res)=>{
     }else{
         res.sendStatus(404);
     }
-
 });
-
-
 // PUT /libraries-stats/almeria
-
 app.put(API_PATH +"/libraries-stats/:city", (req,res)=>{
 
     var city = req.params.city;
@@ -548,12 +543,8 @@ app.put(API_PATH +"/libraries-stats/:city", (req,res)=>{
         libraries = updatedLibraries;
         res.sendStatus(200);
     }
-
 });
-
-
 // DELETE /libraries/almeria
-
 app.delete(API_PATH +"/libraries-stats/:city", (req,res)=>{
 
     var city = req.params.city;
@@ -573,8 +564,8 @@ app.delete(API_PATH +"/libraries-stats/:city", (req,res)=>{
         libraries = updatedLibraries;
         res.sendStatus(200);
     }
-
 });
+
 
 
 app.listen(port, () =>{
