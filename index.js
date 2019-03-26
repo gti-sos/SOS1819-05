@@ -3,6 +3,22 @@ var bodyParser = require("body-parser");
 var app = express();
 var API_PATH = "/api/v1";
 
+const MongoClient = require("mongodb").MongoClient;
+
+const uri_mvm = "mongodb+srv://test:test@sos-nwznc.mongodb.net/sos?retryWrites=true";
+const client_mvm = new MongoClient(uri_mvm, { useNewUrlParser: true });
+
+var students;
+
+client_mvm.connect(err => {
+  students = client_mvm.db("sos1819").collection("students-andalucia");
+  console.log("Connected!");
+});
+
+
+
+
+
 app.use(bodyParser.json());
 
 app.use("/",express.static(__dirname+"/public"));
