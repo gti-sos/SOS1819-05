@@ -110,6 +110,12 @@ var athletesPerformanceSport = [{
     total: "396"
 }];
 
+//DOCS
+app.get(API_PATH + "/athletes-performance-sport/docs", (req, res) => {
+    app.redirect("https://documenter.getpostman.com/view/3889720/S17oyqMD");
+});
+
+
 //LOADINITIALDATA
 app.get(API_PATH + "/athletes-performance-sport/loadInitialData", (req, res) => {
     athletes.find({}).toArray((err, athletesArray) => {
@@ -191,9 +197,18 @@ app.get(API_PATH + "/athletes-performance-sport", function(req, res) {
 //POST AL RECURSO COMPLETO
 app.post(API_PATH + "/athletes-performance-sport", (req, res) => {
     var athlete = req.body;
+    var city = req.body.city;
     console.log("new /POST");
-    athletes.insert(athlete);
-    res.sendStatus(201);
+    if(Object.keys(athlete).length !== 6){
+        res.sendStatus(400);
+    }
+    if (city == athlete.city) {
+        res.sendStatus(409);
+    }
+    else {
+        athletes.insert(athlete);
+        res.sendStatus(201);
+    }
 });
 
 //PUT INCORRECTO
@@ -223,7 +238,7 @@ app.get(API_PATH + "/athletes-performance-sport/:city", (req, res) => {
         if (err)
             console.log("Error :" + err);
         if (athletesList.length >= 1) {
-            res.send(athletesList);
+            res.send(athletesList[0]);
             console.log("/GET a un recurso concreto");
         }
         else {
@@ -243,7 +258,7 @@ app.put(API_PATH + "/athletes-performance-sport/:_id", (req, res) => {
     var _id = req.params._id;
     var athlete = req.body;
 
-    if (_id != athlete._id /*|| Object.keys(athlete).length !== 6*/ ) {
+    if (_id != athlete._id || Object.keys(athlete).length !== 6 ) {
         res.sendStatus(400);
         console.log(Date() + " - Hacking attemp!");
     }
@@ -457,7 +472,7 @@ app.put(API_PATH + "/students-andalucia/:city", (req, res) => {
         }
         else if (!updateStudents.city || !updateStudents.year ||
             !updateStudents.eso || !updateStudents.high ||
-            !updateStudents.vocational || Object.keys(updateStudents).length != 5 || req.body.city != city) {
+            !updateStudents.vocational || Object.keys(updateStudents).length != 6 || req.body.city != city) {
 
             res.sendStatus(400);
 
@@ -574,7 +589,7 @@ app.get(API_PATH + "/libraries-stats/loadInitialData", (req, res) => {
     }];
 
     librariestats.find({}).toArray((err, librariesArray) => {
-        if(err)
+        if (err)
             console.log("Error " + err);
         if (librariesArray.length == 0) {
             librariestats.insert(libraries);
