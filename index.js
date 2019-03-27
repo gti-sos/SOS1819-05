@@ -5,6 +5,7 @@ const MongoClient = require("mongodb").MongoClient;
 const uri = "mongodb+srv://alvaro:rb1907@cluster0-amrh8.mongodb.net/test?retryWrites=true";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
+//MONGO ALVARO
 var athletes;
 
 client.connect(err => {
@@ -15,6 +16,28 @@ client.connect(err => {
         athletes = client.db("sos1819-05").collection("athletes");
         console.log("Connected!");
     }
+});
+
+//MONGO MARTA
+const uri_mvm = "mongodb+srv://test:test@sos-iyxd4.mongodb.net/test?retryWrites=true";
+const client_mvm = new MongoClient(uri_mvm, { useNewUrlParser: true });
+
+var studentsAndalucia;
+
+client_mvm.connect(err => {
+    studentsAndalucia = client_mvm.db("sos1819").collection("students-andalucia");
+    console.log("Connected!");
+});
+
+//MONGO ENRIQUE
+const uri_egv = "mongodb+srv://test:test@sos-brah9.mongodb.net/test?retryWrites=true";
+const client_egv = new MongoClient(uri_egv, { useNewUrlParser: true });
+
+var librariestats;
+
+client_egv.connect(err => {
+    librariestats = client_egv.db("sos1819").collection("libraries-stats");
+    console.log("connected");
 });
 
 var app = express();
@@ -94,8 +117,8 @@ app.get(API_PATH + "/athletes-performance-sport/loadInitialData", (req, res) => 
             console.log("Error: " + err);
         if (athletesArray.length == 0)
             console.log("/Load Initial Data");
-            athletes.insertMany(athletesPerformanceSport);
-            res.send(athletesPerformanceSport);
+        athletes.insertMany(athletesPerformanceSport);
+        res.send(athletesPerformanceSport);
     });
 });
 
@@ -220,12 +243,12 @@ app.put(API_PATH + "/athletes-performance-sport/:_id", (req, res) => {
     var _id = req.params._id;
     var athlete = req.body;
 
-    if ( _id != athlete._id /*|| Object.keys(athlete).length !== 6*/) {
+    if (_id != athlete._id /*|| Object.keys(athlete).length !== 6*/ ) {
         res.sendStatus(400);
         console.log(Date() + " - Hacking attemp!");
     }
     else {
-        athletes.find({"_id": parseInt(_id)}).toArray((err, athletesPut) => {
+        athletes.find({ "_id": parseInt(_id) }).toArray((err, athletesPut) => {
             if (err)
                 console.log("Error :" + err);
             if (athletesPut.length == 0) {
@@ -233,7 +256,7 @@ app.put(API_PATH + "/athletes-performance-sport/:_id", (req, res) => {
                 res.sendStatus(404);
             }
             else {
-                athletes.update({"_id": parseInt(_id)}, athlete, (err, numUpdated) => {
+                athletes.update({ "_id": parseInt(_id) }, athlete, (err, numUpdated) => {
                     if (err) {
                         console.log("Error " + err);
                     }
@@ -269,83 +292,116 @@ app.delete(API_PATH + "/athletes-performance-sport/:city", (req, res) => {
 /*---------------------------------------*/
 /*------------API MARTA------------------*/
 /*---------------------------------------*/
-var studentsAndalucia = [{
-    city: "almeria",
-    year: "2017",
-    esoStudent: "31.925",
-    highSchoolStudent: "10.618",
-    vocationalTraining: "1.045"
-}, {
-    city: "cadiz",
-    year: "2017",
-    esoStudent: "60.230",
-    highSchoolStudent: "21.499",
-    vocationalTraining: "2.219"
-}, {
-    city: "cordoba",
-    year: "2017",
-    esoStudent: "34.346",
-    highSchoolStudent: "12.904",
-    vocationalTraining: "1.446"
-}, {
-    city: "granada",
-    year: "2017",
-    esoStudent: "40.821",
-    highSchoolStudent: "15.536",
-    vocationalTraining: "1.564"
-}, {
-    city: "huelva",
-    year: "2017",
-    esoStudent: "23.958",
-    highSchoolStudent: "7.638",
-    vocationalTraining: "1.020"
-}, {
-    city: "jaen",
-    year: "2017",
-    esoStudent: "28.106",
-    highSchoolStudent: "10.759",
-    vocationalTraining: "966"
-}, {
-    city: "malaga",
-    year: "2017",
-    esoStudent: "72.710",
-    highSchoolStudent: "25.868",
-    vocationalTraining: "2.275"
-}, {
-    city: "sevilla",
-    year: "2017",
-    esoStudent: "92.661",
-    highSchoolStudent: "32.807",
-    vocationalTraining: "2.457"
-}];
-
-var studentsAndaluciaInitial = studentsAndalucia;
-
 //LOADINITIALDATA
 app.get(API_PATH + "/students-andalucia/loadInitialData", (req, res) => {
-    if (studentsAndalucia.length == 0) {
-        studentsAndalucia = studentsAndaluciaInitial;
-        res.send(studentsAndalucia);
-    }
-    else {
-        res.send(studentsAndalucia);
-    }
+
+    var students = [{
+        city: "almeria",
+        year: 2017,
+        eso: 31925,
+        high: 10618,
+        vocational: 1045
+    }, {
+        city: "cadiz",
+        year: 2017,
+        eso: 60230,
+        high: 21499,
+        vocational: 2219
+    }, {
+        city: "cordoba",
+        year: 2017,
+        eso: 34346,
+        high: 12904,
+        vocational: 1446
+    }, {
+        city: "granada",
+        year: 2017,
+        eso: 40821,
+        high: 15536,
+        vocational: 1564
+    }, {
+        city: "huelva",
+        year: 2017,
+        eso: 23958,
+        high: 7638,
+        vocational: 1020
+    }, {
+        city: "jaen",
+        year: 2017,
+        eso: 28106,
+        high: 10759,
+        vocational: 966
+    }, {
+        city: "malaga",
+        year: 2017,
+        eso: 72710,
+        high: 25868,
+        vocational: 2275
+    }, {
+        city: "sevilla",
+        year: 2017,
+        eso: 92661,
+        high: 32807,
+        vocational: 2457
+    }];
+
+    studentsAndalucia.find({}).toArray((err, studentsArray) => {
+
+        if (studentsArray.length == 0) {
+            studentsAndalucia.insert(students);
+            res.sendStatus(200);
+        }
+        else {
+            res.sendStatus(409);
+        }
+    });
 });
 
 //GET /studentsAndalucia/
 
 app.get(API_PATH + "/students-andalucia", (req, res) => {
-    res.send(studentsAndalucia);
+
+    studentsAndalucia.find({}).toArray((err, studentsArray) => {
+        if (err)
+            console.log("Error: " + err);
+
+        res.send(studentsArray);
+    });
+
+
 });
 
 //POST /studentsAndalucia/
 
 app.post(API_PATH + "/students-andalucia", (req, res) => {
     var newStudentsAndalucia = req.body;
+    var city = req.body.city;
 
-    studentsAndalucia.push(newStudentsAndalucia);
+    studentsAndalucia.find({ "city": city }).toArray((err, studentsArray) => {
+        if (err)
+            console.log(err);
 
-    res.sendStatus(201);
+        if (studentsArray != 0) {
+
+            res.sendStatus(409);
+
+        }
+        else if (!newStudentsAndalucia.city || !newStudentsAndalucia.year ||
+            !newStudentsAndalucia.eso || !newStudentsAndalucia.high ||
+            !newStudentsAndalucia.vocational || Object.keys(newStudentsAndalucia).length != 6) {
+
+            res.sendStatus(400);
+        }
+        else {
+
+            studentsAndalucia.insert(newStudentsAndalucia);
+
+            res.sendStatus(201);
+        }
+
+    });
+
+
 
 });
 
@@ -354,7 +410,7 @@ app.post(API_PATH + "/students-andalucia", (req, res) => {
 
 app.delete(API_PATH + "/students-andalucia", (req, res) => {
 
-    studentsAndalucia = [];
+    studentsAndalucia.remove({});
 
     res.sendStatus(200);
 
@@ -367,16 +423,17 @@ app.get(API_PATH + "/students-andalucia/:city", (req, res) => {
 
     var city = req.params.city;
 
-    var filteredStudents = studentsAndalucia.filter((c) => {
-        return c.city == city;
-    })
+    studentsAndalucia.find({ "city": city }).toArray((err, studentsArray) => {
+        if (err)
+            console.log("Error: " + err);
 
-    if (filteredStudents.length >= 1) {
-        res.send(filteredStudents[0]);
-    }
-    else {
-        res.sendStatus(404);
-    }
+        if (studentsArray == 0) {
+            res.sendStatus(404);
+        }
+        else {
+            res.send(studentsArray);
+        }
+    });
 
 });
 
@@ -386,42 +443,33 @@ app.put(API_PATH + "/students-andalucia/:city", (req, res) => {
 
     var city = req.params.city;
     var updateStudents = req.body;
-    var found = false;
 
 
-    var updateStudents = studentsAndalucia.map((c) => {
+    studentsAndalucia.find({ "city": city }).toArray((err, studentsArray) => {
+        if (err)
+            console.log(err);
 
-        if (c.city == city) {
-            found = true;
-            return updateStudents;
+
+        if (studentsArray == 0) {
+
+            res.sendStatus(404);
+
+        }
+        else if (!updateStudents.city || !updateStudents.year ||
+            !updateStudents.eso || !updateStudents.high ||
+            !updateStudents.vocational || Object.keys(updateStudents).length != 6 || req.body.city != city) {
+
+            res.sendStatus(400);
+
         }
         else {
-            return c;
-        }
 
+            studentsAndalucia.updateOne({ "city": city }, { $set: updateStudents });
+            res.sendStatus(200);
+
+        }
     });
 
-
-    if (found == false) {
-        res.sendStatus(404);
-    }
-    else {
-        studentsAndalucia = updateStudents;
-        res.sendStatus(200);
-    }
-
-});
-
-//POST incorrecto
-app.post(API_PATH + "/students-andalucia/:city", (req, res) => {
-    res.sendStatus(405);
-    console.log("/POST no permitido");
-});
-
-//PUT incorrecto
-app.put(API_PATH + "/students-andalucia/", (req, res) => {
-    res.sendStatus(405);
-    console.log("/PUT no permitido");
 });
 
 //DELETE /studentsAndalucia/malaga
@@ -429,29 +477,41 @@ app.put(API_PATH + "/students-andalucia/", (req, res) => {
 app.delete(API_PATH + "/students-andalucia/:city", (req, res) => {
 
     var city = req.params.city;
-    var found = false;
 
+    studentsAndalucia.find({ "city": city }).toArray((err, studentsArray) => {
+        if (err)
+            console.log(err);
 
-    var updateStudents = studentsAndalucia.filter((c) => {
+        if (studentsArray == 0) {
 
-        if (c.city == city)
-            found = true;
+            res.sendStatus(404);
 
+        }
+        else {
 
-        return c.city != city;
+            studentsAndalucia.deleteOne({ "city": city });
+            res.sendStatus(200);
 
+        }
     });
-
-
-    if (found == false) {
-        res.sendStatus(404);
-    }
-    else {
-        studentsAndalucia = updateStudents;
-        res.sendStatus(200);
-    }
-
 });
+
+//POST incorrecto
+app.post(API_PATH + "/students-andalucia/:city", (req, res) => {
+    res.sendStatus(405);
+});
+
+//PUT incorrecto
+app.put(API_PATH + "/students-andalucia/", (req, res) => {
+    res.sendStatus(405);
+});
+
+app.get("/api/v1/students-andalucia/docs/", (req, res) => {
+    res.redirect("https://documenter.getpostman.com/view/6870023/S17qS957");
+});
+
+
+
 
 
 
@@ -459,123 +519,197 @@ app.delete(API_PATH + "/students-andalucia/:city", (req, res) => {
 /*------------API ENRIQUE------------------*/
 /*---------------------------------------*/
 
-var libraries = [{
-    city: "almeria",
-    year: "2017",
-    number: "97",
-    activities: "79",
-    service: "96,62"
-}, {
-    city: "cadiz",
-    year: "2017",
-    number: "76",
-    activitites: "58",
-    service: "99,76"
-}];
 
-// GET /libraries/
+//LOADINITIALDATA
+app.get(API_PATH + "/libraries-stats/loadInitialData", (req, res) => {
 
-app.get(API_PATH + "/libraries-stats", (req, res) => {
-    res.send(libraries);
+    var libraries = [{
+        city: "Almeria",
+        year: 2017,
+        number: 97,
+        activities: 79,
+        service: 96.62
+    }, {
+        city: "Cadiz",
+        year: 2017,
+        number: 76,
+        activities: 58,
+        service: 99.76
+    }, {
+        city: "Cordoba",
+        year: 2017,
+        number: 95,
+        activities: 77,
+        service: 99.80
+    }, {
+        city: "Granada",
+        year: 2017,
+        number: 122,
+        activities: 97,
+        service: 89.65
+    }, {
+        city: "Huelva",
+        year: 2017,
+        number: 81,
+        activities: 70,
+        service: 96.62
+    }, {
+        city: "Jaen",
+        year: 2017,
+        number: 105,
+        activities: 69,
+        service: 95.03
+    }, {
+        city: "Malaga",
+        year: 2017,
+        number: 152,
+        activities: 121,
+        service: 98.80
+    }, {
+        city: "Sevilla",
+        year: 2017,
+        number: 133,
+        activities: 110,
+        service: 98.77
+    }];
+
+    librariestats.find({}).toArray((err, librariesArray) => {
+        if(err)
+            console.log("Error " + err);
+        if (librariesArray.length == 0) {
+            librariestats.insert(libraries);
+            res.sendStatus(200);
+        }
+        else {
+            res.sendStatus(409);
+        }
+    });
 });
+// GET /libraries/
+app.get(API_PATH + "/libraries-stats", (req, res) => {
+    librariestats.find({}).toArray((err, librariesArray) => {
+        if (err)
+            console.log("Error: " + err);
 
-
+        res.send(librariesArray);
+    });
+});
 // POST /libraries/
-
 app.post(API_PATH + "/libraries-stats", (req, res) => {
 
-    var newLlibraries = req.body;
+    var newLibrarieStats = req.body;
+    var city = req.body.city;
 
-    libraries.push(newLlibraries)
+    librariestats.find({ "city": city }).toArray((err, librariesArray) => {
+        if (err)
+            console.log(err);
 
-    res.sendStatus(201);
+        if (librariesArray != 0) {
+
+            res.sendStatus(409);
+
+        }
+        else if (!newLibrarieStats.city || !newLibrarieStats.year ||
+            !newLibrarieStats.number || !newLibrarieStats.activities ||
+            !newLibrarieStats.service || Object.keys(newLibrarieStats).length != 6) {
+
+            res.sendStatus(400);
+        }
+        else {
+
+            librariestats.insert(newLibrarieStats);
+
+            res.sendStatus(201);
+        }
+    });
 });
-
-
 // DELETE /libraries/
-
 app.delete(API_PATH + "/libraries-stats", (req, res) => {
 
-    libraries = [];
+    librariestats.remove({});
 
     res.sendStatus(200);
 });
-
-
 // GET /libraries-stats/almeria
-
 app.get(API_PATH + "/libraries-stats/:city", (req, res) => {
 
     var city = req.params.city;
 
-    var filteredLibraries = libraries.filter((c) => {
-        return c.city == city;
-    })
+    librariestats.find({ "city": city }).toArray((err, librariesArray) => {
+        if (err)
+            console.log("Error: " + err);
 
-    if (filteredLibraries.length >= 1) {
-        res.send(filteredLibraries[0]);
-    }
-    else {
-        res.sendStatus(404);
-    }
+        if (librariesArray == 0) {
+            res.sendStatus(404);
+        }
+        else {
+            res.send(librariesArray);
+        }
+    });
 
 });
-
-
 // PUT /libraries-stats/almeria
-
 app.put(API_PATH + "/libraries-stats/:city", (req, res) => {
 
     var city = req.params.city;
-    var updatedLibraries = req.body;
-    var found = false;
+    var updateStats = req.body;
 
-    var updatedLibraries = libraries.map((c) => {
 
-        if (c.city == city) {
-            found = true;
-            return updatedLibraries;
+    librariestats.find({ "city": city }).toArray((err, librariesArray) => {
+        if (err)
+            console.log(err);
+
+
+        if (librariesArray == 0) {
+
+            res.sendStatus(404);
+
+        }
+        else if (!updateStats.city || !updateStats.year ||
+            !updateStats.number || !updateStats.activities ||
+            !updateStats.service || Object.keys(updateStats).length != 6 || req.body.city != city) {
+
+            res.sendStatus(400);
+
         }
         else {
-            return c;
+
+            librariestats.updateOne({ "city": city }, { $set: updateStats });
+            res.sendStatus(200);
+
         }
-
     });
-
-    if (found == false) {
-        res.sendStatus(404);
-    }
-    else {
-        libraries = updatedLibraries;
-        res.sendStatus(200);
-    }
-
 });
-
-
 // DELETE /libraries/almeria
-
 app.delete(API_PATH + "/libraries-stats/:city", (req, res) => {
 
     var city = req.params.city;
-    var found = false;
 
-    var updatedLibraries = libraries.filter((c) => {
+    librariestats.find({ "city": city }).toArray((err, librariesArray) => {
+        if (err)
+            console.log(err);
 
-        if (c.city == city)
-            found = true;
+        if (librariesArray == 0) {
 
-        return c.city != city;
+            res.sendStatus(404);
+
+        }
+        else {
+
+            librariestats.deleteOne({ "city": city });
+            res.sendStatus(200);
+        }
     });
-
-    if (found == false) {
-        res.sendStatus(404);
-    }
-    else {
-        libraries = updatedLibraries;
-        res.sendStatus(200);
-    }
-
+});
+//POST incorrecto
+app.post(API_PATH + "/libraries-stats/:city", (req, res) => {
+    res.sendStatus(405);
+    console.log("/POST no permitido");
+});
+//PUT incorrecto
+app.put(API_PATH + "/libraries-stats/", (req, res) => {
+    res.sendStatus(405);
+    console.log("/PUT no permitido");
 });
 
 
