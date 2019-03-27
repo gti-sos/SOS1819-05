@@ -457,7 +457,7 @@ app.put(API_PATH + "/students-andalucia/:city", (req, res) => {
         }
         else if (!updateStudents.city || !updateStudents.year ||
             !updateStudents.eso || !updateStudents.high ||
-            !updateStudents.vocational || Object.keys(updateStudents).length != 6 || req.body.city != city) {
+            !updateStudents.vocational || Object.keys(updateStudents).length != 5 || req.body.city != city) {
 
             res.sendStatus(400);
 
