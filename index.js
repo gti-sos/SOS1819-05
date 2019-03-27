@@ -112,7 +112,7 @@ var athletesPerformanceSport = [{
 
 //DOCS
 app.get(API_PATH + "/athletes-performance-sport/docs", (req, res) => {
-    app.redirect("https://documenter.getpostman.com/view/3889720/S17oyqMD");
+    res.redirect("https://documenter.getpostman.com/view/3889720/S17oyqMD");
 });
 
 
