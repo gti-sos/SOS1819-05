@@ -403,7 +403,7 @@ app.post(API_PATH + "/students-andalucia", (req, res) => {
         }
         else if (!newStudentsAndalucia.city || !newStudentsAndalucia.year ||
             !newStudentsAndalucia.eso || !newStudentsAndalucia.high ||
-            !newStudentsAndalucia.vocational || Object.keys(newStudentsAndalucia).length != 6) {
+            !newStudentsAndalucia.vocational || Object.keys(newStudentsAndalucia).length != 5) {
 
             res.sendStatus(400);
         }
