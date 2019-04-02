@@ -196,10 +196,10 @@ module.exports = function(app, API_PATH, athletes) {
                 console.log("Error :" + err);
             if (athletesList.length >= 1) {
                 console.log("/GET a un recurso concreto");
-                res.send(athletesList[0].map((c) => {
+                res.send(athletesList.map((c) => {
                     delete c._id;
                     return c;
-                }));
+                })[0]);
             }
             else {
                 res.sendStatus(404);
