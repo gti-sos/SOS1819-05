@@ -6,6 +6,7 @@
   "scripts": {
     "test": "newman run https://www.getpostman.com/collections/9436c45085d241e377d2",
     "test-athletes-performance-sport": "newman run https://www.getpostman.com/collections/9436c45085d241e377d2",
+    "test-libraries-stats":"newman run https://www.getpostman.com/collections/ac5b50fcccf7541dcc49",
     "start": "node index.js"
   },
   "repository": {
