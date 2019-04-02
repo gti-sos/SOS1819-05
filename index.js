@@ -50,7 +50,7 @@ client.connect(err => {
                 console.log("Connected!");
 
                 studentsAPI(app, API_PATH, studentsAndalucia);
-
+                secureStudentsAPI(app, API_PATH_SECURE, studentsAndalucia)
                 const uri_egv = "mongodb+srv://test:test@sos-brah9.mongodb.net/test?retryWrites=true";
                 const client_egv = new MongoClient(uri_egv, { useNewUrlParser: true });
 
