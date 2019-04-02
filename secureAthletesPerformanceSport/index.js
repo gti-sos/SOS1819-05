@@ -186,8 +186,8 @@ module.exports = function(app, API_PATH_SECURE, athletes) {
                     res.sendStatus(409);
                 }
                 else {
-                    athletes.insert(athlete);
                     res.sendStatus(201);
+                    athletes.insert(athlete);
                 }
             }
         });
