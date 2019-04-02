@@ -64,18 +64,17 @@ module.exports = function(app, API_PATH, athletes) {
             if (err) {
                 console.log("Error: " + err);
             }
+            else if (athletesArray.length == 0) {
+                console.log("/Load Initial Data");
+                res.send(athletesPerformanceSport);
+                athletes.insertMany(athletesPerformanceSport);
+            }
             else {
-                if (athletesArray.length == 0) {
-                    console.log("/Load Initial Data");
-                    res.send(athletesPerformanceSport);
-                    athletes.insertMany(athletesPerformanceSport);
-                }
-                else {
-                    res.send(athletesArray.map((c) => {
-                        delete c._id;
-                        return c;
-                    }));
-                }
+                res.send(athletesArray.map((c) => {
+                    delete c._id;
+                    return c;
+                }));
+
             }
         });
     });
@@ -124,8 +123,7 @@ module.exports = function(app, API_PATH, athletes) {
                 res.sendStatus(500);
                 return;
             }
-
-            if (athletesFilter.length == 0) {
+            else if (athletesFilter.length == 0) {
                 res.send([]);
             }
             else {
@@ -150,7 +148,7 @@ module.exports = function(app, API_PATH, athletes) {
                 if (Object.keys(athlete).length !== 5) {
                     res.sendStatus(400);
                 }
-                if (cityFiltro.length !== 0) {
+                else if (cityFiltro.length !== 0) {
                     res.sendStatus(409);
                 }
                 else {
@@ -173,16 +171,15 @@ module.exports = function(app, API_PATH, athletes) {
             if (err) {
                 console.log("Error" + err);
             }
+            else if (athletesDelete.length == 0) {
+                console.log("No hay nada que borrar");
+                res.sendStatus(404);
+            }
             else {
-                if (athletesDelete.length == 0) {
-                    console.log("No hay nada que borrar");
-                    res.sendStatus(404);
-                }
-                else {
-                    console.log("/DELETE al recurso completo");
-                    res.send([]);
-                    athletes.deleteMany();
-                }
+                console.log("/DELETE al recurso completo");
+                res.send([]);
+                athletes.deleteMany();
+
             }
         });
     });
@@ -192,9 +189,10 @@ module.exports = function(app, API_PATH, athletes) {
         var city = req.params.city;
 
         athletes.find({ "city": city }).toArray((err, athletesList) => {
-            if (err)
+            if (err) {
                 console.log("Error :" + err);
-            if (athletesList.length >= 1) {
+            }
+            else if (athletesList.length >= 1) {
                 console.log("/GET a un recurso concreto");
                 res.send(athletesList.map((c) => {
                     delete c._id;
@@ -224,9 +222,10 @@ module.exports = function(app, API_PATH, athletes) {
         }
         else {
             athletes.find({ "city": city }).toArray((err, athletesPut) => {
-                if (err)
+                if (err) {
                     console.log("Error :" + err);
-                if (athletesPut.length == 0) {
+                }
+                else if (athletesPut.length == 0) {
                     console.log("No hemos encontrado el elemento para actualizar");
                     res.sendStatus(404);
                 }
@@ -253,16 +252,15 @@ module.exports = function(app, API_PATH, athletes) {
             if (err) {
                 console.log("Error :" + err);
             }
+            else if (athletesDel.length == 0) {
+                console.log("No se encuentra el recurso a eliminar");
+                res.sendStatus(404);
+            }
             else {
-                if (athletesDel.length == 0) {
-                    console.log("No se encuentra el recurso a eliminar");
-                    res.sendStatus(404);
-                }
-                else {
-                    console.log("/DELETE de un recurso concreto");
-                    res.sendStatus(200);
-                    athletes.deleteMany({ "city": city });
-                }
+                console.log("/DELETE de un recurso concreto");
+                res.sendStatus(200);
+                athletes.deleteMany({ "city": city });
+
             }
         });
     });
