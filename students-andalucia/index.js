@@ -165,8 +165,8 @@ app.put(API_PATH + "/students-andalucia/:city/:year", (req, res) => {
                 res.sendStatus(400);
     
             }else {
-                studentsAndalucia.updateOne({ "city": city }, { $set: updateStudents });
-                studentsAndalucia.updateOne({ "year": year }, { $set: updateStudents });
+                studentsAndalucia.updateOne({ "city": city, "year": year }, { $set: updateStudents });
+               // studentsAndalucia.updateOne({ "year": year }, { $set: updateStudents });
                 res.sendStatus(200);
     
             }
