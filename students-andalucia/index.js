@@ -28,7 +28,10 @@ app.get(API_PATH + "/students-andalucia/loadInitialData", (req, res) => {
 
 app.get(API_PATH + "/students-andalucia", (req, res) => {
 
-    studentsAndalucia.find({}).toArray((err, studentsArray) => {
+    var limit = parseInt(req.query.limit);
+    var offSet = parseInt(req.query.offset);
+    
+    studentsAndalucia.find({}).skip(offSet).limit(limit).toArray((err, studentsArray) => {
         if (err)
             console.log("Error: " + err);
         
