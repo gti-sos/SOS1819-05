@@ -1,4 +1,4 @@
-module.exports = function(app, API_PATH_SECURE, athletes) {
+module.exports = function(app, API_PATH_SECURE, librariestats) {
 
     //SECURE
     var apikeyObject = {};
@@ -20,14 +20,9 @@ module.exports = function(app, API_PATH_SECURE, athletes) {
     
     
     
-    /*---------------------------------------*/
+/*---------------------------------------*/
 /*------------API ENRIQUE------------------*/
 /*---------------------------------------*/
-
-
-//LOADINITIALDATA
-app.get(API_PATH + "/libraries-stats/loadInitialData", (req, res) => {
-
     var libraries = [{
         city: "Almeria",
         year: 2017,
@@ -78,115 +73,191 @@ app.get(API_PATH + "/libraries-stats/loadInitialData", (req, res) => {
         service: 98.77
     }];
 
-    librariestats.find({}).toArray((err, librariesArray) => {
-        if (err)
-            console.log("Error " + err);
-        if (librariesArray.length == 0) {
-            librariestats.insert(libraries);
-            res.sendStatus(200);
-        }
-        else {
-            res.sendStatus(409);
-        }
+//DOCS
+    app.post(API_PATH_SECURE + "/libraries-stats/docs", (req, res) => {
+        res.redirect("https://documenter.getpostman.com/view/6920009/S17ozAkn");
+
+//LOADINITIALDATA
+    app.get(API_PATH_SECURE + "/libraries-stats/loadInitialData", (req, res) => {
+        librariestats.find({}).toArray((err, librariesArray) => {
+            if (err) {
+                console.log("Error: " + err);
+            }
+            else if (librariesArray.length == 0) {
+                console.log("/Load Initial Data");
+                res.send(libraries.map((c) => {
+                    delete c._id;
+                    return c;
+                }));
+                librariestats.insertMany(libraries);
+            }
+            else {
+                res.send(librariesArray.map((c) => {
+                    delete c._id;
+                    return c;
+                }));
+
+            }
+        });
     });
-});
-// GET /libraries/
-app.get(API_PATH + "/libraries-stats", (req, res) => {
-    librariestats.find({}).toArray((err, librariesArray) => {
-        if (err)
-            console.log("Error: " + err);
+    
+// GET Recurso Completo
+    app.get(API_PATH_SECURE + "/libraries-stats", function(req, res) {
+        var dbquery = {};
+        let offset = 0;
+        let limit = Number.MAX_SAFE_INTEGER;
 
-        res.send(librariesArray);
+        if (req.query.offset) {
+            offset = parseInt(req.query.offset);
+            delete req.query.offset;
+        }
+        if (req.query.limit) {
+            limit = parseInt(req.query.limit);
+            delete req.query.limit;
+        }
+
+        Object.keys(req.query).forEach((i) => {
+            if (isNaN(req.query[i]) == false) {
+                dbquery[i] = parseInt(req.query[i]);
+            }
+            else {
+                dbquery[i] = req.query[i];
+            }
+        });
+
+        if (Object.keys(req.query).includes('from') && Object.keys(req.query).includes('to')) {
+            delete dbquery.from;
+            delete dbquery.to;
+            dbquery['city'] = { "$lte": parseInt(req.query['to']), "$gte": parseInt(req.query['from']) };
+        }
+        else if (Object.keys(req.query).includes('from')) {
+            delete dbquery.from;
+            dbquery['city'] = { "$gte": parseInt(req.query['from']) };
+        }
+        else if (Object.keys(req.query).includes('to')) {
+            delete dbquery.to;
+            dbquery['city'] = { "$lte": parseInt(req.query['to']) };
+        }
+
+        librariestats.find(dbquery).skip(offset).limit(limit).toArray((err, librariesFilter) => {
+            if (err) {
+                console.error(" Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+            else if (librariesFilter.length == 0) {
+                res.send([]);
+            }
+            else {
+                res.send(librariesFilter.map((s) => {
+                    delete s._id;
+                    return s;
+                }));
+            }
+        });
     });
-});
-// POST /libraries/
-app.post(API_PATH + "/libraries-stats", (req, res) => {
+    
+// POST Recurso Completo
+    app.post(API_PATH_SECURE + "/libraries-stats", (req, res) => {
+        var librarie = req.body;
 
-    var newLibrarieStats = req.body;
-    var city = req.body.city;
-
-    librariestats.find({ "city": city }).toArray((err, librariesArray) => {
-        if (err)
-            console.log(err);
-
-        if (librariesArray != 0) {
-
-            res.sendStatus(409);
-
-        }
-        else if (!newLibrarieStats.city || !newLibrarieStats.year ||
-            !newLibrarieStats.number || !newLibrarieStats.activities ||
-            !newLibrarieStats.service || Object.keys(newLibrarieStats).length != 6) {
-
-            res.sendStatus(400);
-        }
-        else {
-
-            librariestats.insert(newLibrarieStats);
-
-            res.sendStatus(201);
-        }
+        librariestats.find({ "city": librariestats.city }).toArray((err, cityFiltro) => {
+            if (err) {
+                console.log("Error :" + err);
+            }
+            else {
+                console.log("new /POST");
+                if (Object.keys(librariestats).length !== 5) {
+                    res.sendStatus(400);
+                }
+                else if (cityFiltro.length !== 0) {
+                    res.sendStatus(409);
+                }
+                else {
+                    res.sendStatus(201);
+                    librariestats.insert(librarie);
+                }
+            }
+        });
     });
-});
-// DELETE /libraries/
-app.delete(API_PATH + "/libraries-stats", (req, res) => {
+    
+//PUT INCORRECTO
+    app.put(API_PATH_SECURE + "/libraries-stats", (req, res) => {
+        res.sendStatus(405);
+        console.log("/PUT no permitido");
+    });
+    
+// DELETE Recurso Completo
+app.delete(API_PATH_SECURE + "/libraries-stats", (req, res) => {
 
     librariestats.remove({});
 
     res.sendStatus(200);
 });
-// GET /libraries-stats/almeria
-app.get(API_PATH + "/libraries-stats/:city", (req, res) => {
 
-    var city = req.params.city;
+// GET Recurso Concreto
+    app.get(API_PATH_SECURE + "/libraries-stats/:city", (req, res) => {
+         var city = req.params.city;
 
-    librariestats.find({ "city": city }).toArray((err, librariesArray) => {
-        if (err)
-            console.log("Error: " + err);
+            librariestats.find({ "city": city }).toArray((err, librariesList) => {
+             if (err) {
+                    console.log("Error :" + err);
+             }
+             else if (librariesList.length >= 1) {
+                    console.log("/GET a un Recurso Concreto");
+                    res.send(librariesList.map((c) => {
+                        delete c._id;
+                        return c;
+                    })[0]);
+                }
+                else {
+                    res.sendStatus(404);
+                }
+            });
+        });
+    });
+    
 
-        if (librariesArray == 0) {
-            res.sendStatus(404);
-        }
-        else {
-            res.send(librariesArray);
-        }
+//POST INCORRECTO
+    app.post(API_PATH_SECURE + "/libraries-stats/:city", (req, res) => {
+        res.sendStatus(405);
+        console.log("/POST no permitido");
     });
 
-});
-// PUT /libraries-stats/almeria
-app.put(API_PATH + "/libraries-stats/:city", (req, res) => {
+// PUT Recurso Concreto
+    app.put(API_PATH_SECURE + "/libraries-stats/:city", (req, res) => {
+        var city = req.params.city;
+        var librarie = req.body;
 
-    var city = req.params.city;
-    var updateStats = req.body;
-
-
-    librariestats.find({ "city": city }).toArray((err, librariesArray) => {
-        if (err)
-            console.log(err);
-
-
-        if (librariesArray == 0) {
-
-            res.sendStatus(404);
-
-        }
-        else if (!updateStats.city || !updateStats.year ||
-            !updateStats.number || !updateStats.activities ||
-            !updateStats.service || Object.keys(updateStats).length != 6 || req.body.city != city) {
-
+        if (city != librarie.city || Object.keys(librarie).length !== 5) {
             res.sendStatus(400);
-
+            console.log(Date() + " - Hacking attemp!");
         }
         else {
-
-            librariestats.updateOne({ "city": city }, { $set: updateStats });
-            res.sendStatus(200);
-
+            librariestats.find({ "city": city }).toArray((err, librariesPut) => {
+                if (err) {
+                    console.log("Error :" + err);
+                }
+                else if (librariesPut.length == 0) {
+                    console.log("No hemos encontrado el elemento para actualizar");
+                    res.sendStatus(404);
+                }
+                else {
+                    librariestats.update({ "city": city }, librarie, (err, numUpdated) => {
+                        if (err) {
+                            console.log("Error " + err);
+                        }
+                        else {
+                            console.log(" - updated" + numUpdated);
+                            res.sendStatus(200);
+                        }
+                    });
+                }
+            });
         }
     });
-});
-// DELETE /libraries/almeria
-app.delete(API_PATH + "/libraries-stats/:city", (req, res) => {
+// DELETE Recurso Concreto
+app.delete(API_PATH_SECURE + "/libraries-stats/:city", (req, res) => {
 
     var city = req.params.city;
 
@@ -206,13 +277,5 @@ app.delete(API_PATH + "/libraries-stats/:city", (req, res) => {
         }
     });
 });
-//POST incorrecto
-app.post(API_PATH + "/libraries-stats/:city", (req, res) => {
-    res.sendStatus(405);
-    console.log("/POST no permitido");
-});
-//PUT incorrecto
-app.put(API_PATH + "/libraries-stats/", (req, res) => {
-    res.sendStatus(405);
-    console.log("/PUT no permitido");
-});
+
+};
