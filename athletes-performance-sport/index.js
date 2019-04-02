@@ -135,7 +135,7 @@ module.exports = function(app, API_PATH, athletes) {
             }
 
             if (athletesFilter.length == 0) {
-                res.sendStatus(404);
+                res.send([]);
             }
             else {
                 res.send(athletesFilter.map((s) => {
@@ -189,7 +189,7 @@ module.exports = function(app, API_PATH, athletes) {
                 else {
                     console.log("/DELETE al recurso completo");
                     res.send([]);
-                    athletes.deleteMany({});
+                    athletes.remove({});
                 }
             }
         });
