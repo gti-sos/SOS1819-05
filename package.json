@@ -4,7 +4,8 @@
   "description": "Analysis of the relationship between the students in Andalusia, libraries and sports",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "newman run https://www.getpostman.com/collections/9436c45085d241e377d2",
+    "test-api1": "newman run https://www.getpostman.com/collections/9436c45085d241e377d2",
     "start": "node index.js"
   },
   "repository": {

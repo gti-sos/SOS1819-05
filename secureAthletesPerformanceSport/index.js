@@ -203,16 +203,21 @@ module.exports = function(app, API_PATH_SECURE, athletes) {
 
     //DELETE AL RECURSO COMPLETO
     app.delete(API_PATH_SECURE + "/athletes-performance-sport", (req, res) => {
-        if (!apikeyObject.checkApiKey(req, res)) return;
-
         athletes.find({}).toArray((err, athletesDelete) => {
-            if (err)
+            if (err) {
                 console.log("Error" + err);
-            if (athletesDelete.length == 0)
-                console.log("No hay nada que borrar");
-            console.log("/DELETE al recurso completo");
-            res.send([]);
-            athletes.deleteMany({});
+            }
+            else {
+                if (athletesDelete.length == 0) {
+                    console.log("No hay nada que borrar");
+                    res.sendStatus(404);
+                }
+                else {
+                    console.log("/DELETE al recurso completo");
+                    res.send([]);
+                    athletes.deleteMany({});
+                }
+            }
         });
     });
 
