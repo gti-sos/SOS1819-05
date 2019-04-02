@@ -94,7 +94,33 @@ app.get(API_PATH + "/students-andalucia/:city", (req, res) => {
 
     var city = req.params.city;
 
-    studentsAndalucia.find({ "city": city }).toArray((err, studentsArray) => {
+    studentsAndalucia.find({ "city": city}).toArray((err, studentsArray) => {
+        if (err)
+            console.log("Error: " + err);
+
+        if (studentsArray == 0) {
+            res.sendStatus(404);
+        }
+        else {
+            res.send(studentsArray.map((c) =>{
+                delete c._id;
+                return(c);
+                
+            }));
+            
+        }
+    });
+
+});
+
+//GET /studentsAndalucia/malaga/2017
+
+app.get(API_PATH + "/students-andalucia/:city/:year", (req, res) => {
+
+    var city = req.params.city;
+    var year = req.params.year;
+
+    studentsAndalucia.find({ "city": city, "year":year }).toArray((err, studentsArray) => {
         if (err)
             console.log("Error: " + err);
 
@@ -115,34 +141,35 @@ app.get(API_PATH + "/students-andalucia/:city", (req, res) => {
 
 //PUT /studentsAndalucia/malaga
 
-app.put(API_PATH + "/students-andalucia/:city", (req, res) => {
+app.put(API_PATH + "/students-andalucia/:city/:year", (req, res) => {
 
     var city = req.params.city;
+    var year = req.params.year;
     var updateStudents = req.body;
 
 
-    studentsAndalucia.find({ "city": city }).toArray((err, studentsArray) => {
-        if (err)
+    studentsAndalucia.find({ "city": city,"year": year }).toArray((err, studentsArray) => {
+        if (err){
             console.log(err);
 
-
-        if (studentsArray == 0) {
+        }
+        if (studentsArray.length == 0) {
 
             res.sendStatus(404);
 
-        }
-        else if (!updateStudents.city || !updateStudents.year ||
-            !updateStudents.eso || !updateStudents.high ||
-            !updateStudents.vocational || Object.keys(updateStudents).length != 5 || req.body.city != city) {
-
-            res.sendStatus(400);
-
-        }
-        else {
-
-            studentsAndalucia.updateOne({ "city": city }, { $set: updateStudents });
-            res.sendStatus(200);
-
+        }else{
+            if (!updateStudents.city || !updateStudents.year ||!updateStudents.eso || !updateStudents.high ||
+                !updateStudents.vocational || Object.keys(updateStudents).length >6 ||
+                updateStudents.city != city || updateStudents.year != year){
+    
+                res.sendStatus(400);
+    
+            }else {
+                studentsAndalucia.updateOne({ "city": city }, { $set: updateStudents });
+                studentsAndalucia.updateOne({ "year": year }, { $set: updateStudents });
+                res.sendStatus(200);
+    
+            }
         }
     });
 

@@ -130,7 +130,7 @@ app.get(API_PATH_SECURE + "/students-andalucia/:city", (req, res) => {
 
 //PUT /studentsAndalucia/malaga
 
-app.put(API_PATH_SECURE + "/students-andalucia/:city", (req, res) => {
+app.put(API_PATH_SECURE + "/students-andalucia/:city/:year", (req, res) => {
 
     var city = req.params.city;
     var updateStudents = req.body;
