@@ -310,63 +310,19 @@ app.delete(API_PATH + "/athletes-performance-sport/:city", (req, res) => {
 //LOADINITIALDATA
 app.get(API_PATH + "/students-andalucia/loadInitialData", (req, res) => {
 
-    var students = [{
-        city: "almeria",
-        year: 2017,
-        eso: 31925,
-        high: 10618,
-        vocational: 1045
-    }, {
-        city: "cadiz",
-        year: 2017,
-        eso: 60230,
-        high: 21499,
-        vocational: 2219
-    }, {
-        city: "cordoba",
-        year: 2017,
-        eso: 34346,
-        high: 12904,
-        vocational: 1446
-    }, {
-        city: "granada",
-        year: 2017,
-        eso: 40821,
-        high: 15536,
-        vocational: 1564
-    }, {
-        city: "huelva",
-        year: 2017,
-        eso: 23958,
-        high: 7638,
-        vocational: 1020
-    }, {
-        city: "jaen",
-        year: 2017,
-        eso: 28106,
-        high: 10759,
-        vocational: 966
-    }, {
-        city: "malaga",
-        year: 2017,
-        eso: 72710,
-        high: 25868,
-        vocational: 2275
-    }, {
-        city: "sevilla",
-        year: 2017,
-        eso: 92661,
-        high: 32807,
-        vocational: 2457
-    }];
-
     studentsAndalucia.find({}).toArray((err, studentsArray) => {
-
         if (studentsArray.length == 0) {
-            studentsAndalucia.insert(students);
-            res.sendStatus(200);
-        }
-        else {
+            studentsAndalucia.insert({city: "almeria", year: 2017, eso: 31925, high: 10618, vocational: 1045});
+            studentsAndalucia.insert({city: "cadiz", year: 2017, eso: 60230, high: 21499, vocational: 2219});
+            studentsAndalucia.insert({city: "cordoba", year: 2017, eso: 34346, high: 12904, vocational: 1446});
+            studentsAndalucia.insert({city: "granada", year: 2017, eso: 40821,  high: 15536, vocational: 1564});
+            studentsAndalucia.insert({city: "huelva", year: 2017, eso: 23958, high: 7638, vocational: 1020}); 
+            studentsAndalucia.insert({city: "jaen", year: 2017, eso: 28106, high: 10759, vocational: 966});
+            studentsAndalucia.insert({city: "malaga", year: 2017, eso: 72710, high: 25868, vocational: 2275});
+            studentsAndalucia.insert({city: "sevilla", year: 2017, eso: 92661, high: 32807, vocational: 2457});
+        
+            res.sendStatus(201);
+        }else{
             res.sendStatus(409);
         }
     });
