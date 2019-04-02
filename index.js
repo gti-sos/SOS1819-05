@@ -335,8 +335,12 @@ app.get(API_PATH + "/students-andalucia", (req, res) => {
     studentsAndalucia.find({}).toArray((err, studentsArray) => {
         if (err)
             console.log("Error: " + err);
-
-        res.send(studentsArray);
+        
+        res.send(studentsArray.map((c) =>{
+            delete c._id;
+            return(c);
+        }));
+        
     });
 
 
@@ -388,7 +392,7 @@ app.delete(API_PATH + "/students-andalucia", (req, res) => {
 });
 
 
-//GET /studentsAndalucia/2017/malaga
+//GET /studentsAndalucia/malaga/
 
 app.get(API_PATH + "/students-andalucia/:city", (req, res) => {
 
@@ -402,7 +406,12 @@ app.get(API_PATH + "/students-andalucia/:city", (req, res) => {
             res.sendStatus(404);
         }
         else {
-            res.send(studentsArray);
+            res.send(studentsArray.map((c) =>{
+                delete c._id;
+                return(c);
+                
+            }));
+            
         }
     });
 
