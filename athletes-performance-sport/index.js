@@ -1,22 +1,4 @@
-module.exports = function(app, API_PATH_SECURE, athletes) {
-
-    //SECURE
-    var apikeyObject = {};
-    var api_key = "sos1819-05";
-
-    apikeyObject.checkApiKey = function(req, res) {
-        if (!req.query.apikey) {
-            console.error('WARNING: No apikey was sent!');
-            res.sendStatus(401);
-            return false;
-        }
-        if (req.query.apikey !== api_key) {
-            console.error('WARNING: Incorrect apikey was used!');
-            res.sendStatus(403);
-            return false;
-        }
-        return true;
-    };
+module.exports = function(app, API_PATH, athletes) {
 
     /*---------------------------------------*/
     /*------------API ÁLVARO------------------*/
@@ -80,17 +62,13 @@ module.exports = function(app, API_PATH_SECURE, athletes) {
     }];
 
     //DOCS
-    app.get(API_PATH_SECURE + "/athletes-performance-sport/docs", (req, res) => {
-        if (!apikeyObject.checkApiKey(req, res)) return;
-
+    app.get(API_PATH + "/athletes-performance-sport/docs", (req, res) => {
         res.redirect("https://documenter.getpostman.com/view/3889720/S17oyqMD");
     });
 
 
     //LOADINITIALDATA
-    app.get(API_PATH_SECURE + "/athletes-performance-sport/loadInitialData", (req, res) => {
-        if (!apikeyObject.checkApiKey(req, res)) return;
-
+    app.get(API_PATH + "/athletes-performance-sport/loadInitialData", (req, res) => {
         athletes.find({}).toArray((err, athletesArray) => {
             if (err)
                 console.log("Error: " + err);
@@ -112,9 +90,7 @@ module.exports = function(app, API_PATH_SECURE, athletes) {
     });*/
 
     //GET RECURSO COMPLETO CON BÚSQUEDA Y PAGINACIÓN
-    app.get(API_PATH_SECURE + "/athletes-performance-sport", function(req, res) {
-        if (!apikeyObject.checkApiKey(req, res)) return;
-
+    app.get(API_PATH + "/athletes-performance-sport", function(req, res) {
         var dbquery = {};
         let offset = 0;
         let limit = Number.MAX_SAFE_INTEGER;
@@ -170,9 +146,9 @@ module.exports = function(app, API_PATH_SECURE, athletes) {
     });
 
     //POST AL RECURSO COMPLETO
-    app.post(API_PATH_SECURE + "/athletes-performance-sport", (req, res) => {
+    app.post(API_PATH + "/athletes-performance-sport", (req, res) => {
         var athlete = req.body;
-
+        
         athletes.find({ "city": athlete.city }).toArray((err, cityFiltro) => {
             if (err) {
                 console.log("Error :" + err);
@@ -194,17 +170,13 @@ module.exports = function(app, API_PATH_SECURE, athletes) {
     });
 
     //PUT INCORRECTO
-    app.put(API_PATH_SECURE + "/athletes-performance-sport", (req, res) => {
-        if (!apikeyObject.checkApiKey(req, res)) return;
-
+    app.put(API_PATH + "/athletes-performance-sport", (req, res) => {
         res.sendStatus(405);
         console.log("/PUT no permitido");
     });
 
     //DELETE AL RECURSO COMPLETO
-    app.delete(API_PATH_SECURE + "/athletes-performance-sport", (req, res) => {
-        if (!apikeyObject.checkApiKey(req, res)) return;
-
+    app.delete(API_PATH + "/athletes-performance-sport", (req, res) => {
         athletes.find({}).toArray((err, athletesDelete) => {
             if (err)
                 console.log("Error" + err);
@@ -217,9 +189,7 @@ module.exports = function(app, API_PATH_SECURE, athletes) {
     });
 
     //GET A UN RECURSO CONCRETO
-    app.get(API_PATH_SECURE + "/athletes-performance-sport/:city", (req, res) => {
-        if (!apikeyObject.checkApiKey(req, res)) return;
-
+    app.get(API_PATH + "/athletes-performance-sport/:city", (req, res) => {
         var city = req.params.city;
 
         athletes.find({ "city": city }).toArray((err, athletesList) => {
@@ -236,17 +206,13 @@ module.exports = function(app, API_PATH_SECURE, athletes) {
     });
 
     //POST INCORRECTO
-    app.post(API_PATH_SECURE + "/athletes-performance-sport/:city", (req, res) => {
-        if (!apikeyObject.checkApiKey(req, res)) return;
-
+    app.post(API_PATH + "/athletes-performance-sport/:city", (req, res) => {
         res.sendStatus(405);
         console.log("/POST no permitido");
     });
 
     //PUT DE UN RECURSO CONCRETO
-    app.put(API_PATH_SECURE + "/athletes-performance-sport/:_id", (req, res) => {
-        if (!apikeyObject.checkApiKey(req, res)) return;
-
+    app.put(API_PATH + "/athletes-performance-sport/:_id", (req, res) => {
         var _id = req.params._id;
         var athlete = req.body;
 
@@ -278,9 +244,7 @@ module.exports = function(app, API_PATH_SECURE, athletes) {
     });
 
     //DELETE DE UN RECURSO CONCRETO
-    app.delete(API_PATH_SECURE + "/athletes-performance-sport/:city", (req, res) => {
-        if (!apikeyObject.checkApiKey(req, res)) return;
-
+    app.delete(API_PATH + "/athletes-performance-sport/:city", (req, res) => {
         var city = req.params.city;
 
         athletes.find({ "city": city }).toArray((err, athletesDel) => {
