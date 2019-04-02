@@ -66,7 +66,10 @@ module.exports = function(app, API_PATH, athletes) {
             }
             else if (athletesArray.length == 0) {
                 console.log("/Load Initial Data");
-                res.send(athletesPerformanceSport);
+                res.send(athletesPerformanceSport.map((c) => {
+                    delete c._id;
+                    return c;
+                }));
                 athletes.insertMany(athletesPerformanceSport);
             }
             else {
