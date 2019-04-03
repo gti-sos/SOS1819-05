@@ -77,7 +77,7 @@ app.post(API_PATH + "/students-andalucia", (req, res) => {
         if (err)
             console.log(err);
 
-        if (studentsArray != 0) {
+        if (studentsArray == 0) {
 
             res.sendStatus(409);
 
