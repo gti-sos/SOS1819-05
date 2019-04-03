@@ -4,8 +4,10 @@
   "description": "Analysis of the relationship between the students in Andalusia, libraries and sports",
   "main": "index.js",
   "scripts": {
-    "test": "newman run https://www.getpostman.com/collections/9436c45085d241e377d2",
+    "test": "newman run https://www.getpostman.com/collections/9436c45085d241e377d2; newman run https://www.getpostman.com/collections/ac5b50fcccf7541dcc49; newman run https://www.getpostman.com/collections/1de93c6a578e3b686229",
     "test-athletes-performance-sport": "newman run https://www.getpostman.com/collections/9436c45085d241e377d2",
+    "test-libraries-stats":"newman run https://www.getpostman.com/collections/ac5b50fcccf7541dcc49",
+    "test-students-andalucia": "newman run https://www.getpostman.com/collections/1de93c6a578e3b686229",
     "start": "node index.js"
   },
   "repository": {

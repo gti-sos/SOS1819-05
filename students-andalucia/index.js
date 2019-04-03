@@ -27,8 +27,11 @@ app.get(API_PATH + "/students-andalucia/loadInitialData", (req, res) => {
 //GET /studentsAndalucia/
 
 app.get(API_PATH + "/students-andalucia", (req, res) => {
-
-    studentsAndalucia.find({}).toArray((err, studentsArray) => {
+  
+    var limit = parseInt(req.query.limit);
+    var offSet = parseInt(req.query.offset);
+    
+    studentsAndalucia.find({}).skip(offSet).limit(limit).toArray((err, studentsArray) => {
         if (err)
             console.log("Error: " + err);
         
@@ -38,7 +41,6 @@ app.get(API_PATH + "/students-andalucia", (req, res) => {
         }));
         
     });
-
 
 });
 
@@ -147,7 +149,6 @@ app.put(API_PATH + "/students-andalucia/:city/:year", (req, res) => {
     var year = req.params.year;
     var updateStudents = req.body;
 
-
     studentsAndalucia.find({ "city": city,"year": year }).toArray((err, studentsArray) => {
         if (err){
             console.log(err);
@@ -159,13 +160,12 @@ app.put(API_PATH + "/students-andalucia/:city/:year", (req, res) => {
 
         }else{
             if (!updateStudents.city || !updateStudents.year ||!updateStudents.eso || !updateStudents.high ||
-                !updateStudents.vocational || Object.keys(updateStudents).length >6 ||
-                updateStudents.city != city || updateStudents.year != year){
+                !updateStudents.vocational || Object.keys(updateStudents).length != 5 ){
     
                 res.sendStatus(400);
     
             }else {
-                studentsAndalucia.updateOne({ "city": city }, { $set: updateStudents });
+                studentsAndalucia.updateOne({ "city": city}, { $set: updateStudents });
                 studentsAndalucia.updateOne({ "year": year }, { $set: updateStudents });
                 res.sendStatus(200);
     
