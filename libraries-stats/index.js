@@ -1,8 +1,8 @@
 module.exports = function(app, API_PATH, librariestats) {
-    
-/*---------------------------------------*/
-/*------------API ENRIQUE------------------*/
-/*---------------------------------------*/
+
+    /*---------------------------------------*/
+    /*------------API ENRIQUE------------------*/
+    /*---------------------------------------*/
     var libraries = [{
         city: "Almeria",
         year: 2017,
@@ -53,11 +53,11 @@ module.exports = function(app, API_PATH, librariestats) {
         service: 98.77
     }];
 
-//DOCS
+    //DOCS
     app.post(API_PATH + "/libraries-stats/docs", (req, res) => {
         res.redirect("https://documenter.getpostman.com/view/6920009/S17ozAkn");
-
-//LOADINITIALDATA
+    });
+    //LOADINITIALDATA
     app.get(API_PATH + "/libraries-stats/loadInitialData", (req, res) => {
         librariestats.find({}).toArray((err, librariesArray) => {
             if (err) {
@@ -80,8 +80,8 @@ module.exports = function(app, API_PATH, librariestats) {
             }
         });
     });
-    
-// GET Recurso Completo
+
+    // GET Recurso Completo
     app.get(API_PATH + "/libraries-stats", function(req, res) {
         var dbquery = {};
         let offset = 0;
@@ -136,8 +136,8 @@ module.exports = function(app, API_PATH, librariestats) {
             }
         });
     });
-    
-// POST Recurso Completo
+
+    // POST Recurso Completo
     app.post(API_PATH + "/libraries-stats", (req, res) => {
         var librarie = req.body;
 
@@ -160,51 +160,51 @@ module.exports = function(app, API_PATH, librariestats) {
             }
         });
     });
-    
-//PUT INCORRECTO
+
+    //PUT INCORRECTO
     app.put(API_PATH + "/libraries-stats", (req, res) => {
         res.sendStatus(405);
         console.log("/PUT no permitido");
     });
-    
-// DELETE Recurso Completo
-app.delete(API_PATH + "/libraries-stats", (req, res) => {
 
-    librariestats.remove({});
+    // DELETE Recurso Completo
+    app.delete(API_PATH + "/libraries-stats", (req, res) => {
 
-    res.sendStatus(200);
-});
+        librariestats.remove({});
 
-// GET Recurso Concreto
+        res.sendStatus(200);
+    });
+
+    // GET Recurso Concreto
     app.get(API_PATH + "/libraries-stats/:city", (req, res) => {
-         var city = req.params.city;
+        var city = req.params.city;
 
-            librariestats.find({ "city": city }).toArray((err, librariesList) => {
-             if (err) {
-                    console.log("Error :" + err);
-             }
-             else if (librariesList.length >= 1) {
-                    console.log("/GET a un Recurso Concreto");
-                    res.send(librariesList.map((c) => {
-                        delete c._id;
-                        return c;
-                    })[0]);
-                }
-                else {
-                    res.sendStatus(404);
-                }
-            });
+        librariestats.find({ "city": city }).toArray((err, librariesList) => {
+            if (err) {
+                console.log("Error :" + err);
+            }
+            else if (librariesList.length >= 1) {
+                console.log("/GET a un Recurso Concreto");
+                res.send(librariesList.map((c) => {
+                    delete c._id;
+                    return c;
+                })[0]);
+            }
+            else {
+                res.sendStatus(404);
+            }
         });
     });
-    
 
-//POST INCORRECTO
+
+
+    //POST INCORRECTO
     app.post(API_PATH + "/libraries-stats/:city", (req, res) => {
         res.sendStatus(405);
         console.log("/POST no permitido");
     });
 
-// PUT Recurso Concreto
+    // PUT Recurso Concreto
     app.put(API_PATH + "/libraries-stats/:city", (req, res) => {
         var city = req.params.city;
         var librarie = req.body;
@@ -236,26 +236,26 @@ app.delete(API_PATH + "/libraries-stats", (req, res) => {
             });
         }
     });
-// DELETE Recurso Concreto
-app.delete(API_PATH + "/libraries-stats/:city", (req, res) => {
+    // DELETE Recurso Concreto
+    app.delete(API_PATH + "/libraries-stats/:city", (req, res) => {
 
-    var city = req.params.city;
+        var city = req.params.city;
 
-    librariestats.find({ "city": city }).toArray((err, librariesArray) => {
-        if (err)
-            console.log(err);
+        librariestats.find({ "city": city }).toArray((err, librariesArray) => {
+            if (err)
+                console.log(err);
 
-        if (librariesArray == 0) {
+            if (librariesArray == 0) {
 
-            res.sendStatus(404);
+                res.sendStatus(404);
 
-        }
-        else {
+            }
+            else {
 
-            librariestats.deleteOne({ "city": city });
-            res.sendStatus(200);
-        }
+                librariestats.deleteOne({ "city": city });
+                res.sendStatus(200);
+            }
+        });
     });
-});
 
 };
