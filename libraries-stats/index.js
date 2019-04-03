@@ -147,7 +147,7 @@ module.exports = function(app, API_PATH, librariestats) {
             }
             else {
                 console.log("new /POST");
-                if (Object.keys(librariestats).length !== 5) {
+                if (Object.keys(librarie).length !== 5) {
                     res.sendStatus(400);
                 }
                 else if (cityFiltro.length !== 0) {
