@@ -241,6 +241,30 @@ module.exports = function(app, API_PATH_SECURE, athletes) {
         });
     });
 
+    //GET A VARIOS RECURSOS
+    app.get(API_PATH_SECURE + "/athletes-performance-sport/:city/:year", (req, res) => {
+        if (!apikeyObject.checkApiKey(req, res)) return;
+
+        var city = req.params.city;
+        var year = req.params.year;
+
+        athletes.find({ "city": city, "year": parseInt(year) }).toArray((err, athletesList) => {
+            if (err) {
+                console.log("Error :" + err);
+            }
+            else if (athletesList.length >= 1) {
+                console.log("/GET a un recurso concreto");
+                res.send(athletesList.map((c) => {
+                    delete c._id;
+                    return c;
+                })[0]);
+            }
+            else {
+                res.sendStatus(404);
+            }
+        });
+    });
+
     //POST INCORRECTO
     app.post(API_PATH_SECURE + "/athletes-performance-sport/:city", (req, res) => {
         if (!apikeyObject.checkApiKey(req, res)) return;
@@ -271,6 +295,42 @@ module.exports = function(app, API_PATH_SECURE, athletes) {
                 }
                 else {
                     athletes.update({ "city": city }, athlete, (err, numUpdated) => {
+                        if (err) {
+                            console.log("Error " + err);
+                        }
+                        else {
+                            console.log(" - updated" + numUpdated);
+                            res.sendStatus(200);
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+    //PUT DE VARIOS RECURSOS
+    app.put(API_PATH_SECURE + "/athletes-performance-sport/:city/:year", (req, res) => {
+        if (!apikeyObject.checkApiKey(req, res)) return;
+
+        var city = req.params.city;
+        var year = req.params.year;
+        var athlete = req.body;
+
+        if (city != athlete.city || year != athlete.year || Object.keys(athlete).length !== 5) {
+            res.sendStatus(400);
+            console.log(Date() + " - Hacking attemp!");
+        }
+        else {
+            athletes.find({ "city": city, "year": parseInt(year) }).toArray((err, athletesPut) => {
+                if (err) {
+                    console.log("Error :" + err);
+                }
+                else if (athletesPut.length == 0) {
+                    console.log("No hemos encontrado el elemento para actualizar");
+                    res.sendStatus(404);
+                }
+                else {
+                    athletes.update({ "city": city, "year": parseInt(year) }, athlete, (err, numUpdated) => {
                         if (err) {
                             console.log("Error " + err);
                         }
