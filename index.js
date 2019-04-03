@@ -50,11 +50,9 @@ client.connect(err => {
                 studentsAndalucia = client_mvm.db("sos1819").collection("students-andalucia");
                 console.log("Connected!");
 
-<<<<<<< HEAD
                 studentsAPI(app, API_PATH, studentsAndalucia);
-                secureStudentsAPI(app, API_PATH_SECURE, studentsAndalucia)
-=======
->>>>>>> a99a4b9f4de36aee3d6052d0efb9a9f14e14efdd
+                secureStudentsAPI(app, API_PATH_SECURE, studentsAndalucia);
+                
                 const uri_egv = "mongodb+srv://test:test@sos-brah9.mongodb.net/test?retryWrites=true";
                 const client_egv = new MongoClient(uri_egv, { useNewUrlParser: true });
 
