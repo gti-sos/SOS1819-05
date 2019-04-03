@@ -39,7 +39,7 @@ client.connect(err => {
 
         athletesApi(app, API_PATH, athletes);
         secureAthletesApi(app, API_PATH_SECURE, athletes);
-        
+
         const uri_mvm = "mongodb+srv://test:test@sos-iyxd4.mongodb.net/test?retryWrites=true";
         const client_mvm = new MongoClient(uri_mvm, { useNewUrlParser: true });
 
@@ -55,7 +55,7 @@ client.connect(err => {
 
 
                 studentsAPI(app, API_PATH, studentsAndalucia);
-                secureStudentsAPI(app, API_PATH_SECURE, studentsAndalucia)
+                secureStudentsAPI(app, API_PATH_SECURE, studentsAndalucia);
 
                 const uri_egv = "mongodb+srv://test:test@sos-brah9.mongodb.net/test?retryWrites=true";
                 const client_egv = new MongoClient(uri_egv, { useNewUrlParser: true });
@@ -71,12 +71,14 @@ client.connect(err => {
                         console.log("connected");
 
                         librariesAPI(app, API_PATH, librariestats);
-                        secureLibrariesAPI(app, API_PATH_SECURE, librariestats)
+                        secureLibrariesAPI(app, API_PATH_SECURE, librariestats);
 
+                        app.listen(port, () => {
+                            console.log("Magic server ready on port " + port);
+                        });
                     }
                 });
             }
         });
     }
 });
-
