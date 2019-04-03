@@ -123,6 +123,7 @@ app.get(API_PATH + "/students-andalucia/:city", (req, res) => {
             console.log("Error: " + err);
 
         if (studentsArray == 0) {
+            console.log("El recurso no se ha encontrado");
             res.sendStatus(404);
         }
         else {
@@ -131,7 +132,7 @@ app.get(API_PATH + "/students-andalucia/:city", (req, res) => {
                 return(c);
                 
             }));
-            
+         console.log("Recurso encontrado y mostrado"); 
         }
     });
 
@@ -149,15 +150,17 @@ app.get(API_PATH + "/students-andalucia/:city/:year", (req, res) => {
             console.log("Error: " + err);
 
         if (studentsArray == 0) {
+            console.log("El recurso no se ha encontrado");
             res.sendStatus(404);
         }
         else {
+            console.log("Recurso encontrado");
             res.send(studentsArray.map((c) =>{
                 delete c._id;
+                console.log("Id borrado");
                 return(c);
-                
             }));
-            
+        console.log("Recurso devuelto");
         }
     });
 
