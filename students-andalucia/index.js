@@ -77,8 +77,8 @@ app.post(API_PATH + "/students-andalucia", (req, res) => {
         if (err)
             console.log(err);
 
-        if (studentsArray !== 0) {
-
+        if (studentsArray != 0) {
+            console.log("Conflicto porque el objeto ya existe");
             res.sendStatus(409);
 
         }
@@ -86,10 +86,11 @@ app.post(API_PATH + "/students-andalucia", (req, res) => {
             !newStudentsAndalucia.eso || !newStudentsAndalucia.high ||
             !newStudentsAndalucia.vocational || Object.keys(newStudentsAndalucia).length != 5) {
 
+            console.log("El número de campos debe ser 5");
             res.sendStatus(400);
         }
         else {
-
+            console.log("El nuevo dato se ha insertado correctamente");
             studentsAndalucia.insert(newStudentsAndalucia);
 
             res.sendStatus(201);
