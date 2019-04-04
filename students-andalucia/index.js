@@ -227,24 +227,23 @@ app.put(API_PATH + "/students-andalucia/:city/:year", (req, res) => {
     studentsAndalucia.find({ "city": city,"year": year }).toArray((err, studentsArray) => {
         if (err){
             console.log(err);
-
         }
         if (studentsArray.length == 0) {
-
+            console.log("PUT recurso no encontrado 404");
             res.sendStatus(404);
 
-        }else{
-            if (!updateStudents.city || !updateStudents.year ||!updateStudents.eso || !updateStudents.high ||
-                !updateStudents.vocational || Object.keys(updateStudents).length != 5 ){
-    
+        }else if (!updateStudents.city || !updateStudents.year ||!updateStudents.eso || !updateStudents.high || !updateStudents.vocational 
+            ||updateStudents.city != city || updateStudents.year != year|| Object.keys(updateStudents).length != 5 ){
+                console.log("PUT recurso encontrado. Se intenta actualizar con campos no validos 400");
                 res.sendStatus(400);
     
-            }else {
+        }else {
                 studentsAndalucia.updateOne({ "city": city}, { $set: updateStudents });
                 studentsAndalucia.updateOne({ "year": year }, { $set: updateStudents });
+                console.log("PUT realizado con exito");
                 res.sendStatus(200);
     
-            }
+        
         }
     });
 
