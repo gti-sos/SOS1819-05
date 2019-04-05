@@ -83,29 +83,6 @@ app.get(API_PATH + "/students-andalucia", (req, res) => {
     var dbquery ={};
     var limit = parseInt(req.query.limit);
     var offSet = parseInt(req.query.offset);
-    
-    Object.keys(req.query).forEach((i) => {
-            if (isNaN(req.query[i]) == false) {
-                dbquery[i] = parseInt(req.query[i]);
-            }
-            else {
-                dbquery[i] = req.query[i];
-            }
-        });
-
-        if (Object.keys(req.query).includes('from') && Object.keys(req.query).includes('to')) {
-            delete dbquery.from;
-            delete dbquery.to;
-            dbquery['city'] = { "$lte": parseInt(req.query['to']), "$gte": parseInt(req.query['from']) };
-        }
-        else if (Object.keys(req.query).includes('from')) {
-            delete dbquery.from;
-            dbquery['city'] = { "$gte": parseInt(req.query['from']) };
-        }
-        else if (Object.keys(req.query).includes('to')) {
-            delete dbquery.to;
-            dbquery['city'] = { "$lte": parseInt(req.query['to']) };
-        }
 
     studentsAndalucia.find({}).skip(offSet).limit(limit).toArray((err, studentsArray) => {
         if (err)
