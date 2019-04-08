@@ -1,5 +1,9 @@
 module.exports = function(app, API_PATH, studentsAndalucia){
     
+function isString(x) {
+    return Object.prototype.toString.call(x) === "[object String]";
+}
+    
 /*---------------------------------------*/
 /*------------API MARTA------------------*/
 /*---------------------------------------*/
@@ -79,21 +83,119 @@ app.get(API_PATH + "/students-andalucia/loadInitialData", (req, res) => {
 
 //GET /studentsAndalucia/
 
-app.get(API_PATH + "/students-andalucia", (req, res) => {
-    var dbquery ={};
+var path = API_PATH + "/students-andalucia";
+app.get(path, function(req, res) {
+    var city = req.params.city;
+    var year = parseInt(req.params.year);
+    var eso = parseInt(req.params.eso);
+    var high = parseInt(req.params.high);
+    var vocational = parseInt(req.params.vocational);
+    
     var limit = parseInt(req.query.limit);
     var offSet = parseInt(req.query.offset);
+    
+    if (Number.isInteger(limit) && Number.isInteger(offSet)) {
+        //PAGINACIÓN
+        studentsAndalucia.find({}).skip(offSet).limit(limit).toArray((err, studentsArray) => {
+            if (err)
+                console.log("Error: " + err);
+            
+            res.send(studentsArray.map((c) =>{
+                delete c._id;
+                return(c);
+            }));
+            
+        });
+   
+    //BUSQUEDAS 
+    }else if(isString("city")){
+        console.log("Tamos buscando por ciudad");
+        studentsAndalucia.find({ "city": city }).toArray((err, studentsArray) => {
+            console.log(studentsArray.length);
+            if (err)
+                console.log("Error: " + err);
+            
+            if(studentsArray.length == 0){
+                console.log("No se ha encontrado por city");
+                return res.sendStatus(404);                    
+            }else{
+                res.send(studentsArray.map((c) =>{
+                    delete c._id;
+                    return(c);
+                }));
+                
+            }
+        }); 
+    }else if(Number.isInteger("year")){
+        console.log("Tamos buscando por año");
+        studentsAndalucia.find({ "year":year }).toArray((err, studentsArray) => {
+            if (err)
+                console.log("Error: " + err);
+            
+            if(studentsArray.length==0){
+                console.log("No se ha encontrado por año");
+                return res.sendStatus(404); 
+            }else{
+                return res.send(studentsArray);
+            }
+        });
+    }else if(Number.isInteger("eso")){
+        
+        console.log("Tamos buscando por eso");
+        studentsAndalucia.find({ "eso":eso }).toArray((err, studentsArray) => {
+            if (err)
+                console.log("Error: " + err);
+                        
+            if(studentsArray.length==0){
+                console.log("No se ha encontrado por eso");
+                return res.sendStatus(404);
+            }else{
+                return res.send(studentsArray);    
+            }
+        });
+    }else if(Number.isInteger("high")){
+        console.log("Tamos buscando por high");
+        studentsAndalucia.find({ "high":high }).toArray((err, studentsArray) => {
+            if (err)
+                console.log("Error: " + err);
+                
+            if(studentsArray.length==0){
+                console.log("No se ha encontrado por high");
+                return res.sendStatus(404);
+            }else{
+                return res.send(studentsArray);
+            }
+        });
+    }else if(Number.isInteger("vocational")){
+        console.log("Tamos buscando por vocational");
+        studentsAndalucia.find({ "vocational":vocational }).toArray((err, studentsArray) => {
+            if (err)
+                console.log("Error: " + err);
+                
+            if(studentsArray.length==0){
+                console.log("No se ha encontrado por vocational");
+                return res.sendStatus(404);
+            }else{
+                return res.send(studentsArray);
+            }
+        });
+    }else {
+        console.log("Te lo devuelvo todo");
+            studentsAndalucia.find({}).toArray((err, studentsArray) => {
+                if (err) {
+                    console.log("Error: " + err);
+                }
+                else {
+                    res.send(studentsArray.map((c) =>{
+                        delete c._id;
+                        return(c);
+                    }));
+                }
+            });
 
-    studentsAndalucia.find({}).skip(offSet).limit(limit).toArray((err, studentsArray) => {
-        if (err)
-            console.log("Error: " + err);
-        
-        res.send(studentsArray.map((c) =>{
-            delete c._id;
-            return(c);
-        }));
-        
-    });
+    }
+    
+    
 
 });
 
@@ -149,6 +251,7 @@ app.get(API_PATH + "/students-andalucia/:city", (req, res) => {
     var city = req.params.city;
 
     studentsAndalucia.find({ "city": city}).toArray((err, studentsArray) => {
+        console.log(studentsArray.length);
         if (err)
             console.log("Error: " + err);
 
@@ -262,5 +365,14 @@ app.get("/api/v1/students-andalucia/docs/", (req, res) => {
     res.redirect("https://documenter.getpostman.com/view/6870023/S17qS957");
 });
 
+/*var buscador = function(city, year, eso, high, vocational);
+app.get(API_PATH + "/students-andalucia" , function(req, res) {
+   var city = req.params.city;
+   
+   if(){
+       
+   } 
+});*/
+    
 
 }
