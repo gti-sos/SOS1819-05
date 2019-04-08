@@ -108,7 +108,7 @@ app.get(path, function(req, res) {
         });
    
     //BUSQUEDAS 
-    }else if(isString("city")){
+    }else if(isString(city)){
         console.log("Tamos buscando por ciudad");
         studentsAndalucia.find({ "city": city }).toArray((err, studentsArray) => {
             console.log(studentsArray.length);
@@ -126,7 +126,7 @@ app.get(path, function(req, res) {
                 
             }
         }); 
-    }else if(Number.isInteger("year")){
+    }else if(Number.isInteger(year)){
         console.log("Tamos buscando por año");
         studentsAndalucia.find({ "year":year }).toArray((err, studentsArray) => {
             if (err)
@@ -139,7 +139,7 @@ app.get(path, function(req, res) {
                 return res.send(studentsArray);
             }
         });
-    }else if(Number.isInteger("eso")){
+    }else if(Number.isInteger(eso)){
         
         console.log("Tamos buscando por eso");
         studentsAndalucia.find({ "eso":eso }).toArray((err, studentsArray) => {
@@ -153,7 +153,7 @@ app.get(path, function(req, res) {
                 return res.send(studentsArray);    
             }
         });
-    }else if(Number.isInteger("high")){
+    }else if(Number.isInteger(high)){
         console.log("Tamos buscando por high");
         studentsAndalucia.find({ "high":high }).toArray((err, studentsArray) => {
             if (err)
@@ -166,7 +166,7 @@ app.get(path, function(req, res) {
                 return res.send(studentsArray);
             }
         });
-    }else if(Number.isInteger("vocational")){
+    }else if(Number.isInteger(vocational)){
         console.log("Tamos buscando por vocational");
         studentsAndalucia.find({ "vocational":vocational }).toArray((err, studentsArray) => {
             if (err)
