@@ -1,8 +1,5 @@
 module.exports = function(app, API_PATH, studentsAndalucia){
-    
-function isString(x) {
-    return Object.prototype.toString.call(x) === "[object String]";
-}
+
     
 /*---------------------------------------*/
 /*------------API MARTA------------------*/
@@ -83,121 +80,61 @@ app.get(API_PATH + "/students-andalucia/loadInitialData", (req, res) => {
 
 //GET /studentsAndalucia/
 
-var path = API_PATH + "/students-andalucia";
-app.get(path, function(req, res) {
-    var city = req.params.city;
-    var year = parseInt(req.params.year);
-    var eso = parseInt(req.params.eso);
-    var high = parseInt(req.params.high);
-    var vocational = parseInt(req.params.vocational);
-    
-    var limit = parseInt(req.query.limit);
-    var offSet = parseInt(req.query.offset);
-    
-    if (Number.isInteger(limit) && Number.isInteger(offSet)) {
-        //PAGINACIÓN
-        studentsAndalucia.find({}).skip(offSet).limit(limit).toArray((err, studentsArray) => {
-            if (err)
-                console.log("Error: " + err);
-            
-            res.send(studentsArray.map((c) =>{
-                delete c._id;
-                return(c);
-            }));
-            
+
+app.get(API_PATH + "/students-andalucia", function(req, res) {
+        var dbquery = {};
+        let offset = 0;
+        let limit = Number.MAX_SAFE_INTEGER;
+
+        if (req.query.offset) {
+            offset = parseInt(req.query.offset);
+            delete req.query.offset;
+        }
+        if (req.query.limit) {
+            limit = parseInt(req.query.limit);
+            delete req.query.limit;
+        }
+
+        Object.keys(req.query).forEach((i) => {
+            if (isNaN(req.query[i]) == false) {
+                dbquery[i] = parseInt(req.query[i]);
+            }
+            else {
+                dbquery[i] = req.query[i];
+            }
         });
-   
-    //BUSQUEDAS 
-    }else if(isString(city)){
-        console.log("Tamos buscando por ciudad");
-        studentsAndalucia.find({ "city": city }).toArray((err, studentsArray) => {
-            console.log(studentsArray.length);
-            if (err)
-                console.log("Error: " + err);
-            
-            if(studentsArray.length == 0){
-                console.log("No se ha encontrado por city");
-                return res.sendStatus(404);                    
-            }else{
-                res.send(studentsArray.map((c) =>{
-                    delete c._id;
-                    return(c);
+
+        if (Object.keys(req.query).includes('from') && Object.keys(req.query).includes('to')) {
+            delete dbquery.from;
+            delete dbquery.to;
+            dbquery['city'] = { "$lte": parseInt(req.query['to']), "$gte": parseInt(req.query['from']) };
+        }
+        else if (Object.keys(req.query).includes('from')) {
+            delete dbquery.from;
+            dbquery['city'] = { "$gte": parseInt(req.query['from']) };
+        }
+        else if (Object.keys(req.query).includes('to')) {
+            delete dbquery.to;
+            dbquery['city'] = { "$lte": parseInt(req.query['to']) };
+        }
+
+        studentsAndalucia.find(dbquery).skip(offset).limit(limit).toArray((err, studentsArray) => {
+            if (err) {
+                console.error(" Error accesing DB");
+                res.sendStatus(500);
+                return;
+            }
+            else if (studentsArray.length == 0) {
+                res.send([]);
+            }
+            else {
+                res.send(studentsArray.map((s) => {
+                    delete s._id;
+                    return s;
                 }));
-                
-            }
-        }); 
-    }else if(Number.isInteger(year)){
-        console.log("Tamos buscando por año");
-        studentsAndalucia.find({ "year":year }).toArray((err, studentsArray) => {
-            if (err)
-                console.log("Error: " + err);
-            
-            if(studentsArray.length==0){
-                console.log("No se ha encontrado por año");
-                return res.sendStatus(404); 
-            }else{
-                return res.send(studentsArray);
             }
         });
-    }else if(Number.isInteger(eso)){
-        
-        console.log("Tamos buscando por eso");
-        studentsAndalucia.find({ "eso":eso }).toArray((err, studentsArray) => {
-            if (err)
-                console.log("Error: " + err);
-                        
-            if(studentsArray.length==0){
-                console.log("No se ha encontrado por eso");
-                return res.sendStatus(404);
-            }else{
-                return res.send(studentsArray);    
-            }
-        });
-    }else if(Number.isInteger(high)){
-        console.log("Tamos buscando por high");
-        studentsAndalucia.find({ "high":high }).toArray((err, studentsArray) => {
-            if (err)
-                console.log("Error: " + err);
-                
-            if(studentsArray.length==0){
-                console.log("No se ha encontrado por high");
-                return res.sendStatus(404);
-            }else{
-                return res.send(studentsArray);
-            }
-        });
-    }else if(Number.isInteger(vocational)){
-        console.log("Tamos buscando por vocational");
-        studentsAndalucia.find({ "vocational":vocational }).toArray((err, studentsArray) => {
-            if (err)
-                console.log("Error: " + err);
-                
-            if(studentsArray.length==0){
-                console.log("No se ha encontrado por vocational");
-                return res.sendStatus(404);
-            }else{
-                return res.send(studentsArray);
-            }
-        });
-    }else {
-        console.log("Te lo devuelvo todo");
-            studentsAndalucia.find({}).toArray((err, studentsArray) => {
-                if (err) {
-                    console.log("Error: " + err);
-                }
-                else {
-                    res.send(studentsArray.map((c) =>{
-                        delete c._id;
-                        return(c);
-                    }));
-                }
-            });
-
-    }
-    
-    
-
-});
+    });
 
 //POST /studentsAndalucia/
 
