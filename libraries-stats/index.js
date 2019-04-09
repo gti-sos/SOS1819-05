@@ -148,10 +148,10 @@ module.exports = function(app, API_PATH, librariestats) {
             else {
                 console.log("new /POST");
                 if (Object.keys(librarie).length !== 5) {
-                    res.sendStatus(400);
+                    res.sendStatus(409);
                 }
                 else if (cityFiltro.length !== 0) {
-                    res.sendStatus(409);
+                    res.sendStatus(400);
                 }
                 else {
                     res.sendStatus(201);
@@ -192,6 +192,30 @@ module.exports = function(app, API_PATH, librariestats) {
             }
             else {
                 res.sendStatus(404);
+            }
+        });
+    });
+    
+    //GET busqueda por 2 parametros
+
+    app.get(API_PATH + "/libraries-stats/:city/:year", (req, res) => {
+
+        var city = req.params.city;
+        var year = req.params.year;
+
+        librariestats.find({ "city": city, "year":year }).toArray((err, librariesArray) => {
+            if (err)
+                console.log("Error: " + err);
+
+            if (librariesArray == 0) {
+                res.sendStatus(404);
+            }
+            else {
+                res.send(librariesArray.map((c) =>{
+                    delete c._id;
+                    return(c);
+                
+                }));
             }
         });
     });
@@ -257,5 +281,4 @@ module.exports = function(app, API_PATH, librariestats) {
             }
         });
     });
-
 };
