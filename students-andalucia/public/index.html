@@ -5,27 +5,11 @@
         <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/bower_components/angular/angular.min.js"></script>
         
-        <script>
-            /*global angular $scope*/
-            
-            var app = angular.module("MiniPostmanApp",[]);
-            console.log("App initialized!");
-            
-            
-            app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
-                console.log("MainCtrl initialized!");
-                $scope.url = "api/v1/students-andalucia";
-                
-                $scope.send = function(){
-                $http.get($scope.url).then(function(response){
-                   $scope.data = JSON.stringify(response.data,null,2); 
-                });
-                }
-            }]);
-            
-        </script>
+        <script src="minipostman-app.js"></script>
+        <script src="main-ctrl.js"></script>
+        
     </head>
-    <body>
+    <body ng-controller="MainCtrl">
         <h1>Mini Postman</h1>
         <div>
             <label>URL:<input class="form-control text-center" ng-model="url"/></label>
