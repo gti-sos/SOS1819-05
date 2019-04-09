@@ -1,8 +1,29 @@
-<html>
+<html ng-app="MiniPostmanApp">
     <head>
         <title>Mini Postman</title>
         <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" >
         <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/bower_components/angular/angular.min.js"></script>
+        
+        <script>
+            /*global angular $scope*/
+            
+            var app = angular.module("MiniPostmanApp",[]);
+            console.log("App initialized!");
+            
+            
+            app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
+                console.log("MainCtrl initialized!");
+                $scope.url = "api/v1/students-andalucia";
+                
+                $scope.send = function(){
+                $http.get($scope.url).then(function(response){
+                   $scope.data = JSON.stringify(response.data,null,2); 
+                });
+                }
+            }]);
+            
+        </script>
     </head>
     <body>
         <h1>Mini Postman</h1>
