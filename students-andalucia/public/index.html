@@ -13,8 +13,17 @@
         <h1>Mini Postman</h1>
         <div>
             <label>URL:<input class="form-control text-center" ng-model="url"/></label>
-            <button class="btn btn-primary" ng-click="send()">Send</button>
+            <button class="btn btn-primary" ng-click="get()">Get</button>
+            <button class="btn btn-success" ng-click="post()">Post</button>
+            <button class="btn btn-light" ng-click="put()">Put</button>
+            <button class="btn btn-danger" ng-click="delete()">Delete</button>
+            <button class="btn btn-info" ng-click="loadInitialData()">LoadInitialData</button>
         </div>
+        
+        <div>
+            <label>Status code: {{status}}</label>
+        </div>
+        
         <div>
             <textarea class="form-control" rows="20" ng-model="data"></textarea>
         </div>
