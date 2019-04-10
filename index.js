@@ -1,5 +1,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
+var path = require("path");
 
 //ALVARO
 var athletesApi = require("./athletes-performance-sport");
@@ -17,7 +18,8 @@ var API_PATH_SECURE = "/api/v1/secure";
 
 app.use(bodyParser.json());
 
-app.use("/", express.static(__dirname + "/public"));
+app.use("/", express.static(path.join(__dirname,"public")));
+app.use("/api-athletes/v1/minipostman", express.static(path.join(__dirname,"public/athletesApi")));
 
 var port = process.env.PORT || 8080;
 

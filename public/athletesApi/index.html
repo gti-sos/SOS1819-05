@@ -1,0 +1,26 @@
+<html ng-app="App">
+
+<head>
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+
+    <script src="App.js"></script>
+    <script src="mainCtrl.js"></script>
+</head>
+
+<body ng-controller="mainCtrl">
+    <div>
+        <label>URL: <input class="form-control text-center" ng-model="url"/></label>
+        <button class="btn btn-primary" ng-click="get()">Get</button>
+        <button class="btn btn-secondary" ng-click="post()">Post</button>
+        <button class="btn btn-warning" ng-click="put()">Put</button>
+        <button class="btn btn-danger" ng-click="delete()">Delete</button>
+        <button class="btn btn-info" ng-click="loadInitialData()">LoadInitialData</button>
+    </div>
+    <div>
+        <textarea class="form-control" size="40" rows="20" ng-model="data"></textarea>
+    </div>
+</body>
+
+</html>
