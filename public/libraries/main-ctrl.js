@@ -3,7 +3,7 @@
 var app = angular.module("MiniPostmanApp");
 
 app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
-    console.log("Modular MainCtrl initialized!");
+    console.log("Modular MainCtrl initialized prueba !");
     $scope.url = "/api/v1/libraries-stats/";
         
     //LoadInitialData
