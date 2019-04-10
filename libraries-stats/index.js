@@ -138,7 +138,7 @@ module.exports = function(app, API_PATH, librariestats) {
     });
 
     // POST Recurso Completo
-    app.post(API_PATH + "/libraries-stats/docs", (req, res) => {
+    app.post(API_PATH + "/libraries-stats", (req, res) => {
         var newLibrariesStats = req.body;
         var city = req.body.city;
     
