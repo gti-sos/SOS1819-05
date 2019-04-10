@@ -9,6 +9,10 @@ app.controller("mainCtrl", ["$scope", "$http", function($scope, $http) {
         $http.get($scope.url).then(function(response) {
             $scope.status = response.status;
             $scope.data = JSON.stringify(response.data, null, 2);
+
+        }, function(error) {
+            $scope.status = error.status;
+            $scope.data = "";
         });
     };
 
@@ -16,6 +20,10 @@ app.controller("mainCtrl", ["$scope", "$http", function($scope, $http) {
         $http.post($scope.url, $scope.data).then(function(response) {
             $scope.status = response.status;
             $scope.data = JSON.stringify(response.data, null, 2);
+
+        }, function(error) {
+            $scope.status = error.status;
+            $scope.data = "";
         });
     };
 
@@ -23,6 +31,10 @@ app.controller("mainCtrl", ["$scope", "$http", function($scope, $http) {
         $http.put($scope.url, $scope.data).then(function(response) {
             $scope.status = response.status;
             $scope.data = JSON.stringify(response.data, null, 2);
+
+        }, function(error) {
+            $scope.status = error.status;
+            $scope.data = "";
         });
     };
 
@@ -30,6 +42,10 @@ app.controller("mainCtrl", ["$scope", "$http", function($scope, $http) {
         $http.delete($scope.url).then(function(response) {
             $scope.status = response.status;
             $scope.data = [];
+
+        }, function(error) {
+            $scope.status = error.status;
+            $scope.data = "";
         });
     };
 
