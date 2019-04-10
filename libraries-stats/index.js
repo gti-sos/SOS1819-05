@@ -81,7 +81,7 @@ module.exports = function(app, API_PATH, librariestats) {
         });
     });
 
-    // GET Recurso Completo
+    // GET Recurso Completo BUSQUEDA Y PAGINACION
     app.get(API_PATH + "/libraries-stats", function(req, res) {
         var dbquery = {};
         let offset = 0;
@@ -138,27 +138,35 @@ module.exports = function(app, API_PATH, librariestats) {
     });
 
     // POST Recurso Completo
-    app.post(API_PATH + "/libraries-stats", (req, res) => {
-        var librarie = req.body;
-
-        librariestats.find({ "city": librariestats.city }).toArray((err, cityFiltro) => {
-            if (err) {
-                console.log("Error :" + err);
+    app.post(API_PATH + "/libraries-stats/docs", (req, res) => {
+        var newLibrariesStats = req.body;
+        var city = req.body.city;
+    
+        librariestats.find({ "city": city }).toArray((err, librariesArray) => {
+            if (err)
+                console.log(err);
+    
+            if (librariesArray != 0) {
+                console.log("Conflicto porque el objeto ya existe");
+                res.sendStatus(409);
+    
+            }
+            else if (!newLibrariesStats.city || !newLibrariesStats.year ||
+                !newLibrariesStats.number || !newLibrariesStats.activities ||
+                !newLibrariesStats.service || Object.keys(newLibrariesStats).length != 5) {
+    
+                console.log("El número de campos debe ser 5");
+                res.sendStatus(400);
             }
             else {
-                console.log("new /POST");
-                if (Object.keys(librarie).length !== 5) {
-                    res.sendStatus(409);
-                }
-                else if (cityFiltro.length !== 0) {
-                    res.sendStatus(400);
-                }
-                else {
-                    res.sendStatus(201);
-                    librariestats.insert(librarie);
-                }
+                console.log("El nuevo dato se ha insertado correctamente");
+                librariestats.insert(newLibrariesStats);
+    
+                res.sendStatus(201);
             }
+    
         });
+    
     });
 
     //PUT INCORRECTO
