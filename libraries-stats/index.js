@@ -152,8 +152,8 @@ module.exports = function(app, API_PATH, librariestats) {
     
             }
             else if (!newLibrariesStats.city || !newLibrariesStats.year ||
-                !newLibrariesStats.eso || !newLibrariesStats.high ||
-                !newLibrariesStats.vocational || Object.keys(newLibrariesStats).length != 5) {
+                !newLibrariesStats.number || !newLibrariesStats.activities ||
+                !newLibrariesStats.service || Object.keys(newLibrariesStats).length != 5) {
     
                 console.log("El número de campos debe ser 5");
                 res.sendStatus(400);
