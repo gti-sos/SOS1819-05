@@ -13,15 +13,10 @@ app.controller("editCtrl", ["$scope", "$http", "$routeParams", "$location", func
     $scope.put = function() {
         console.log("Updating an athlete");
         $http.put(API, $scope.updatedAthlete).then(function(res) {
-            if ($scope.updatedAthlete.params != 5) {
-                console.log("Actualización incorrecta");
-                $scope.status = "400: debe completar todos los campos";
-            }
-            else {
-                console.log(res.status + ": los datos han sido actualizados correctamente");
-                window.alert("OK: estadística actualizada");
-                $location.path("/ui/v1/athletes-performance-sport");
-            }
+            console.log(res.status + ": los datos han sido actualizados correctamente");
+            window.alert("OK: estadística actualizada");
+            $location.path("/ui/v1/athletes-performance-sport");
+
         });
     };
 }]);
