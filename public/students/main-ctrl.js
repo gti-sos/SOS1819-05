@@ -45,11 +45,11 @@ app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
     }
 
     //DELETE RECURSO CONCRETO     
-    $scope.delete = function(city, year){
-        console.log("Deleting student!"+ city+ year);      
+    $scope.deleteData = function(city, year){
+        console.log("Deleting student!"+ city + year);      
         
         $http
-            .delete(API + "/" + city + year)
+            .delete(API + "/" + city + "/" + year)
             .then(function(response){
                 console.log("Delete response: " + response.status + " " + response.data);
                 refresh();
@@ -68,5 +68,47 @@ app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
             });
     
     }
+    
+    //BUSQUEDA
+    $scope.searchData = function(city, year) {
+
+        if (city && !year) {
+
+            $http.get($scope.url + "?city=" + city).then(function(response) {
+
+                $scope.datos = response.data;
+                $scope.mensaje = "Recurso/s encontrado/s con exito";
+
+            }, function(error) {
+
+                $scope.mensaje = "Error: " + error.status + " = recurso/s no encontrado/s";
+
+                refresh();
+            });
+        }
+        else {
+
+            if (year && !city) {
+
+                $http.get($scope.url + "?year=" + year).then(function(response) {
+
+                    $scope.datos = response.data;
+
+                    $scope.mensaje = "Recurso/s encontrado/s con exito";
+
+                }, function(error) {
+
+                    $scope.mensaje = "Error: " + error.status + " = recurso/s no encontrado/s";
+
+                    refresh();
+
+                });
+            }
+            else {
+
+                refresh();
+            }
+        }
+    };
     
 }]);
