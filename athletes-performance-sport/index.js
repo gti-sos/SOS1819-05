@@ -64,20 +64,21 @@ module.exports = function(app, API_PATH, athletes) {
             if (err) {
                 console.log("Error: " + err);
             }
-            else if (athletesArray.length == 0) {
-                console.log("/Load Initial Data");
-                res.send(athletesPerformanceSport.map((c) => {
-                    delete c._id;
-                    return c;
-                }));
-                athletes.insertMany(athletesPerformanceSport);
-            }
             else {
-                res.send(athletesArray.map((c) => {
-                    delete c._id;
-                    return c;
-                }));
-
+                if (athletesArray.length == 0) {
+                    console.log("/Load Initial Data");
+                    res.send(athletesPerformanceSport.map((c) => {
+                        delete c._id;
+                        return c;
+                    }));
+                    athletes.insertMany(athletesPerformanceSport);
+                }
+                else {
+                    res.send(athletesArray.map((c) => {
+                        delete c._id;
+                        return c;
+                    }));
+                }
             }
         });
     });
@@ -126,7 +127,8 @@ module.exports = function(app, API_PATH, athletes) {
                 res.sendStatus(500);
                 return;
             }
-            else if (athletesFilter.length == 0) {
+
+            if (athletesFilter.length == 0) {
                 res.send([]);
             }
             else {
@@ -174,15 +176,16 @@ module.exports = function(app, API_PATH, athletes) {
             if (err) {
                 console.log("Error" + err);
             }
-            else if (athletesDelete.length == 0) {
-                console.log("No hay nada que borrar");
-                res.sendStatus(404);
-            }
             else {
-                console.log("/DELETE al recurso completo");
-                res.send([]);
-                athletes.deleteMany();
-
+                if (athletesDelete.length == 0) {
+                    console.log("No hay nada que borrar");
+                    res.sendStatus(404);
+                }
+                else {
+                    console.log("/DELETE al recurso completo");
+                    res.send([]);
+                    athletes.deleteMany();
+                }
             }
         });
     });
@@ -195,15 +198,18 @@ module.exports = function(app, API_PATH, athletes) {
             if (err) {
                 console.log("Error :" + err);
             }
-            else if (athletesList.length >= 1) {
-                console.log("/GET a un recurso concreto");
-                res.send(athletesList.map((c) => {
-                    delete c._id;
-                    return c;
-                })[0]);
-            }
             else {
-                res.sendStatus(404);
+                console.log("Error :" + err);
+                if (athletesList.length >= 1) {
+                    console.log("/GET a un recurso concreto");
+                    res.send(athletesList.map((c) => {
+                        delete c._id;
+                        return c;
+                    })[0]);
+                }
+                else {
+                    res.sendStatus(404);
+                }
             }
         });
     });
@@ -280,7 +286,7 @@ module.exports = function(app, API_PATH, athletes) {
             console.log(Date() + " - Hacking attemp!");
         }
         else {
-            athletes.find({ "city": city , "year": parseInt(year)}).toArray((err, athletesPut) => {
+            athletes.find({ "city": city, "year": parseInt(year) }).toArray((err, athletesPut) => {
                 if (err) {
                     console.log("Error :" + err);
                 }
@@ -289,7 +295,7 @@ module.exports = function(app, API_PATH, athletes) {
                     res.sendStatus(404);
                 }
                 else {
-                    athletes.update({ "city": city , "year": parseInt(year)}, athlete, (err, numUpdated) => {
+                    athletes.update({ "city": city, "year": parseInt(year) }, athlete, (err, numUpdated) => {
                         if (err) {
                             console.log("Error " + err);
                         }

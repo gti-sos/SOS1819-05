@@ -86,20 +86,21 @@ module.exports = function(app, API_PATH_SECURE, athletes) {
             if (err) {
                 console.log("Error: " + err);
             }
-            else if (athletesArray.length == 0) {
-                console.log("/Load Initial Data");
-                res.send(athletesPerformanceSport.map((c) => {
-                    delete c._id;
-                    return c;
-                }));
-                athletes.insertMany(athletesPerformanceSport);
-            }
             else {
-                res.send(athletesArray.map((c) => {
-                    delete c._id;
-                    return c;
-                }));
-
+                if (athletesArray.length == 0) {
+                    console.log("/Load Initial Data");
+                    res.send(athletesPerformanceSport.map((c) => {
+                        delete c._id;
+                        return c;
+                    }));
+                    athletes.insertMany(athletesPerformanceSport);
+                }
+                else {
+                    res.send(athletesArray.map((c) => {
+                        delete c._id;
+                        return c;
+                    }));
+                }
             }
         });
     });
@@ -205,15 +206,16 @@ module.exports = function(app, API_PATH_SECURE, athletes) {
             if (err) {
                 console.log("Error" + err);
             }
-            else if (athletesDelete.length == 0) {
-                console.log("No hay nada que borrar");
-                res.sendStatus(404);
-            }
             else {
-                console.log("/DELETE al recurso completo");
-                res.send([]);
-                athletes.deleteMany();
-
+                if (athletesDelete.length == 0) {
+                    console.log("No hay nada que borrar");
+                    res.sendStatus(404);
+                }
+                else {
+                    console.log("/DELETE al recurso completo");
+                    res.send([]);
+                    athletes.deleteMany();
+                }
             }
         });
     });
@@ -354,16 +356,15 @@ module.exports = function(app, API_PATH_SECURE, athletes) {
             if (err) {
                 console.log("Error :" + err);
             }
+            else if (athletesDel.length == 0) {
+                console.log("No se encuentra el recurso a eliminar");
+                res.sendStatus(404);
+            }
             else {
-                if (athletesDel.length == 0) {
-                    console.log("No se encuentra el recurso a eliminar");
-                    res.sendStatus(404);
-                }
-                else {
-                    console.log("/DELETE de un recurso concreto");
-                    res.sendStatus(200);
-                    athletes.deleteMany({ "city": city });
-                }
+                console.log("/DELETE de un recurso concreto");
+                res.sendStatus(200);
+                athletes.deleteMany({ "city": city });
+
             }
         });
     });

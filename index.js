@@ -19,9 +19,6 @@ var API_PATH_SECURE = "/api/v1/secure";
 app.use(bodyParser.json());
 
 app.use("/", express.static(path.join(__dirname,"public")));
-app.use("/api-athletes/v1/minipostman", express.static(path.join(__dirname,"public/athletesApi")));
-app.use("/students-andalucia/v1/minipostman", express.static(path.join(__dirname,"public/students")));
-app.use("/libraries-stats/v1/minipostman", express.static(path.join(__dirname,"public/libraries")));
 
 var port = process.env.PORT || 8080;
 
@@ -78,7 +75,9 @@ client.connect(err => {
                         secureLibrariesAPI(app, API_PATH_SECURE, librariestats);
 
                         app.listen(port, () => {
-                            console.log("Magic server ready on port " + port);
+                            console.log("Server ready on port: " + port);
+                        }).on("error",(e)=>{
+                            console.log("Server NOT READY: " + e);
                         });
                     }
                 });

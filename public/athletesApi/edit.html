@@ -1,0 +1,27 @@
+<head>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+</head>
+
+<body ng-controller="editCtrl">
+    <h1>Athlete</h1>
+    <table class="table">
+        <thead>
+            <th>City</th>
+            <th>Year</th>
+            <th>Man</th>
+            <th>Woman</th>
+            <th>Total</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            <td>{{ updatedAthlete.city }}</td>
+            <td>{{ updatedAthlete.year }}</td>
+            <td><input type="form-control" ng-model="updatedAthlete.man"/></td>
+            <td><input type="form-control" ng-model="updatedAthlete.woman"/></td>
+            <td><input type="form-control" ng-model="updatedAthlete.total"/></td>
+            <td><button class="btn btn-primary" ng-click="put()">Actualizar</button></td>
+        </tbody>
+    </table>
+</body>
