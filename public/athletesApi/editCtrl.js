@@ -7,7 +7,7 @@ app.controller("editCtrl", ["$scope", "$http", "$routeParams", "$location", func
 
     $http.get(API).then(function(res) {
         console.log("Dato recibido del servidor: " + JSON.stringify(res.data, null, 2));
-        $scope.updatedAthlete = res.data[0];
+        $scope.updatedAthlete = res.data;
     });
 
     $scope.put = function() {
