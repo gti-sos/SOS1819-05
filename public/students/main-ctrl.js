@@ -8,13 +8,17 @@ app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
     refresh();
         
     //LoadInitialData
-    $scope.loadInitialData = function (){
-        $http.get($scope.url + "loadInitialData").then(function (response){
-            $scope.data = JSON.stringify(response.data,null,2);
-            $scope.statusInfo = JSON.stringify(response.status, null, 2);
-        }).catch(function (response) {
-		   	$scope.statusInfo = JSON.stringify(response.status, null, 2);
-		});
+    $scope.loadInitialData = function() {
+
+        $http.get(API + "/loadInitialData", JSON.stringify($scope.data)).then(function(response) {
+            $scope.estado = response.status;
+            refresh();
+        }).catch(function(response) { //recoje el error en caso de que haya
+            $scope.estado = response.status;
+
+            refresh();
+
+        });
     };
          
     //GET 
@@ -40,18 +44,29 @@ app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
             });
     }
 
-    //DELETE        
-    $scope.delete = function(city){
-        console.log("Deleting student!"+ city);      
+    //DELETE RECURSO CONCRETO     
+    $scope.delete = function(city, year){
+        console.log("Deleting student!"+ city+ year);      
         
         $http
-            .delete(API + "/" + city)
+            .delete(API + "/" + city + year)
+            .then(function(response){
+                console.log("Delete response: " + response.status + " " + response.data);
+                refresh();
+            });
+    }
+    
+    //DELETE TODO        
+    $scope.deleteAll = function(){
+        console.log("Deleting student!");      
+        
+        $http
+            .delete(API + "/")
             .then(function(response){
                 console.log("Delete response: " + response.status + " " + response.data);
                 refresh();
             });
     
     }
-    
     
 }]);

@@ -29,8 +29,12 @@
                         <td>{{student.high}}</td>
                         <td>{{student.vocational}}</td>
                         <td>
-                            <button class="btn btn-danger" ng-clic="delete(student.city)">Borrar</button> 
+                            <button class="btn btn-danger" ng-clic="delete(student.city, student.year)">Borrar</button> 
                         </td>
+                    </tr>
+                    <tr>    
+                        <button class="btn btn-danger" ng-click="deleteAll()">Borrar todo</button>
+                        <button class="btn btn-info" ng-click="loadInitialData()">Load Initial Data</button>
                     </tr>
                     <tr>
                         <td><h4>Añadir un nuevo dato:</h4></td>
