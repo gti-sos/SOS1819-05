@@ -9,27 +9,48 @@
         <script src="main-ctrl.js"></script>
         
     </head>
-    <body ng-controller="MainCtrl">
-        <h1>Mini Postman Prueba </h1>
-        <div>
-            <label>URL:<input class="form-control text-center" ng-model="url"/></label>
-            <button class="btn btn-primary" ng-click="get()">Get</button>
-            <button class="btn btn-success" ng-click="post()">Post</button>
-            <button class="btn btn-light" ng-click="put()">Put</button>
-            <button class="btn btn-danger" ng-click="delete()">Delete</button>
-            <button class="btn btn-info" ng-click="loadInitialData()">LoadInitialData</button>
-        </div>
-        
-        <div>
-            <label>Status code: {{status}}</label>
-        </div>
-        
-        <div>
-            <textarea class="form-control" rows="20" ng-model="data"></textarea>
-        </div>
-        
-        
-         
-    </body>
+    <body ng-controller="mainCtrl">
+    <h1>Athletes</h1>
+    <div>
+        <ul>
+            <button class="btn btn-warning" ng-click="deleteAll()">DeleteAll</button>
+            <button class="btn btn-secondary" ng-click="loadInitialData()">LoadInitialData</button>
+        </ul>
+    </div>
+    <table class="table">
+        <thead>
+            <th>City</th>
+            <th>Year</th>
+            <th>number</th>
+            <th>activities</th>
+            <th>service</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="librarie in libraries">
+                <td><a href="/api/v1/libraries-stats{{ librarie.city }}/{{ librarie.year }}">{{ librarie.city }}</a></td>
+                <td>{{ athlete.year }}</td>
+                <td>{{ athlete.number }}</td>
+                <td>{{ athlete.activities }}</td>
+                <td>{{ athlete.service }}</td>
+                <td><button class="btn btn-danger" ng-click="delete(librarie.city)">Delete</button></td>
+            </tr>
+            <tr>
+                <td><input class="form-control" ng-model="newLibrarie.city" /></td>
+                <td><input class="form-control" ng-model="newLibrarie.year" /></td>
+                <td><input class="form-control" ng-model="newLibrarie.number" /></td>
+                <td><input class="form-control" ng-model="newLibrarie.activities" /></td>
+                <td><input class="form-control" ng-model="newLibrarie.service" /></td>
+                <td><button class="btn btn-primary" ng-click="add()">Add</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <ul>
+            <button class="btn btn-outline-primary" ng-click="previousPage()">Pagina Anterior</button>
+            <button class="btn btn-outline-secondary" ng-click="nextPage()">Pagina Siguiente</button>
+        </ul>
+    </div>
+</body>
 
 </html>
