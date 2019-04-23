@@ -226,7 +226,7 @@ app.post(API_PATH + "/libraries-stats/docs", (req, res) => {
 
     });
     
-    //PUT /studentsAndalucia/malaga/2017
+    //PUT Dos Parametros
 
     app.put(API_PATH + "/libraries-stats/:city/:year", (req, res) => {
 
