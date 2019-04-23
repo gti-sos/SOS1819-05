@@ -16,4 +16,5 @@ angular
                 templateUrl: "../athletesApi/edit.html",
                 controller: "editCtrl"
             });
+                
     });
