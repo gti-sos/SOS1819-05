@@ -9,7 +9,8 @@ module.exports = function(app, API_PATH, librariestats) {
         number: 97,
         activities: 79,
         service: 96.62
-    }, {
+    }, 
+    {
         city: "Cadiz",
         year: 2017,
         number: 76,
@@ -52,11 +53,10 @@ module.exports = function(app, API_PATH, librariestats) {
         activities: 110,
         service: 98.77
     }];
-
-    //DOCS
-    app.post(API_PATH + "/libraries-stats/docs", (req, res) => {
-        res.redirect("https://documenter.getpostman.com/view/6920009/S17ozAkn");
-    });
+//DOCS
+app.post(API_PATH + "/libraries-stats/docs", (req, res) => {
+    res.redirect("https://documenter.getpostman.com/view/6920009/S17ozAkn");
+});
     //LOADINITIALDATA
     app.get(API_PATH + "/libraries-stats/loadInitialData", (req, res) => {
         librariestats.find({}).toArray((err, librariesArray) => {
@@ -169,11 +169,7 @@ module.exports = function(app, API_PATH, librariestats) {
     
     });
 
-    //PUT INCORRECTO
-    app.put(API_PATH + "/libraries-stats", (req, res) => {
-        res.sendStatus(405);
-        console.log("/PUT no permitido");
-    });
+    
 
     // DELETE Recurso Completo
     app.delete(API_PATH + "/libraries-stats", (req, res) => {
@@ -208,27 +204,67 @@ module.exports = function(app, API_PATH, librariestats) {
 
     app.get(API_PATH + "/libraries-stats/:city/:year", (req, res) => {
 
+      
+    var city = req.params.city;
+    var year = parseInt(req.params.year);
+
+    librariestats.find({ "city": city, "year":year }).toArray((err, librariesArray) => {
+        if (err){
+            console.log("Error: " + err);
+        }
+        if(librariesArray.length >=1) {
+            console.log("GET a un recurso. Recurso encontrado");
+            res.send(librariesArray.map((c) =>{
+                delete c._id;
+                return(c);
+            })[0]);
+        }else {
+            console.log("GET a un recurso. El recurso no se ha encontrado");
+            res.sendStatus(404);
+        }
+    });
+
+    });
+    
+    //PUT /studentsAndalucia/malaga/2017
+
+    app.put(API_PATH + "/libraries-stats/:city/:year", (req, res) => {
+
         var city = req.params.city;
-        var year = req.params.year;
+        var year = parseInt(req.params.year);
+        var updateLibraries = req.body;
 
-        librariestats.find({ "city": city, "year":year }).toArray((err, librariesArray) => {
-            if (err)
-                console.log("Error: " + err);
-
-            if (librariesArray == 0) {
-                res.sendStatus(404);
+        librariestats.find({ "city": city,"year": year }).toArray((err, librariesArray) => {
+            if (err){
+                console.log(err);
             }
-            else {
-                res.send(librariesArray.map((c) =>{
-                    delete c._id;
-                    return(c);
-                
-                }));
+            if (librariesArray.length == 0) {
+                console.log("PUT recurso no encontrado 404");
+                res.sendStatus(404);
+
+            }else if (!updateLibraries.city || !updateLibraries.year ||!updateLibraries.number || !updateLibraries.activities || !updateLibraries.service 
+                ||updateLibraries.city != city || updateLibraries.year != year|| Object.keys(updateLibraries).length != 5 ){
+                    console.log("PUT recurso encontrado. Se intenta actualizar con campos no validos 400");
+                    res.sendStatus(400);
+    
+            }else {
+                    librariestats.updateOne({ "city": city}, { $set: updateLibraries });
+                    librariestats.updateOne({ "year": year }, { $set: updateLibraries });
+                    console.log("PUT realizado con exito");
+                    res.sendStatus(200);
+    
+        
             }
         });
+
     });
 
 
+    //PUT INCORRECTO
+    app.put(API_PATH + "/libraries-stats", (req, res) => {
+        res.sendStatus(405);
+        console.log("/PUT no permitido");
+    });
 
     //POST INCORRECTO
     app.post(API_PATH + "/libraries-stats/:city", (req, res) => {
