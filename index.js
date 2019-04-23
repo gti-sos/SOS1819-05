@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 app.use("/", express.static(path.join(__dirname,"public")));
 app.use("/api-athletes/v1/minipostman", express.static(path.join(__dirname,"public/athletesApi")));
-app.use("/students-andalucia/v1/minipostman", express.static(path.join(__dirname,"public/students")));
+app.use("/ui/v1/students-andalucia", express.static(path.join(__dirname,"public/students")));
 app.use("/libraries-stats/v1/minipostman", express.static(path.join(__dirname,"public/libraries")));
 
 var port = process.env.PORT || 8080;
