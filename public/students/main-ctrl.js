@@ -4,7 +4,7 @@ var app = angular.module("MiniPostmanApp");
 
 app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
     console.log("Modular MainCtrl initialized!");
-    $scope.url = "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/";
+    var API = "/api/v1/students-andalucia";
         
     //LoadInitialData
     $scope.loadInitialData = function (){
@@ -17,15 +17,12 @@ app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
     };
          
     //GET       
-    $scope.get = function(){
-        $http.get($scope.url).then(function(response){
-            $scope.status = response.status;
-            $scope.data = JSON.stringify(response.data,null,2);
-        }, function (error){
-            $scope.status = error.status;
-            $scope.data = "";
-        });
-    };
+    console.log("Requesting students to <"+ API +">...");
+    $http.get(API).then(function(response){
+        console.log("Data Received: " + JSON.stringify(response.data,null,2));
+            
+        $scope.students = response.data;
+    });
 
     //POST
     $scope.post = function(){
