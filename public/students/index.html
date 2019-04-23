@@ -10,21 +10,60 @@
         
     </head>
     <body ng-controller="MainCtrl">
-        <h1>Mini Postman</h1>
-        <div>
-            <label>URL: <input class="form-control text-center" ng-model="url" size="80" /></label>
-            <button class="btn btn-primary" ng-click="get()">Get All / Get</button>
-            <button class="btn btn-success" ng-click="post()">Post</button>
-            <button class="btn btn-light" ng-click="put()">Put</button>
-            <button class="btn btn-danger" ng-click="delete()">Delete All / Delete</button>
-            <button class="btn btn-info" ng-click="loadInitialData()">Load Initial Data</button>
-        </div>
-        <div>
-            <label>Status code: {{status}}</label>
-        </div>
-        <div>
-            <textarea  class="form-control" rows="20" ng-model="data"></textarea>
-        </div>
+        <h1>Mini Postman MARTA</h1>
+         <table class="table" style="width: 85%;">
+                <thead>
+                    <tr>
+                        <th>Ciudad</th>
+                        <th>Año</th>
+                        <th>ESO</th>
+                        <th>Bachillerato</th>
+                        <th>Universidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in students">
+                        <td>{{student.city}}</td>
+                        <td>{{student.year}}</td>
+                        <td>{{student.eso}}</td>
+                        <td>{{student.high}}</td>
+                        <td>{{student.vocational}}</td>
+                        <td>
+                            <button class="btn btn-danger" ng-clic="delete(student.city)">Borrar</button> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><h4>Añadir un nuevo dato:</h4></td>
+                        <td>
+                            <p>Ciudad:</p>
+                            <input class="form-control" ng-model="newStudent.city" value="new city">
+                        </td>
+                        <td>
+                            <p>Año:</p>
+                            <input class="form-control" ng-model="newStudent.year" value="new year">
+                        </td>
+                        <td>
+                            <p>Eso:</p>
+                            <input class="form-control" ng-model="newStudent.eso" value="new eso">
+                        </td>
+                        <td>
+                            <p>Bachillerato:</p>
+                            <input class="form-control" ng-model="newStudent.high" value="new high">
+                        </td> 
+                        <td>
+                            <p>Universidad:</p>
+                            <input class="form-control" ng-model="newStudent.vocational" value="new vocational">
+                        </td>                        
+                        <td>
+                            <button class="btn btn-primary" ng-click="add()">Añadir</button>
+                        </td>
+                    </tr>
+                </tbody>   
+        </table>
+            <tr>
+                <td></td>
+            </tr>
+        </table>     
         
     </body>
 

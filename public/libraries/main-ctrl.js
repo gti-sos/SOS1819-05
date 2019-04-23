@@ -3,8 +3,8 @@
 var app = angular.module("MiniPostmanApp");
 
 app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
-    console.log("Modular MainCtrl initialized!");
-    $scope.url = "https://sos1819-05.herokuapp.com/api/v1/libraries-stats/";
+    console.log("Modular MainCtrl initialized prueba !");
+    $scope.url = "/api/v1/libraries-stats/";
         
     //LoadInitialData
     $scope.loadInitialData = function (){
