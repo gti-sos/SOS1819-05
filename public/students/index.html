@@ -10,7 +10,30 @@
         
     </head>
     <body ng-controller="MainCtrl">
-        <h1>Mini Postman</h1>
+        <h1>Mini Postman MARTA</h1>
+         <table class="table">
+                <thead>
+                    <tr>
+                        <th>Ciudad</th>
+                        <th>Año</th>
+                        <th>ESO</th>
+                        <th>Bachillerato</th>
+                        <th>Universidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in students">
+                        <td>{{student.city}}</td>
+                        <td>{{student.year}}</td>
+                        <td>{{student.eso}}</td>
+                        <td>{{student.high}}</td>
+                        <td>{{student.vocational}}</td>
+                        <td>
+                            <button class="btn btn-danger" ng-clic="delete()">Borrar</button> 
+                        </td>
+                    </tr>
+                </tbody>   
+                    
         <div>
             <label>URL: <input class="form-control text-center" ng-model="url" size="80" /></label>
             <button class="btn btn-primary" ng-click="get()">Get All/Get</button>
