@@ -23,10 +23,10 @@
         <tbody>
             <tr ng-repeat="librarie in libraries">
                 <td><a href="/api/v1/libraries-stats{{ librarie.city }}/{{ librarie.year }}">{{ librarie.city }}</a></td>
-                <td>{{ athlete.year }}</td>
-                <td>{{ athlete.number }}</td>
-                <td>{{ athlete.activities }}</td>
-                <td>{{ athlete.service }}</td>
+                <td>{{ librarie.year }}</td>
+                <td>{{ librarie.number }}</td>
+                <td>{{ librarie.activities }}</td>
+                <td>{{ librarie.service }}</td>
                 <td><button class="btn btn-danger" ng-click="delete(librarie.city)">Delete</button></td>
             </tr>
             <tr>
