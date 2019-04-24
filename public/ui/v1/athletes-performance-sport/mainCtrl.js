@@ -25,14 +25,11 @@ app.controller("mainCtrl", ["$scope", "$http", function($scope, $http) {
             console.log("POST res: " + res.status + " " + res.data);
             refresh();
             $scope.status = res.status + ": el dato se ha añadido correctamente";
-        }, function(res) {
-            if (newAthlete.length !== 5) {
-                console.log(res.status + "debe completar todos los campos");
-                $scope.status = "Error 400: debe completar todos los campos";
-            }
-            else if ($scope.city == newAthlete.city && $scope.year == newAthlete.year) {
-                console.log(res.status + "la estadística ya existe");
-                $scope.status = res.status + ": la estadística ya existe";
+        }, function(error) {
+            if(error.status==400){
+                window.alert("ERROR: Debe completar todos los campos");
+            }else if(error.status==409){
+                window.alert("ERROR: la ciudad " + JSON.stringify(newAthlete.city,null,2) + " ya existe.");
             }
         });
     };
@@ -62,9 +59,10 @@ app.controller("mainCtrl", ["$scope", "$http", function($scope, $http) {
         $http.get(API + "/loadInitialData").then(function(res) {
             console.log("LOADING res: " + res.status + " " + res.data);
             $scope.status = res.status + ": los datos se han inicializado correctamente";
-            refresh();
-
+        }).catch(function(res){
+           $scope.statusInfo = JSON.stringify(res.status,null,2); 
         });
+        refresh();
     };
 
     $scope.previousPage = function() {
@@ -85,12 +83,16 @@ app.controller("mainCtrl", ["$scope", "$http", function($scope, $http) {
 
     $scope.busqueda = function() {
         console.log(API + "?" + $scope.atributo + "=" + $scope.valor);
-        $http.get(API + "?" + $scope.atributo + "=" + $scope.valor).then(function succesCallback(res) {
-            $scope.status = "Recurso encontrado";
+        $http.get(API + "?" + $scope.atributo + "=" + $scope.valor).then(function (res) {
+            if(res.data.length == 0){
+                window.alert("No se ha encontrado ningun dato");
+            }else if(res.data.length == 1){
+                window.alert("Se ha encontrado 1 dato");
+            }else{
+                window.alert("se han encontrado " + res.data.length + " datos");
+            }
             $scope.athletes = res.data;
-        }, function errorCallback(res) {
-            console.log(res.status);
-            $scope.status = res.status;
+            console.log(res.status + " " + JSON.stringify(res.data,null,2));
         });
     };
 
