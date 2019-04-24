@@ -16,5 +16,14 @@ angular
                 templateUrl: "../athletesApi/edit.html",
                 controller: "editCtrl"
             });
-                
+
+            /*Enrique*/
+            .when("/api/v1/libraries-stats", {
+                templateUrl: "../libraries/index.html",
+                controller: "mainCtrl"
+            })
+            .when("/api/v1/libraries-stats/:city/:year", {
+                templateUrl: "../libraries/edit.html",
+                controller: "editCtrl"
+            });
     });

@@ -15,7 +15,7 @@ app.controller("editCtrl", ["$scope", "$http", "$routeParams", "$location", func
         $http.put(API, $scope.updatedLibrarie).then(function(res) {
             console.log(res.status + ": los datos han sido actualizados correctamente");
             window.alert("OK: estadística actualizada");
-            $location.path("/ui/v1/libraries-stats");
+            $location.path("/api/v1/libraries-stats");
 
         });
     };
