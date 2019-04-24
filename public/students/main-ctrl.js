@@ -45,16 +45,15 @@ app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
     }
 
     //DELETE RECURSO CONCRETO     
-    $scope.deleteData = function(city, year){
-        console.log("Deleting student!"+ city + year);      
-        
-        $http
-            .delete(API + "/" + city + "/" + year)
-            .then(function(response){
-                console.log("Delete response: " + response.status + " " + response.data);
-                refresh();
-            });
-    }
+    $scope.delete = function(city) {
+        console.log("Deleting student with city : " + city);
+        $http.delete(API + "/" + city).then(function(res) {
+            console.log("DELETE res: " + res.status + " " + res.data);
+
+            refresh();
+            $scope.status = res.status + ": el dato se ha eliminado correctamente";
+        });
+    };
     
     //DELETE TODO        
     $scope.deleteAll = function(){
@@ -70,45 +69,15 @@ app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
     }
     
     //BUSQUEDA
-    $scope.searchData = function(city, year) {
-
-        if (city && !year) {
-
-            $http.get($scope.url + "?city=" + city).then(function(response) {
-
-                $scope.datos = response.data;
-                $scope.mensaje = "Recurso/s encontrado/s con exito";
-
-            }, function(error) {
-
-                $scope.mensaje = "Error: " + error.status + " = recurso/s no encontrado/s";
-
-                refresh();
-            });
-        }
-        else {
-
-            if (year && !city) {
-
-                $http.get($scope.url + "?year=" + year).then(function(response) {
-
-                    $scope.datos = response.data;
-
-                    $scope.mensaje = "Recurso/s encontrado/s con exito";
-
-                }, function(error) {
-
-                    $scope.mensaje = "Error: " + error.status + " = recurso/s no encontrado/s";
-
-                    refresh();
-
-                });
-            }
-            else {
-
-                refresh();
-            }
-        }
+    $scope.busqueda = function() {
+        console.log(API + "?" + $scope.atributo + "=" + $scope.valor);
+        $http.get(API + "?" + $scope.atributo + "=" + $scope.valor).then(function succesCallback(res) {
+            $scope.status = "Recurso encontrado";
+            $scope.students = res.data;
+        }, function errorCallback(res) {
+            console.log(res.status);
+            $scope.status = res.status;
+        });
     };
     
 }]);

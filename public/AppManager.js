@@ -16,16 +16,25 @@ angular
             .when("/ui/v1/athletes-performance-sport/:city/:year", {
                 templateUrl: "../athletesApi/edit.html",
                controller: "editCtrl"
-            });
+            })
         
             /*Enrique*/
-        //    .when("/api/v1/libraries-stats", {
-        
-        //        templateUrl: "../libraries/index.html",
-        //        controller: "mainCtrl"
-        //    })
-        //    .when("/api/v1/libraries-stats/:city/:year", {
-        //        templateUrl: "../libraries/edit.html",
-        //        controller: "editCtrl"
-        //    }); 
+            .when("/api/v1/libraries-stats", {
+                templateUrl: "../libraries/index.html",
+                controller: "mainCtrl"
+            })
+            .when("/api/v1/libraries-stats/:city/:year", {
+                templateUrl: "../libraries/edit.html",
+                controller: "editCtrl"
+            })
+            
+            //Marta
+            .when("/ui/v1/students-andalucia", {
+                templateUrl: "../students/index.html",
+                controller: "mainCtrl"
+            })
+            .when("/ui/v1/students-andalucia/:city/:year", {
+                templateUrl: "../students/edit.html",
+                controller: "editCtrl"
+            });
     });

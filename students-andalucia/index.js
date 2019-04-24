@@ -288,6 +288,27 @@ app.delete(API_PATH + "/students-andalucia/:city/:year", (req, res) => {
     });
 });
 
+    //DELETE DE UN RECURSO CONCRETO
+    app.delete(API_PATH + "/students-andalucia/:city", (req, res) => {
+        var city = req.params.city;
+
+        studentsAndalucia.find({ "city": city }).toArray((err, studentsArray) => {
+            if (err) {
+                console.log("Error :" + err);
+            }
+            else if (studentsArray.length == 0) {
+                console.log("No se encuentra el recurso a eliminar");
+                res.sendStatus(404);
+            }
+            else {
+                console.log("/DELETE de un recurso concreto");
+                res.sendStatus(200);
+                studentsAndalucia.deleteMany({ "city": city });
+
+            }
+        });
+    });
+
 //POST incorrecto
 app.post(API_PATH + "/students-andalucia/:city/:year", (req, res) => {
     res.sendStatus(405);
