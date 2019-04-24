@@ -27,4 +27,14 @@ angular
                 templateUrl: "../libraries/edit.html",
                 controller: "editCtrl"
             });
+            
+            //Marta
+            .when("/ui/v1/students-andalucia", {
+                templateUrl: "../students/index.html",
+                controller: "mainCtrl"
+            })
+            .when("/ui/v1/students-andalucia/:city/:year", {
+                templateUrl: "../students/edit.html",
+                controller: "editCtrl"
+            });
     });
