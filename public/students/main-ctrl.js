@@ -47,11 +47,11 @@ app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
     //DELETE RECURSO CONCRETO     
     $scope.delete = function(city) {
         console.log("Deleting student with city : " + city);
-        $http.delete(API + "/" + city).then(function(res) {
-            console.log("DELETE res: " + res.status + " " + res.data);
+        $http.delete(API + "/" + city).then(function(response) {
+            console.log("DELETE res: " + response.status + " " + response.data);
 
             refresh();
-            $scope.status = res.status + ": el dato se ha eliminado correctamente";
+            $scope.status = response.status + ": el dato se ha eliminado correctamente";
         });
     };
     
