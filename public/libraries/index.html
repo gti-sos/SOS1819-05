@@ -7,26 +7,26 @@
     <h1>Blibliotecas</h1>
     <div>
         <ul>
-            <button class="btn btn-warning" ng-click="deleteAll()">DeleteAll</button>
-            <button class="btn btn-secondary" ng-click="loadInitialData()">LoadInitialData</button>
+            <button class="btn btn-warning" ng-click="deleteAll()">Borrar Todo</button>
+            <button class="btn btn-secondary" ng-click="loadInitialData()">Iniciar Todo</button>
         </ul>
     </div>
     <table class="table">
         <thead>
-            <th>City</th>
-            <th>Year</th>
-            <th>number</th>
-            <th>activities</th>
-            <th>service</th>
-            <th>Actions</th>
+            <th>Ciudad</th>
+            <th>Año</th>
+            <th>Numero</th>
+            <th>Actividades</th>
+            <th>Servicio</th>
+            <th>Acciones</th>
         </thead>
         <tbody>
             <tr ng-repeat="librarie in libraries">
                 <td><a href="/api/v1/libraries-stats{{ librarie.city }}/{{ librarie.year }}">{{ librarie.city }}</a></td>
-                <td>{{ athlete.year }}</td>
-                <td>{{ athlete.number }}</td>
-                <td>{{ athlete.activities }}</td>
-                <td>{{ athlete.service }}</td>
+                <td>{{ librarie.year }}</td>
+                <td>{{ librarie.number }}</td>
+                <td>{{ librarie.activities }}</td>
+                <td>{{ librarie.service }}</td>
                 <td><button class="btn btn-danger" ng-click="delete(librarie.city)">Delete</button></td>
             </tr>
             <tr>
@@ -35,7 +35,7 @@
                 <td><input class="form-control" ng-model="newLibrarie.number" /></td>
                 <td><input class="form-control" ng-model="newLibrarie.activities" /></td>
                 <td><input class="form-control" ng-model="newLibrarie.service" /></td>
-                <td><button class="btn btn-primary" ng-click="add()">Add</button></td>
+                <td><button class="btn btn-primary" ng-click="add()">Añadir</button></td>
             </tr>
         </tbody>
     </table>
