@@ -29,14 +29,14 @@
                         <td>{{student.high}}</td>
                         <td>{{student.vocational}}</td>
                         <td>
-                            <button class="btn btn-danger" ng-clic="deleteData(student.city, student.year)">Borrar</button> 
+                            <button class="btn btn-danger" ng-clic="delete(student.city)">Borrar</button> 
                         </td>
                     </tr>
                     <tr>    
                         <button class="btn btn-danger" ng-click="deleteAll()">Borrar todo</button>
                         <button class="btn btn-info" ng-click="loadInitialData()">Inicializar datos</button>
-                        <label>URL: <input class="form-control text-center" ng-model="url" size="40" /></label>
-                        <button class="btn btn-light" ng-click="searchData(student.city, student.year)">Buscar</button>
+                        <input style="width: 20%" placeholder="ciudad" name="valor" class="form-control" ng-model="valor" />
+                        <button class="button btn-primary" ng-click="busqueda()">Buscar</button>
                     </tr>
                     <tr>
                         <td><h4>Añadir un nuevo dato:</h4></td>
@@ -66,11 +66,6 @@
                     </tr>
                 </tbody>   
         </table>
-            <tr>
-                <td></td>
-            </tr>
-        </table>     
-        
-    </body>
 
+    </body>
 </html>
