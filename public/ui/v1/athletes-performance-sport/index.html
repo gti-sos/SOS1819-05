@@ -1,7 +1,13 @@
+<!DOCTYPE html>
+<html ng-app="App">
 <head>
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="mainCtrl.js"></script>
+    <script type="text/javascript" src="editCtrl.js"></script>
+    
 </head>
 
 <body ng-controller="mainCtrl">
@@ -23,7 +29,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="athlete in athletes">
-                <td><a href="/#!/ui/v1/athletes-performance-sport/{{ athlete.city }}/{{ athlete.year }}">{{ athlete.city }}</a></td>
+                <td><a href="edit.html">{{ athlete.city }}</a></td>
                 <td>{{ athlete.year }}</td>
                 <td>{{ athlete.man }}</td>
                 <td>{{ athlete.woman }}</td>
@@ -63,3 +69,4 @@
 </body>
 <hr/>
 <h8><i>{{status}}</i></h8>
+</html>

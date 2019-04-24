@@ -2,6 +2,10 @@
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="mainCtrl.js"></script>
+    <script type="text/javascript" src="editCtrl.js"></script>
 </head>
 
 <body ng-controller="editCtrl">
@@ -18,9 +22,9 @@
         <tbody>
             <td>{{ updatedAthlete.city }}</td>
             <td>{{ updatedAthlete.year }}</td>
-            <td><input type="form-control" ng-model="updatedAthlete.man"/></td>
-            <td><input type="form-control" ng-model="updatedAthlete.woman"/></td>
-            <td><input type="form-control" ng-model="updatedAthlete.total"/></td>
+            <td><input type="form-control" ng-model="updatedAthlete.man" /></td>
+            <td><input type="form-control" ng-model="updatedAthlete.woman" /></td>
+            <td><input type="form-control" ng-model="updatedAthlete.total" /></td>
             <td><button class="btn btn-primary" ng-click="put()">Actualizar</button></td>
         </tbody>
     </table>
