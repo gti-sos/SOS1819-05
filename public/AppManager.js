@@ -21,7 +21,7 @@ angular
             /*Enrique*/
             .when("/ui/v1/libraries-stats", {
                 templateUrl: "../libraries/index.html",
-                controller: "main-ctrl"
+                controller: "mainCtrl"
             })
             .when("/ui/v1/libraries-stats/:city/:year", {
                 templateUrl: "../libraries/edit.html",
@@ -31,7 +31,7 @@ angular
             //Marta
             .when("/ui/v1/students-andalucia", {
                 templateUrl: "../students/index.html",
-                controller: "main-ctrl"
+                controller: "MainCtrl"
             })
             .when("/ui/v1/students-andalucia/:city/:year", {
                 templateUrl: "../students/edit.html",
