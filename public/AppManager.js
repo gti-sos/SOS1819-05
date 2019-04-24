@@ -19,11 +19,11 @@ angular
             })
         
             /*Enrique*/
-            .when("/api/v1/libraries-stats", {
+            .when("/ui/v1/libraries-stats", {
                 templateUrl: "../libraries/index.html",
-                controller: "mainCtrl"
+                controller: "main-ctrl"
             })
-            .when("/api/v1/libraries-stats/:city/:year", {
+            .when("/ui/v1/libraries-stats/:city/:year", {
                 templateUrl: "../libraries/edit.html",
                 controller: "editCtrl"
             })
@@ -31,7 +31,7 @@ angular
             //Marta
             .when("/ui/v1/students-andalucia", {
                 templateUrl: "../students/index.html",
-                controller: "mainCtrl"
+                controller: "main-ctrl"
             })
             .when("/ui/v1/students-andalucia/:city/:year", {
                 templateUrl: "../students/edit.html",
