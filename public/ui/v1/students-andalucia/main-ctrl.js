@@ -10,22 +10,8 @@ app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
     $scope.currentPage = 1;
     
     refresh();
-        
-    //LoadInitialData
-    $scope.loadInitialData = function() {
-
-        $http.get(API + "/loadInitialData", JSON.stringify($scope.data)).then(function(response) {
-            $scope.estado = response.status;
-            refresh();
-        }).catch(function(response) { //recoje el error en caso de que haya
-            $scope.estado = response.status;
-
-            refresh();
-
-        });
-    };
-         
-    //GET 
+    
+     
     function refresh(){
         console.log("Requesting students to <"+ API +">...");
         $http.get(API).then(function(response){
@@ -34,6 +20,19 @@ app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
             $scope.students = response.data;
         });
     }
+        
+    //LoadInitialData
+    $scope.loadInitialData = function() {
+        console.log("Loading all athletes");
+        $http.get(API + "/loadInitialData").then(function(response) {
+            console.log("LOADING res: " + response.status + " " + response.data);
+            $scope.status = response.status + ": los datos se han inicializado correctamente";
+        }).catch(function(response){
+           $scope.statusInfo = JSON.stringify(response.status,null,2); 
+        });
+        refresh();
+    };
+        
     
     //POST
     $scope.add = function(){
@@ -45,11 +44,20 @@ app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
             .then(function(response){
                 console.log("Response: " + response.status + " " +response.data);
                 refresh();
+                $scope.status = response.status + ": el dato se ha añadido correctamente";
+            }, function(error) {
+            if(error.status==400){
+                window.alert("ERROR: No puede haber campos vacios");
+            }else if(error.status==409){
+                window.alert("ERROR: la ciudad " + JSON.stringify(newStudent.city,null,2) + " ya existe.");
+            }
+           
             });
     }
 
     //DELETE RECURSO CONCRETO     
     $scope.delete = function(city) {
+        debugger;
         console.log("Deleting student with city : " + city);
         $http.delete(API + "/" + city).then(function(response) {
             console.log("DELETE res: " + response.status + " " + response.data);
@@ -67,7 +75,10 @@ app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
             .delete(API + "/")
             .then(function(response){
                 console.log("Delete response: " + response.status + " " + response.data);
+                
                 refresh();
+                $scope.status = response.status + ": los datos se han eliminado correctamente";
+                
             });
     
     }
@@ -98,7 +109,7 @@ app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
     };
 
     $scope.nextPage = function() {
-        if ($scope.students.length == 10) {
+        if ($scope.students.length == 4) {
             offset += limit;
             refresh();
             $scope.currentPage += 1;
