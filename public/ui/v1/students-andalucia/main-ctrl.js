@@ -83,7 +83,7 @@ app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
             }else{
                 window.alert("se han encontrado " + res.data.length + " datos");
             }
-            $scope.athletes = res.data;
+            $scope.students = res.data;
             console.log(res.status + " " + JSON.stringify(res.data,null,2));
         });
     };
@@ -98,7 +98,7 @@ app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
     };
 
     $scope.nextPage = function() {
-        if ($scope.athletes.length == 10) {
+        if ($scope.students.length == 10) {
             offset += limit;
             refresh();
             $scope.currentPage += 1;
