@@ -5,6 +5,10 @@ var app = angular.module("MiniPostmanApp");
 app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
     console.log("Modular MainCtrl initialized!");
     var API = "/api/v1/students-andalucia";
+    var limit = 10;
+    var offset = 0;
+    $scope.currentPage = 1;
+    
     refresh();
         
     //LoadInitialData
@@ -71,13 +75,34 @@ app.controller("MainCtrl", ["$scope","$http", function($scope, $http){
     //BUSQUEDA
     $scope.busqueda = function() {
         console.log(API + "?" + $scope.atributo + "=" + $scope.valor);
-        $http.get(API + "?" + $scope.atributo + "=" + $scope.valor).then(function succesCallback(res) {
-            $scope.status = "Recurso encontrado";
-            $scope.students = res.data;
-        }, function errorCallback(res) {
-            console.log(res.status);
-            $scope.status = res.status;
+        $http.get(API + "?" + $scope.atributo + "=" + $scope.valor).then(function (res) {
+            if(res.data.length == 0){
+                window.alert("No se ha encontrado ningun dato");
+            }else if(res.data.length == 1){
+                window.alert("Se ha encontrado 1 dato");
+            }else{
+                window.alert("se han encontrado " + res.data.length + " datos");
+            }
+            $scope.athletes = res.data;
+            console.log(res.status + " " + JSON.stringify(res.data,null,2));
         });
     };
+    
+    //PAGINACIÓN
+    $scope.previousPage = function() {
+        if ($scope.currentPage > 1) {
+            offset -= limit;
+            refresh();
+            $scope.currentPage -= 1;
+        }
+    };
+
+    $scope.nextPage = function() {
+        if ($scope.athletes.length == 10) {
+            offset += limit;
+            refresh();
+            $scope.currentPage += 1;
+        }
+    };    
     
 }]);
