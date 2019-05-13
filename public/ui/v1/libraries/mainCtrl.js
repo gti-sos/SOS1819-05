@@ -1,8 +1,8 @@
 /*global angular*/
 var app = angular.module("App");
 
-app.controller("main-ctrl", ["$scope", "$http", function($scope, $http) {
-    console.log("main-ctrl inicializado");
+app.controller("mainCtrl", ["$scope", "$http", function($scope, $http) {
+    console.log("mainCtrl inicializado");
     var API = "/api/v1/libraries-stats";
     var limit = 10;
     var offset = 0;
