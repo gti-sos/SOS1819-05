@@ -1,0 +1,657 @@
+{
+	"info": {
+		"_postman_id": "df257039-b523-43b0-9e7d-374b8c75a563",
+		"name": "SOS1819-05-students-andalucia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "282289fa-d531-41d3-a779-e333acc83747",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"students-andalucia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/loadInitialData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1c3cf77c-8759-4889-85ad-3b6b3aae5e8c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"API returns some data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length === 8).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/loadInitialData",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"students-andalucia",
+						"loadInitialData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ebb0e6b0-ba40-43f3-a867-e6f22fa67091",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"API returns some data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length === 8).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"students-andalucia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ab360b4f-e49f-40fd-9355-11010668afe6",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"city\": \"madrid\",\n        \"year\": 2017,\n        \"eso\": 1,\n        \"high\": 2,\n        \"vocational\": 3\n    }"
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"students-andalucia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport/murcia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9e301d77-470a-4193-a8de-26c85495018c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/madrid",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"students-andalucia",
+						"madrid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/madrid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9e301d77-470a-4193-a8de-26c85495018c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/madrid/2017",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"students-andalucia",
+						"madrid",
+						"2017"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/9",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "82d58134-27a1-430d-8972-587fefe547fc",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}   
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"city\": \"madrid\",\n        \"year\": 2017,\n        \"eso\": 8,\n        \"high\": 37\n    }"
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/madrid",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"students-andalucia",
+						"madrid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/murcia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e272d6a2-f8ff-4372-b8e3-ced951bf5ccf",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"city\": \"madrid\",\n        \"year\": 2017,\n        \"eso\": 0,\n        \"high\": 37,\n        \"vocational\": 7\n    }"
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/madrid",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"students-andalucia",
+						"madrid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/murcia Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e272d6a2-f8ff-4372-b8e3-ced951bf5ccf",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"city\": \"madrid\",\n        \"year\": 2017,\n        \"eso\": 0,\n        \"high\": 0,\n        \"vocational\": 0\n    }"
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/madrid/2017",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"students-andalucia",
+						"madrid",
+						"2017"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ec872e08-0e65-45cd-b9b5-77413f4e8c0e",
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"city\": \"madrid\",\n        \"year\": 2018,\n        \"eso\": 63,\n        \"high\": 37,\n        \"vocational\": 100\n    }"
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"students-andalucia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/murcia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cef2a8e1-d38f-4adb-b31b-6fdd805fb699",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/madrid",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"students-andalucia",
+						"madrid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/murcia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2f814992-5f30-423e-8028-ff9b67f3bb2f",
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/madrid",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"students-andalucia",
+						"madrid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "47fdb9ff-4f6b-4f1a-aaa2-52c57a393e0b",
+						"exec": [
+							"pm.test(\"Status code is 409\", function () {",
+							"    pm.response.to.have.status(409);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"city\": \"sevilla\",\n        \"year\": 2017,\n        \"eso\": 63,\n        \"high\": 37,\n        \"vocational\": 100\n    }"
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"students-andalucia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "353c19ce-3393-48d2-a825-07094a803973",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"city\": \"valencia\",\n        \"year\": 2017,\n        \"eso\": 63,\n        \"high\": 37\n    }"
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"students-andalucia"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
