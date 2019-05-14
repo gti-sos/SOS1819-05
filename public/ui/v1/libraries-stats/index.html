@@ -18,6 +18,25 @@
             <button class="btn btn-secondary" ng-click="loadInitialData()">Iniciar Todo</button>
         </ul>
     </div>
+    
+     <tr>
+        <td>
+            <select class="form-control" ng-model="atributo">
+                                <option value="" disabled selected>Campo Búsqueda</option>
+                                <option value="city">Ciudad</option>
+                                <option value="year">Año</option>
+                                <option value="number">Hombre</option>
+                                <option value="activities">Mujer</option>
+                                <option value="service">Total</option>
+                              </select>
+        </td>
+        <td><input placeholder="valor de busqueda" name="valor de busqueda" class="form-control" ng-model="valor" /></td>
+        <td><button class="button btn-primary" ng-click="busqueda()">Buscar</button></td>
+    </tr>
+    
+    
+    
+    
     <table class="table">
         <thead>
             <th>Ciudad</th>
