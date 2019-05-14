@@ -17,6 +17,8 @@ app.controller("editCtrl", ["$scope", "$http", "$routeParams", "$location", func
             window.alert("OK: estadística actualizada");
             $location.path("/ui/v1/students-andalucia");
 
+
+
         });
     };
 }]);
