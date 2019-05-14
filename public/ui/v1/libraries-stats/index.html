@@ -5,12 +5,12 @@
         <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
         <script type="text/javascript" src="main.js"></script>
-        <script type="text/javascript" src="mainCtrl.js"></script>
+        <script type="text/javascript" src="main-ctrl.js"></script>
     </head>
         
     
     
-    <body ng-controller="mainCtrl">
+    <body ng-controller="main-ctrl">
     <h1>Blibliotecas</h1>
     <div>
         <ul>
@@ -18,6 +18,25 @@
             <button class="btn btn-secondary" ng-click="loadInitialData()">Iniciar Todo</button>
         </ul>
     </div>
+    
+     <tr>
+        <td>
+            <select class="form-control" ng-model="atributo">
+                                <option value="" disabled selected>Campo Búsqueda</option>
+                                <option value="city">Ciudad</option>
+                                <option value="year">Año</option>
+                                <option value="number">Numero</option>
+                                <option value="activities">Actividades</option>
+                                <option value="service">Servicio</option>
+                              </select>
+        </td>
+        <td><input placeholder="valor de busqueda" name="valor de busqueda" class="form-control" ng-model="valor" /></td>
+        <td><button class="button btn-primary" ng-click="busqueda()">Buscar</button></td>
+    </tr>
+    
+    
+    
+    
     <table class="table">
         <thead>
             <th>Ciudad</th>
