@@ -19,7 +19,7 @@ angular
         }
 
         $scope.add = function() {
-            var newStudent = $scope.newAthlete;
+            var newStudent = $scope.newStudent;
             console.log("Adding a new athlete: " + JSON.stringify(newStudent, null, 2));
             $http.post(API, newStudent).then(function(res) {
                 console.log("POST res: " + res.status + " " + res.data);
