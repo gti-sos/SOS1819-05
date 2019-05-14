@@ -1,6 +1,6 @@
 /*global angular*/
 angular
-    .module("app")
+    .module("StudentsApp")
     .controller("studentsListCtrl", ["$scope", "$http", function($scope, $http) {
         console.log("studentsListCtrl inicializado");
         var API = "/api/v1/students-andalucia";

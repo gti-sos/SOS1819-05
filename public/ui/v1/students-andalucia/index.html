@@ -1,18 +1,21 @@
-<html ng-app="MiniPostmanApp">
+<html ng-app="StudentsApp">
     <head>
         <title>API Estudiantes</title>
         <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" >
         <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/bower_components/angular/angular.min.js"></script>
+        <script src="/bower_components/angular-route/angular-route.min.js"></script>
+        
         
         <script type="text/javascript" src="students-app.js"></script>
-        <script type="text/javascript" src="main-ctrl.js"></script>
+        <script type="text/javascript" src="studentsListCtrl.js"></script>
         <script type="text/javascript" src="editCtrl.js"></script>
         
     </head>
-    <body >
-        
+    <body>
+        <div ng-view>
+            
+        </div>
     </body>
-    <hr>
-    <h8 style="padding-left:40%;"><i>{{status}}</i></h8>
+
 </html>

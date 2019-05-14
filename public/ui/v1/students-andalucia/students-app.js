@@ -1,6 +1,6 @@
 /* global angular*/
 angular
-    .module("app", ["ngRoute"])
+    .module("StudentsApp", ["ngRoute"])
     .config(function($routeProvider) {
         $routeProvider
             .when("/",{
