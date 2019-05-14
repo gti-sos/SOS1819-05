@@ -4,7 +4,7 @@
         .module("MiniPostmanApp",["ngRoute"])
         .config( function ($routeProvider){
             $routeProvider
-                .when("/edit/:name",{
+                .when("/edit/:city",{
                    controller : "EditCtrl",
                    templateUrl: "edit.html"
                 });

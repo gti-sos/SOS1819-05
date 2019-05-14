@@ -11,12 +11,11 @@ app.controller("editCtrl", ["$scope", "$http", "$routeParams", "$location", func
     });
 
     $scope.put = function() {
-        console.log("Updating an athlete");
-        $http.put(API, $scope.updatedAthlete).then(function(res) {
+        console.log("Updating a student");
+        $http.put(API, $scope.updatedStudent ).then(function(res) {
             console.log(res.status + ": los datos han sido actualizados correctamente");
             window.alert("OK: estadística actualizada");
             $location.path("/ui/v1/students-andalucia");
-
 
         });
     };
