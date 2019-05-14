@@ -1,14 +1,16 @@
-/*global angular*/
+/* global angular*/
+angular
+    .module("app", ["ngRoute"])
+    .config(function($routeProvider) {
+        $routeProvider
+            .when("/",{
+                templateUrl: "studentsList.html",
+                controller: "studentsListCtrl"
+            })
+            .when("/edit/:city/:year",{
+                templateUrl: "edit.html",
+                controller: "editCtrl"
+            });
+    });
 
-    angular
-        .module("MiniPostmanApp",["ngRoute"])
-        .config( function ($routeProvider){
-            $routeProvider
-                .when("/edit/:city",{
-                   controller : "EditCtrl",
-                   templateUrl: "edit.html"
-                });
-        });
-            
-        
-    console.log("Students app initialized!");
+console.log("Students App Initialized!");
