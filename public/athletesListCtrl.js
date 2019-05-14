@@ -25,11 +25,11 @@ angular
                 console.log("POST res: " + res.status + " " + res.data);
                 refresh();
                 $scope.status = res.status + ": el dato se ha añadido correctamente";
-            }, function(error) {
-                if (error.status == 400) {
+            }).catch(function(res) {
+                if (res.status == 400) {
                     window.alert("ERROR: Debe completar todos los campos");
                 }
-                else if (error.status == 409) {
+                else if (res.status == 409) {
                     window.alert("ERROR: la ciudad " + JSON.stringify(newAthlete.city, null, 2) + " ya existe.");
                 }
             });
@@ -39,7 +39,6 @@ angular
             console.log("Deleting athlete with city : " + city);
             $http.delete(API + "/" + city).then(function(res) {
                 console.log("DELETE res: " + res.status + " " + res.data);
-
                 refresh();
                 $scope.status = res.status + ": el dato se ha eliminado correctamente";
             });
@@ -60,10 +59,11 @@ angular
             $http.get(API + "/loadInitialData").then(function(res) {
                 console.log("LOADING res: " + res.status + " " + res.data);
                 $scope.status = res.status + ": los datos se han inicializado correctamente";
+                refresh();
             }).catch(function(res) {
                 $scope.statusInfo = JSON.stringify(res.status, null, 2);
+                refresh();
             });
-            refresh();
         };
 
         $scope.previousPage = function() {

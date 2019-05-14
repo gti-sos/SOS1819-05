@@ -14,22 +14,21 @@ angular
                 $scope.updatedAthlete = res.data;
             });
         }
-        
-        $scope.update = function() {
-            $http.put(athleteURL, $scope.updatedAthlete).then(function(response) {
-                $scope.status = "Status: " + response.status;
-                alert("OK: estadistica actualizada");
-            }).catch(function(response) {
-                if (response.status == 405) {
-                    alert("Método no permitido");
-                }
-                if (response.status == 400) {
-                    alert("Asegurese de poner bien los datos");
-                }
-                $scope.estado = response.status;
 
+        $scope.update = function() {
+            $http.put(athleteURL, $scope.updatedAthlete).then(function(res) {
+                $scope.status = "Status: " + res.status;
+                window.alert("OK: estadistica actualizada");
+                $location.path("athletesApp"); //para volver
+            }, function() {
+                var i;
+                for (i = 0; i < $scope.length; i++) {
+                    if ($scope[i] == null) {
+                        $scope.status = "Error 400: debe completar todos los campos";
+                        break;
+                    }
+                }
             });
-            $location.path("athletesApp"); //para volver
             refresh();
         };
 
