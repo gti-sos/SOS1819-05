@@ -29,6 +29,6 @@ angular
 
         });
         $location.path("/"); //para volver al la vista principal
-    };
+    }
     
 }]);

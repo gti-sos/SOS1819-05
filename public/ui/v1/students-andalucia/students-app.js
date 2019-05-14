@@ -8,7 +8,7 @@ angular
                 controller: "studentsListCtrl"
             })
             .when("/edit/:city/:year",{
-                templateUrl: "edit.html",
+                templateUrl: "studentEdit.html",
                 controller: "editCtrl"
             });
     });
