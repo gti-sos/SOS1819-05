@@ -6,15 +6,12 @@ angular
     console.log("editCtrl inicializado");
     var API = "/api/v1/students-andalucia" + "/" + $routeParams.city + "/" + $routeParams.year;
 
-    refresh();
+    $http.get(API).then(function (response){
+        console.log("Data Received: "
+                        + JSON.stringify(response.data,null,2));
 
-    function refresh() {
-        console.log("Requesting athletes to <" + API + ">");
-        $http.get(API).then(function(res) {
-            console.log("Datos recibidos del servidor: " + JSON.stringify(res.data, null, 2));
-            $scope.updatedStudent = res.data;
-        });
-    }
+        $scope.updatedStudent = response.data;
+    });
 
 
     $scope.update = function() {
@@ -32,7 +29,6 @@ angular
 
         });
         $location.path("/"); //para volver al la vista principal
-        refresh();
     };
     
 }]);
