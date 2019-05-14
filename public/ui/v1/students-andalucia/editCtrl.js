@@ -18,7 +18,6 @@ app.controller("editCtrl", ["$scope", "$http", "$routeParams", "$location", func
             $location.path("/ui/v1/students-andalucia");
 
 
-
         });
     };
 }]);
