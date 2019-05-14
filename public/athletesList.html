@@ -1,0 +1,61 @@
+<h1>ATLETAS</h1>
+<div>
+    <ul>
+        <button class="btn btn-warning" ng-click="deleteAll()">Eliminar</button>
+        <button class="btn btn-secondary" ng-click="loadInitialData()">Inicializar</button>
+    </ul>
+</div>
+<table class="table table-hover table-dark">
+    <thead class="thead-dark">
+        <th>Ciudad</th>
+        <th>Año</th>
+        <th>Hombre</th>
+        <th>Mujer</th>
+        <th>Total</th>
+        <th>Acciones</th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="athlete in athletes">
+            <td><a href="/main.html#!/athletesApp/{{athlete.city}}/{{athlete.year}}">{{ athlete.city }}</a></td>
+            <td>{{ athlete.year }}</td>
+            <td>{{ athlete.man }}</td>
+            <td>{{ athlete.woman }}</td>
+            <td>{{ athlete.total }}</td>
+            <td><button class="btn btn-danger" value="delete" ng-click="delete(athlete.city)">Eliminar</button></td>
+        </tr>
+        <tr>
+            <td><input class="form-control" ng-model="newAthlete.city" /></td>
+            <td><input class="form-control" ng-model="newAthlete.year" /></td>
+            <td><input class="form-control" ng-model="newAthlete.man" /></td>
+            <td><input class="form-control" ng-model="newAthlete.woman" /></td>
+            <td><input class="form-control" ng-model="newAthlete.total" /></td>
+            <td><button class="btn btn-primary" value="add" ng-click="add()">Añadir</button></td>
+        </tr>
+    </tbody>
+</table>
+<div>
+    <ul>
+        <button class="btn btn-outline-primary" ng-click="previousPage()">Página Anterior</button>
+        <button class="btn btn-outline-secondary" ng-click="nextPage()">Página Siguiente</button>
+    </ul>
+</div>
+<tr>
+    <td>
+        <select class="form-control" ng-model="atributo">
+                                <option value="" disabled selected>Campo Búsqueda</option>
+                                <option value="city">Ciudad</option>
+                                <option value="year">Año</option>
+                                <option value="man">Hombre</option>
+                                <option value="woman">Mujer</option>
+                                <option value="total">Total</option>
+                              </select>
+    </td>
+    <td><input placeholder="valor" name="valor" class="form-control" ng-model="valor" /></td>
+    <td><button class="button btn-primary" ng-click="busqueda()">Buscar</button></td>
+</tr>
+</body>
+<hr/>
+<h8><i>{{status}}</i></h8>
+
+</html>
+    
