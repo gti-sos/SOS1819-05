@@ -282,7 +282,7 @@
 			"response": []
 		},
 		{
-			"name": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport/9",
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/9",
 			"event": [
 				{
 					"listen": "test",
@@ -294,7 +294,7 @@
 							"});"
 						],
 						"type": "text/javascript"
-					}
+					}   
 				}
 			],
 			"request": {
@@ -309,10 +309,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"city\": \"madrid\",\n        \"year\": 2017,\n        \"man\": 63,\n        \"woman\": 37\n    }"
+					"raw": "{\n        \"city\": \"madrid\",\n        \"year\": 2017,\n        \"eso\": 8,\n        \"high\": 37\n    }"
 				},
 				"url": {
-					"raw": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport/madrid",
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/madrid",
 					"protocol": "https",
 					"host": [
 						"sos1819-05",
@@ -322,7 +322,7 @@
 					"path": [
 						"api",
 						"v1",
-						"athletes-performance-sport",
+						"students-andalucia",
 						"madrid"
 					]
 				}
@@ -330,7 +330,7 @@
 			"response": []
 		},
 		{
-			"name": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport/murcia",
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/murcia",
 			"event": [
 				{
 					"listen": "test",
@@ -359,10 +359,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"city\": \"madrid\",\n        \"year\": 2017,\n        \"man\": 0,\n        \"woman\": 37,\n        \"total\": 37\n    }"
+					"raw": "{\n        \"city\": \"madrid\",\n        \"year\": 2017,\n        \"eso\": 0,\n        \"high\": 37,\n        \"vocational\": 7\n    }"
 				},
 				"url": {
-					"raw": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport/madrid",
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/madrid",
 					"protocol": "https",
 					"host": [
 						"sos1819-05",
@@ -372,7 +372,7 @@
 					"path": [
 						"api",
 						"v1",
-						"athletes-performance-sport",
+						"students-andalucia",
 						"madrid"
 					]
 				}
@@ -380,7 +380,7 @@
 			"response": []
 		},
 		{
-			"name": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport/murcia Copy",
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/murcia Copy",
 			"event": [
 				{
 					"listen": "test",
@@ -409,10 +409,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"city\": \"madrid\",\n        \"year\": 2017,\n        \"man\": 0,\n        \"woman\": 0,\n        \"total\": 0\n    }"
+					"raw": "{\n        \"city\": \"madrid\",\n        \"year\": 2017,\n        \"eso\": 0,\n        \"high\": 0,\n        \"vocational\": 0\n    }"
 				},
 				"url": {
-					"raw": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport/madrid/2017",
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/madrid/2017",
 					"protocol": "https",
 					"host": [
 						"sos1819-05",
@@ -422,7 +422,7 @@
 					"path": [
 						"api",
 						"v1",
-						"athletes-performance-sport",
+						"students-andalucia",
 						"madrid",
 						"2017"
 					]
@@ -431,7 +431,7 @@
 			"response": []
 		},
 		{
-			"name": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport",
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia",
 			"event": [
 				{
 					"listen": "test",
@@ -458,10 +458,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"city\": \"madrid\",\n        \"year\": 2018,\n        \"man\": 63,\n        \"woman\": 37,\n        \"total\": 100\n    }"
+					"raw": "{\n        \"city\": \"madrid\",\n        \"year\": 2018,\n        \"eso\": 63,\n        \"high\": 37,\n        \"vocational\": 100\n    }"
 				},
 				"url": {
-					"raw": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport",
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia",
 					"protocol": "https",
 					"host": [
 						"sos1819-05",
@@ -471,14 +471,14 @@
 					"path": [
 						"api",
 						"v1",
-						"athletes-performance-sport"
+						"students-andalucia"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport/murcia",
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/murcia",
 			"event": [
 				{
 					"listen": "test",
@@ -501,7 +501,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport/madrid",
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/madrid",
 					"protocol": "https",
 					"host": [
 						"sos1819-05",
@@ -511,7 +511,7 @@
 					"path": [
 						"api",
 						"v1",
-						"athletes-performance-sport",
+						"students-andalucia",
 						"madrid"
 					]
 				}
@@ -519,7 +519,7 @@
 			"response": []
 		},
 		{
-			"name": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport/murcia",
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/murcia",
 			"event": [
 				{
 					"listen": "test",
@@ -542,7 +542,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport/madrid",
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia/madrid",
 					"protocol": "https",
 					"host": [
 						"sos1819-05",
@@ -552,7 +552,7 @@
 					"path": [
 						"api",
 						"v1",
-						"athletes-performance-sport",
+						"students-andalucia",
 						"madrid"
 					]
 				}
@@ -560,7 +560,7 @@
 			"response": []
 		},
 		{
-			"name": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport",
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia",
 			"event": [
 				{
 					"listen": "test",
@@ -587,10 +587,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"city\": \"sevilla\",\n        \"year\": 2017,\n        \"man\": 63,\n        \"woman\": 37,\n        \"total\": 100\n    }"
+					"raw": "{\n        \"city\": \"sevilla\",\n        \"year\": 2017,\n        \"eso\": 63,\n        \"high\": 37,\n        \"vocational\": 100\n    }"
 				},
 				"url": {
-					"raw": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport",
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia",
 					"protocol": "https",
 					"host": [
 						"sos1819-05",
@@ -600,14 +600,14 @@
 					"path": [
 						"api",
 						"v1",
-						"athletes-performance-sport"
+						"students-andalucia"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport",
+			"name": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia",
 			"event": [
 				{
 					"listen": "test",
@@ -634,10 +634,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"city\": \"valencia\",\n        \"year\": 2017,\n        \"man\": 63,\n        \"woman\": 37\n    }"
+					"raw": "{\n        \"city\": \"valencia\",\n        \"year\": 2017,\n        \"eso\": 63,\n        \"high\": 37\n    }"
 				},
 				"url": {
-					"raw": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport",
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/students-andalucia",
 					"protocol": "https",
 					"host": [
 						"sos1819-05",
@@ -647,7 +647,7 @@
 					"path": [
 						"api",
 						"v1",
-						"athletes-performance-sport"
+						"students-andalucia"
 					]
 				}
 			},
