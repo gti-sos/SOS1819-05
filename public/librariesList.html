@@ -1,4 +1,3 @@
-
     <h1>Blibliotecas</h1>
     <div>
         <ul>
@@ -21,10 +20,6 @@
         <td><input placeholder="valor de busqueda" name="valor de busqueda" class="form-control" ng-model="valor" /></td>
         <td><button class="button btn-primary" ng-click="busqueda()">Buscar</button></td>
     </tr>
-    
-    
-    
-    
     <table class="table">
         <thead>
             <th>Ciudad</th>
@@ -36,7 +31,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="librarie in libraries">
-                <td><a href="/api/v1/libraries-stats{{ librarie.city }}/{{ librarie.year }}">{{ librarie.city }}</a></td>
+                <td><a href="/main.html#!/librariesApp/{{ librarie.city }}/{{ librarie.year }}">{{ librarie.city }}</a></td>
                 <td>{{ librarie.year }}</td>
                 <td>{{ librarie.number }}</td>
                 <td>{{ librarie.activities }}</td>
