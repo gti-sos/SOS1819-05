@@ -15,21 +15,23 @@ angular
             });
         }
         
+        
+        
+        
         $scope.update = function() {
-            $http.put(librarieURL, $scope.updatedLibrarie).then(function(response) {
-                $scope.status = "Status: " + response.status;
-                alert("OK: biblioteca actualizada");
-            }).catch(function(response) {
-                if (response.status == 405) {
-                    alert("Método no permitido");
+            $http.put(librarieURL, $scope.updatedLibrarie).then(function(res) {
+                $scope.status = "Status: " + res.status;
+                window.alert("Biblioteca actualizada");
+                $location.path("librariesApp"); //para volver
+            }, function() {
+                var i;
+                for (i = 0; i < $scope.length; i++) {
+                    if ($scope[i] == null) {
+                        $scope.status = "Error 400:Rellene todos los atributos";
+                        break;
+                    }
                 }
-                if (response.status == 400) {
-                    alert("Datos incorrectos");
-                }
-                $scope.estado = response.status;
-
             });
-            $location.path("librariesApp"); //para volver
             refresh();
         };
 
