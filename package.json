@@ -10,7 +10,7 @@
     "test-libraries-stats":"newman run https://www.getpostman.com/collections/ac5b50fcccf7541dcc49",
     "test-students-andalucia": "newman run https://www.getpostman.com/collections/1de93c6a578e3b686229",
     "test": "newman run tests/backend/SOS1819-05-athletes-performance-sport.postman_collection.json && protractor tests/tests.js",
-    "testEnrique": "newman run /backend/SOS1891-05-libraries-stats.postman_collection.json && protractor tests/tests.js",
+    "test-Enrique": "newman run /backend/SOS1891-05-libraries-stats.postman_collection.json && protractor tests/tests.js",
     "posttest": "killall phantomjs",
     "start": "node index.js"
   },

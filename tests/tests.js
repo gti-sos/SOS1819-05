@@ -4,7 +4,7 @@ exports.config = {
     specs: [
         "e2e/TC01-loadAthletes.js",
         "e2e/TC02-newAthlete.js",
-        "e2e/TC03-deleteAthlete.js",
+        "e2e/TC03-deleteAthlete.js"
     ]
 
 };

@@ -1,7 +1,7 @@
 <h1>ATLETAS</h1>
 <div>
     <ul>
-        <button class="btn btn-warning" ng-click="deleteAll()">Eliminar</button>
+        <button class="btn btn-warning" value="delete" ng-click="deleteAll()">Eliminar</button>
         <button class="btn btn-secondary" ng-click="loadInitialData()">Inicializar</button>
     </ul>
 </div>
@@ -21,7 +21,7 @@
             <td>{{ athlete.man }}</td>
             <td>{{ athlete.woman }}</td>
             <td>{{ athlete.total }}</td>
-            <td><button class="btn btn-danger" value="delete" ng-click="delete(athlete.city)">Eliminar</button></td>
+            <td><button class="btn btn-danger" ng-click="delete(athlete.city)">Eliminar</button></td>
         </tr>
         <tr>
             <td><input class="form-control" ng-model="newAthlete.city" /></td>
