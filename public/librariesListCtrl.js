@@ -43,7 +43,7 @@ angular
                 console.log("DELETE res: " + res.status + " " + res.data);
     
                 refresh();
-                $scope.status = res.status + ": el dato se ha eliminado correctamente";
+               window.alert("Dato Borrado");
             });
         };
     
@@ -53,7 +53,7 @@ angular
                 console.log("DELETEALL res: " + res.status + " " + res.data);
     
                 refresh();
-                $scope.status = res.status + ": los datos se han eliminado correctamente";
+                window.alert("Datos borrados correctamente");
             });
         };
     
@@ -63,6 +63,7 @@ angular
                 console.log("LOADING res: " + res.status + " " + res.data);
                 $scope.status = res.status + ": los datos se han inicializado correctamente";
                 refresh();
+                window.alert("Datos Reiniciados");
     
             });
         };

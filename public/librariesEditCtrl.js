@@ -15,6 +15,9 @@ angular
             });
         }
         
+        
+        
+        
         $scope.update = function() {
             $http.put(librarieURL, $scope.updatedLibrarie).then(function(res) {
                 $scope.status = "Status: " + res.status;
