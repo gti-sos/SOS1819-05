@@ -24,15 +24,15 @@ angular
             $http.post(API, newLibrarie).then(function(res) {
                 console.log("POST res: " + res.status + " " + res.data);
                 refresh();
-                $scope.status = res.status + ": el dato se ha añadido correctamente";
+                window.alert("Dato añadido correctamente");
             }, function(res) {
                 if (newLibrarie.length !== 5) {
                     console.log(res.status + "debe completar todos los campos");
-                    $scope.status = "Error 400: debe completar todos los campos";
+                    window.alert("Debe rellenar todos los campos");
                 }
                 else if ($scope.city == newLibrarie.city && $scope.year == newLibrarie.year) {
                     console.log(res.status + "la estadística ya existe");
-                    $scope.status = res.status + ": la estadística ya existe";
+                    window.alert("Este dato ya existe");
                 }
             });
         };
