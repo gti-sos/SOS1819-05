@@ -12,6 +12,8 @@ angular
                 controller: "athletesEditCtrl"
             })
             
+                        
+
             .when("/librariesApp",{
                 templateUrl: "librariesList.html",
                 controller: "librariesListCtrl"
