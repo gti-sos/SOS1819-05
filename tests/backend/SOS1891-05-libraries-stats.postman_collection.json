@@ -1,0 +1,548 @@
+{
+	"info": {
+		"_postman_id": "0ca62a04-0046-4e07-b040-40b1e90a5577",
+		"name": "SOS1891-05-libraries-stats",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://sos1819-labs-sos1819egv.c9users.io/api/v1/libraries-stats/loadInitialData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7d3e8ad9-4a8a-40b3-bba4-67fafad76938",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/libraries-stats/loadInitialData",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"libraries-stats",
+						"loadInitialData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-labs-sos1819egv.c9users.io/api/v1/libraries-stats",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c72c8dc1-1383-4e3d-9f5b-706776757c65",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"city\": \"sevilla\",\n        \"year\": \"2017\",\n        \"number\": \"97\",\n        \"activities\": \"79\",\n        \"service\": \"96,62\"\n    }"
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/libraries-stats",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"libraries-stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c79aa3cb-a70d-41e0-a5c5-a9384ed2f40f",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"city\": \"Albacete\",\n    \"year\": 2017, \n    \"number\" : 22, \n    \"activities\": 58,\n    \"service\": 99.76 \n}"
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/libraries-stats",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"libraries-stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-labs-sos1819egv.c9users.io/api/v1/libraries-stats/almeria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3a2abbb7-2508-47a5-accb-e80266add5a3",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/libraries-stats/Sevilla",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"libraries-stats",
+						"Sevilla"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-labs-sos1819egv.c9users.io/api/v1/libraries-stats/almeria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d7e10eb0-533d-4de4-8fa2-b815ab5b2c18",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"city\": \"Almeria\",\n        \"year\": 2017,\n        \"number\": 97,\n        \"activities\": 799999999,\n        \"service\": 96.62\n    }"
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/libraries-stats/Almeria",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"libraries-stats",
+						"Almeria"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-05.herokuapp.com/api/v1/libraries-stats/Cadiz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "70294197-a690-4ccf-89a0-8edc944c4ae1",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"city\": \"Almeria\",\n    \"year\": 2017, \n    \"number\" : 22, \n    \"activities\": 58\n}"
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/libraries-stats/Almeria",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"libraries-stats",
+						"Almeria"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-labs-sos1819egv.c9users.io/api/v1/libraries-stats",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5a9b14b6-efe3-4436-b65b-3fd6a38cf528",
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"city\": \"Albacete\",\n    \"year\": 2017, \n    \"number\" : 22, \n    \"activities\": 58,\n    \"service\": 99.76 \n}"
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/libraries-stats",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"libraries-stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-labs-sos1819egv.c9users.io/api/v1//libraries-stats/cadiz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dc709b37-c847-4fe1-91e7-409431b34574",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/libraries-stats/Sevilla",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"libraries-stats",
+						"Sevilla"
+					]
+				},
+				"description": "// DELETE /libraries/almeria"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-labs-sos1819egv.c9users.io/api/v1/libraries-stats/cadiz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1f6fb9df-c520-43cf-9602-44b62b9e7872",
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/libraries-stats/Albacete",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"libraries-stats",
+						"Albacete"
+					]
+				},
+				"description": "POST incorrecto"
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-labs-sos1819egv.c9users.io/api/v1/libraries-stats",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "676dc30e-b636-4ec5-9a38-2234b65a1348",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"city\": \"sevilla\",\n        \"year\": \"2017\",\n        \"number\": \"97\",\n        \"activities\": \"79\",\n        \"service\": \"96,62\"\n    }"
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/libraries-stats",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"libraries-stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://sos1819-05.herokuapp.com/api/v1/libraries-stats/loadInitialData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3cb0e718-caaf-44c5-9ae8-ac510f5392f1",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/libraries-stats/loadInitialData",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"libraries-stats",
+						"loadInitialData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get 2 parametros",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a3470436-cd73-4282-965d-c11418126a1f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/libraries-stats/Almeria/2017",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"libraries-stats",
+						"Almeria",
+						"2017"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
