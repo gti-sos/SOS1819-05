@@ -227,38 +227,38 @@ app.post(API_PATH + "/libraries-stats/docs", (req, res) => {
     });
     
     //PUT Dos Parametros
-
     app.put(API_PATH + "/libraries-stats/:city/:year", (req, res) => {
-
         var city = req.params.city;
-        var year = parseInt(req.params.year);
-        var updateLibraries = req.body;
+        var year = req.params.year;
+        var librarie = req.body;
 
-        librariestats.find({ "city": city,"year": year }).toArray((err, librariesArray) => {
-            if (err){
-                console.log(err);
-            }
-            if (librariesArray.length == 0) {
-                console.log("PUT recurso no encontrado 404");
-                res.sendStatus(404);
-
-            }else if (!updateLibraries.city || !updateLibraries.year ||!updateLibraries.number || !updateLibraries.activities || !updateLibraries.service 
-                ||updateLibraries.city != city || updateLibraries.year != year|| Object.keys(updateLibraries).length != 5 ){
-                    console.log("PUT recurso encontrado. Se intenta actualizar con campos no validos 400");
-                    res.sendStatus(400);
-    
-            }else {
-                    librariestats.updateOne({ "city": city}, { $set: updateLibraries });
-                    librariestats.updateOne({ "year": year }, { $set: updateLibraries });
-                    console.log("PUT realizado con exito");
-                    res.sendStatus(200);
-    
-        
-            }
-        });
-
+        if (city != librarie.city || year != librarie.year || Object.keys(librarie).length !== 5) {
+            res.sendStatus(400);
+            console.log(Date() + " - Hacking attemp!");
+        }
+        else {
+            libraries.find({ "city": city, "year": parseInt(year) }).toArray((err, librariesPut) => {
+                if (err) {
+                    console.log("Error :" + err);
+                }
+                else if (librariesPut.length == 0) {
+                    console.log("No hemos encontrado el elemento para actualizar");
+                    res.sendStatus(404);
+                }
+                else {
+                    libraries.update({ "city": city, "year": parseInt(year) }, librarie, (err, numUpdated) => {
+                        if (err) {
+                            console.log("Error " + err);
+                        }
+                        else {
+                            console.log(" - updated" + numUpdated);
+                            res.sendStatus(200);
+                        }
+                    });
+                }
+            });
+        }
     });
-
 
     //PUT INCORRECTO
     app.put(API_PATH + "/libraries-stats", (req, res) => {
