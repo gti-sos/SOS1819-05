@@ -10,7 +10,7 @@ angular
         function refresh() {
             console.log("Requesting libraries to <" + librarieURL + ">");
             $http.get(librarieURL).then(function(res) {
-                console.log("Datos recibidos del servidor: " + JSON.stringify(res.data, null, 2));
+                console.log("Datos recibidos: " + JSON.stringify(res.data, null, 2));
                 $scope.updatedLibrarie = res.data;
             });
         }
@@ -19,12 +19,12 @@ angular
             $http.put(librarieURL, $scope.updatedLibrarie).then(function(res) {
                 $scope.status = "Status: " + res.status;
                 window.alert("OK: estadistica actualizada");
-                $location.path("librariesApp"); //para volver
+                $location.path("librariesApp");
             }, function() {
                 var i;
                 for (i = 0; i < $scope.length; i++) {
                     if ($scope[i] == null) {
-                        $scope.status = "Error 400: debe completar todos los campos";
+                        $scope.status = "Debe completar todos los campos";
                         break;
                     }
                 }
