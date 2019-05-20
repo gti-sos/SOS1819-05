@@ -3,7 +3,7 @@ angular
     .module("app")
     .controller("librariesEditCtrl", ["$scope", "$http", "$routeParams", "$location", function($scope, $http, $routeParams, $location) {
         console.log("librariesEditCtrl initialized!");
-        var athleteURL = "/api/v1/libraries-stats/" + $routeParams.city + "/" + $routeParams.year;
+        var librarieURL = "/api/v1/libraries-stats/" + $routeParams.city + "/" + $routeParams.year;
 
         refresh();
 
