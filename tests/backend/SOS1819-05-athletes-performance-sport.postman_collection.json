@@ -6,6 +6,52 @@
 	},
 	"item": [
 		{
+			"name": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport/loadInitialData Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1c3cf77c-8759-4889-85ad-3b6b3aae5e8c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"API returns some data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length === 8).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport/loadInitialData",
+					"protocol": "https",
+					"host": [
+						"sos1819-05",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"athletes-performance-sport",
+						"loadInitialData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport",
 			"event": [
 				{

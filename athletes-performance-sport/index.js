@@ -295,7 +295,7 @@ module.exports = function(app, API_PATH, athletes) {
                     res.sendStatus(404);
                 }
                 else {
-                    athletes.update({ "city": city, "year": parseInt(year) }, athlete, (err, numUpdated) => {
+                    athletes.updateOne({ "city": city, "year": parseInt(year) }, {$set: athlete}, (err, numUpdated) => {
                         if (err) {
                             console.log("Error " + err);
                         }
