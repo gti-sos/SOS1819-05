@@ -1,13 +1,17 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
+var request = require("request");
+var cors = require("cors");
 
 //ALVARO
 var athletesApi = require("./athletes-performance-sport");
 var secureAthletesApi = require("./secureAthletesPerformanceSport");
+
 //MARTA
 var studentsAPI = require("./students-andalucia");
 var secureStudentsAPI = require("./secureStudentsAndalucia");
+
 //ENRIQUE
 var librariesAPI = require("./libraries-stats");
 var secureLibrariesAPI = require("./secureLibrariesStats");
@@ -18,8 +22,9 @@ var API_PATH_SECURE = "/api/v1/secure";
 
 app.use(bodyParser.json());
 
-app.use("/", express.static(path.join(__dirname,"public")));
+app.use("/", express.static(path.join(__dirname, "public")));
 
+app.use(cors());
 
 var port = process.env.PORT || 8080;
 
@@ -31,6 +36,36 @@ const client = new MongoClient(uri, { useNewUrlParser: true });
 
 var athletes;
 
+/*-------------------------------------------------------PROXY ALVARO---------------------------------------------------------------------*/
+var proxyAlvaro = "/api/v1/athletes-performance-sport/proxy";
+var apiServerHostAlvaro = "https://sos1819-05.herokuapp.com/api/v1/athletes-performance-sport";
+
+app.use(proxyAlvaro, function(req, res) {
+    console.log('piped: ' + apiServerHostAlvaro);
+    req.pipe(request(apiServerHostAlvaro)).pipe(res);
+});
+
+/*-------------------------------------------------------PROXY MARTA---------------------------------------------------------------------*/
+
+var proxyMarta = "/api/v1/students-andalucia/proxy";
+var apiServerHostMarta = "https://sos1819-05.herokuapp.com/api/v1/students-andalucia";
+
+app.use(proxyMarta, function(req, res) {
+    console.log('piped: ' + apiServerHostMarta);
+    req.pipe(request(apiServerHostMarta)).pipe(res);
+});
+
+/*-------------------------------------------------------PROXY ENRIQUE---------------------------------------------------------------------*/
+var proxyEnrique = "/api/v1/libraries-stats/proxy";
+var apiServerHostEnrique = "https://sos1819-05.herokuapp.com/api/v1/libraries-stats";
+
+app.use(proxyEnrique, function(req, res) {
+    console.log('piped: ' + apiServerHostEnrique);
+    req.pipe(request(apiServerHostEnrique)).pipe(res);
+});
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------------*/
 client.connect(err => {
     if (err) {
         console.log("Error en la conexión con la base de datos");
@@ -77,7 +112,7 @@ client.connect(err => {
 
                         app.listen(port, () => {
                             console.log("Server ready on port: " + port);
-                        }).on("error",(e)=>{
+                        }).on("error", (e) => {
                             console.log("Server NOT READY: " + e);
                         });
                     }

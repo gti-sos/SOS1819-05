@@ -22,6 +22,18 @@ angular
             .when("/analytics", {
                 templateUrl: "analytics.html",
                 controller: "analyticsCtrl"
+            })
+            .when("/analytics/Athletes", {
+                templateUrl: "analyticsAthletes.html",
+                controller: "analyticsAthletesCtrl"
+            })
+            .when("/integrations", {
+                templateUrl: "integrations.html",
+                controller: "integrationsCtrl"
+            })
+            .when("/integrations/Athletes", {
+                templateUrl: "integrationsAthletes.html",
+                controller: "integrationsAthletesCtrl"
             });
     });
 

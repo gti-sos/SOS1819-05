@@ -1,92 +1,81 @@
-/*global angular*/
-/*global Highcharts*/
-/*global google*/
+/* global angular*/
+/* global Highcharts*/
 angular
     .module("app")
     .controller("analyticsCtrl", ["$scope", "$http", function($scope, $http) {
         console.log("analyticsCtrl initialized");
-        var api = "/api/v1/athletes-performance-sport";
 
-        $http.get(api).then(function(res) {
-            Highcharts.chart('analytics1', {
+        var apiAlvaro = "/api/v1/athletes-performance-sport/proxy";
+        var apiMarta = "/api/v1/students-andalucia/proxy";
+        var apiEnrique = "/api/v1/libraries-stats/proxy";
 
-                title: {
-                    text: 'athletes analytics'
-                },
+        $http.get(apiAlvaro).then(function(res1) {
+            $http.get(apiMarta).then(function(res2) {
+                $http.get(apiEnrique).then(function(res3) {
 
-                subtitle: {
-                    text: 'Source: athletes-performance-sport'
-                },
-
-                xAxis: {
-                    categories: res.data.map(function(a) { return a.city })
-                },
-
-                yAxis: {
-                    title: {
-                        text: 'Number of Athletes'
-                    }
-                },
-                legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle'
-                },
-
-                series: [{
-                    name: 'Man',
-                    data: res.data.map(function(a) { return a.man })
-                }, {
-                    name: 'Woman',
-                    data: res.data.map(function(a) { return a.woman })
-                }, {
-                    name: 'Total',
-                    data: res.data.map(function(a) { return a.total })
-                }],
-
-                responsive: {
-                    rules: [{
-                        condition: {
-                            maxWidth: 500
+                    Highcharts.chart('analytics', {
+                        title: {
+                            text: 'Integration Grupal'
                         },
-                        chartOptions: {
-                            legend: {
-                                layout: 'horizontal',
-                                align: 'center',
-                                verticalAlign: 'bottom'
-                            }
-                        }
-                    }]
-                }
+                        xAxis: {
+                            categories: ['Almería', 'Cadiz', 'Cordoba', 'Granada', 'Huelva', 'Jaen', 'Malaga', 'Sevilla']
+                        },
+                        labels: {
+                            items: [{
+                                style: {
+                                    left: '50px',
+                                    top: '18px',
+                                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                                }
+                            }]
+                        },
+                        series: [{
+                            type: 'column',
+                            name: 'man',
+                            data: res1.data.map(function(a) { return a.man })
+                        }, {
+                            type: 'column',
+                            name: 'woman',
+                            data: res1.data.map(function(a) { return a.woman })
+                        }, {
+                            type: 'column',
+                            name: 'total',
+                            data: res1.data.map(function(a) { return a.total })
+                        }, {
+                            type: 'column',
+                            name: 'eso',
+                            data: res2.data.map(function(a) { return a.eso })
+                        }, {
+                            type: 'column',
+                            name: 'high',
+                            data: res2.data.map(function(a) { return a.high })
+                        }, {
+                            type: 'column',
+                            name: 'vocational',
+                            data: res2.data.map(function(a) { return a.vocational })
+                        }, {
+                            type: 'column',
+                            name: 'number',
+                            data: res3.data.map(function(a) { return a.number })
+                        }, {
+                            type: 'column',
+                            name: 'activities',
+                            data: res3.data.map(function(a) { return a.activities })
+                        }, {
+                            type: 'column',
+                            name: 'service',
+                            data: res3.data.map(function(a) { return a.service })
+
+                        }, {
+                            type: 'column',
+                            name: 'year',
+                            data: res1.data.map(function(a) { return a.year })
+                        }]
+                    });
+
+                });
             });
-
-            google.charts.load('current', {
-                'packages': ['geochart'],
-                'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
-            });
-            google.charts.setOnLoadCallback(drawMarkersMap);
-
-            function drawMarkersMap() {
-                var data = google.visualization.arrayToDataTable([
-                    ['City', 'Total'],
-                    ['Almeria', res.data[0].total],
-                    ['Cadiz', 1324110],
-                    ['Cordoba', 959574],
-                    ['Granada', 907563],
-                    ['Huelva', 655875],
-                    ['Jaen', 607906],
-                    ['Malaga', 380181],
-                    ['Seville', 371282]
-                ]);
-
-                var options = {
-                    region: 'ES',
-                    displayMode: 'markers',
-                    colorAxis: { colors: ['green', 'blue'] }
-                };
-
-                var chart = new google.visualization.GeoChart(document.getElementById('analytics2'));
-                chart.draw(data, options);
-            }
         });
+
+
     }]);
