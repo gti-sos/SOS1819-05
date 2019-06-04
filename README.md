@@ -18,7 +18,7 @@
 - **Usos**:
     - [https://sos1819-05.herokuapp.com/main.html#!/usos](https://sos1819-05.herokuapp.com/main.html#!/usos)
     **About**
-    - [https://sos1819-05.herokuapp.com/main.html#!/about](https://sos1819-05.herokuapp.com/main.html#!/about)
+    - [https://sos1819-05.herokuapp.com/main.html#!/about](https://youtu.be/_ApesNo8mho)
 
 - **DOCKERHUB**:
     docker run -e MSG='funciona' -e PORT=8081 -p 8081:8081 -d alvortmed/sos1819-05
