@@ -45,6 +45,46 @@ app.use(proxyAlvaro, function(req, res) {
     req.pipe(request(apiServerHostAlvaro)).pipe(res);
 });
 
+var proxyAlvaro2 = "/api/v1/athletes-performance-sport/proxy2";
+var apiServerHostAlvaro2 = "https://sos1819-07.herokuapp.com/api/v1/takingstats";
+
+app.use(proxyAlvaro2, function(req, res){
+   console.log("'piped: " + apiServerHostAlvaro2);
+   req.pipe(request(apiServerHostAlvaro2)).pipe(res);
+});
+
+var proxyAlvaro3 = "/api/v1/athletes-performance-sport/proxy3";
+var apiServerHostAlvaro3 = "https://sos1819-03.herokuapp.com/api/v1/computers-attacks-stats";
+
+app.use(proxyAlvaro3, function(req, res){
+    console.log("piped: " + apiServerHostAlvaro3);
+    req.pipe(request(apiServerHostAlvaro3)).pipe(res);
+});
+
+var proxyAlvaro4 = "/api/v1/athletes-performance-sport/proxy4";
+var apiServerHostAlvaro4 = "https://sos1819-11.herokuapp.com/api/v2/public-health-expenses";
+
+app.use(proxyAlvaro4, function(req, res){
+    console.log("piped: " + apiServerHostAlvaro4);
+    req.pipe(request(apiServerHostAlvaro4)).pipe(res);
+});
+
+var proxyAlvaro5 = "/api/v1/athletes-performance-sport/proxy5";
+var apiServerHostAlvaro5 = "https://swapi.co/api/starships/?format=json";
+
+app.use(proxyAlvaro5, function(req, res){
+    console.log("piped: " + apiServerHostAlvaro5);
+    req.pipe(request(apiServerHostAlvaro5)).pipe(res);
+});
+
+var proxyAlvaro6 = "/api/v1/athletes-performance-sport/proxy6";
+var apiServerHostAlvaro6 = "https://parallelum.com.br/fipe/api/v1/motos/marcas";
+
+app.use(proxyAlvaro6, function(req, res){
+    console.log("piped: " + apiServerHostAlvaro6);
+    req.pipe(request(apiServerHostAlvaro6)).pipe(res);
+});
+
 /*-------------------------------------------------------PROXY MARTA---------------------------------------------------------------------*/
 
 var proxyMarta = "/api/v1/students-andalucia/proxy";

@@ -27,13 +27,22 @@ angular
                 templateUrl: "analyticsAthletes.html",
                 controller: "analyticsAthletesCtrl"
             })
-            .when("/integrations", {
-                templateUrl: "integrations.html",
-                controller: "integrationsCtrl"
-            })
             .when("/integrations/Athletes", {
                 templateUrl: "integrationsAthletes.html",
                 controller: "integrationsAthletesCtrl"
+            })
+            .when("/usos/Athletes", {
+                templateUrl: "usosAthletes.html",
+                controller: "usosAthletesCtrl"
+            })
+            .when("/usos", {
+                templateUrl: "usos.html"
+            })
+            .when("/integrations", {
+                templateUrl: "integrations.html"
+            })
+            .when("/about", {
+                templateUrl: "about.html"
             });
     });
 
