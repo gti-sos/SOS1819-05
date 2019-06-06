@@ -6,10 +6,17 @@ exports.config = {
         "e2e/TC02-newAthlete.js",
         "e2e/TC03-deleteAthlete.js",
         
+<<<<<<< HEAD
         
         "e2e/TC01-loadLibraries.js",
         "e2e/TC02-newLibraries.js",
         "e2e/TC03-deleteLibraries.js"
+=======
+          "e2e/TC01-loadLibraries.js",
+        "e2e/TC02-newLibraries.js",
+        "e2e/TC03-deleteLibraries.js"
+    
+>>>>>>> 227d609c865f144d6229736e27f33611ee3e5861
     ]
 
 };

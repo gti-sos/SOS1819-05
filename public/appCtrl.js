@@ -12,6 +12,10 @@ angular
                 controller: "athletesEditCtrl"
             })
             
+<<<<<<< HEAD
+=======
+                        
+>>>>>>> 227d609c865f144d6229736e27f33611ee3e5861
             .when("/librariesApp",{
                 templateUrl: "librariesList.html",
                 controller: "librariesListCtrl"
