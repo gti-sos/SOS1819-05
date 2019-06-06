@@ -1,4 +1,4 @@
-/* global angular*/
+/*global angular*/
 angular
     .module("app", ["ngRoute"])
     .config(function($routeProvider) {
@@ -10,23 +10,6 @@ angular
             .when("/athletesApp/:city/:year", {
                 templateUrl: "athletesEdit.html",
                 controller: "athletesEditCtrl"
-            })
-<<<<<<< HEAD
-            
-<<<<<<< HEAD
-=======
-                        
->>>>>>> 227d609c865f144d6229736e27f33611ee3e5861
-            .when("/librariesApp",{
-=======
-            .when("/librariesApp", {
->>>>>>> ad4a349ea53f9290d6e45106b2b1f5e567aa5b60
-                templateUrl: "librariesList.html",
-                controller: "librariesListCtrl"
-            })
-            .when("/librariesApp/:city/:year", {
-                templateUrl: "librariesEdit.html",
-                controller: "librariesEditCtrl"
             })
             .when("/analytics", {
                 templateUrl: "analytics.html",
