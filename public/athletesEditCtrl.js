@@ -16,20 +16,17 @@ angular
         }
 
         $scope.update = function() {
-            $http.put(athleteURL, $scope.updatedAthlete).then(function(res) {
-                $scope.status = "Status: " + res.status;
-                window.alert("OK: estadistica actualizada");
-                $location.path("athletesApp"); //para volver
-            }, function() {
-                var i;
-                for (i = 0; i < $scope.length; i++) {
-                    if ($scope[i] == null) {
-                        $scope.status = "Error 400: debe completar todos los campos";
-                        break;
-                    }
-                }
-            });
-            refresh();
-        };
+            console.log("tratamiento del error");
 
+            if (Object.values($scope.updatedAthlete).includes("")) {
+                window.alert("Debe rellenar todos los campos");
+            }
+            else {
+                $http.put(athleteURL, $scope.updatedAthlete).then(function(res) {
+                    window.alert("Modificado correctamente");
+                    refresh();
+                    $location.path("athletesApp");
+                });
+            }
+        };
     }]);

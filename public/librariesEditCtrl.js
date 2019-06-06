@@ -14,20 +14,17 @@ angular
                 $scope.updatedLibrarie = res.data;
             });
         }
-        
-        
-        
-        
+
         $scope.update = function() {
             $http.put(librarieURL, $scope.updatedLibrarie).then(function(res) {
                 $scope.status = "Status: " + res.status;
-                window.alert("Biblioteca actualizada");
-                $location.path("librariesApp"); //para volver
+                window.alert("OK: estadistica actualizada");
+                $location.path("librariesApp");
             }, function() {
                 var i;
                 for (i = 0; i < $scope.length; i++) {
                     if ($scope[i] == null) {
-                        $scope.status = "Error 400:Rellene todos los atributos";
+                        $scope.status = "Debe completar todos los campos";
                         break;
                     }
                 }

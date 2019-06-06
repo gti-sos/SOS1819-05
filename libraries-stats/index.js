@@ -227,8 +227,7 @@ app.post(API_PATH + "/libraries-stats/docs", (req, res) => {
     });
     
     //PUT Dos Parametros
-
-    app.put(API_PATH + "/libraries-stats/:city/:year", (req, res) => {
+      app.put(API_PATH + "/libraries-stats/:city/:year", (req, res) => {
 
         var city = req.params.city;
         var year = parseInt(req.params.year);
@@ -258,7 +257,6 @@ app.post(API_PATH + "/libraries-stats/docs", (req, res) => {
         });
 
     });
-
 
     //PUT INCORRECTO
     app.put(API_PATH + "/libraries-stats", (req, res) => {

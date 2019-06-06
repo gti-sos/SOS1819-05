@@ -7,10 +7,10 @@
     "pretest": "tests/runPhantom.sh",
     "test-todos": "newman run https://www.getpostman.com/collections/9436c45085d241e377d2; newman run https://www.getpostman.com/collections/ac5b50fcccf7541dcc49; newman run https://www.getpostman.com/collections/1de93c6a578e3b686229",
     "test-athletes-performance-sport": "newman run https://www.getpostman.com/collections/ac5b50fcccf7541dcc49",
-    "test-libraries-stats":"newman run https://www.getpostman.com/collections/ac5b50fcccf7541dcc49",
+    "test-libraries-stats": "newman run https://www.getpostman.com/collections/ac5b50fcccf7541dcc49",
     "test-students-andalucia": "newman run https://www.getpostman.com/collections/1de93c6a578e3b686229",
     "test": "newman run tests/backend/SOS1819-05-athletes-performance-sport.postman_collection.json && protractor tests/tests.js",
-    "testEnrique": "newman run /backend/SOS1891-05-libraries-stats.postman_collection.json && protractor tests/tests.js",
+    "test-Enrique": "protractor tests/tests.js",
     "posttest": "killall phantomjs",
     "start": "node index.js"
   },
@@ -25,8 +25,11 @@
   },
   "homepage": "https://github.com/gti-sos/SOS1819-05#readme",
   "dependencies": {
+    "angular-chart.js": "^1.1.1",
     "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
-    "mongodb": "^3.2.2"
+    "mongodb": "^3.2.2",
+    "request": "^2.88.0"
   }
 }

@@ -1,6 +1,6 @@
 describe('Check if a new athlete can be created', function() {
     it('List should grow after the athlete creation', function() {
-        browser.get("http://localhost:8080/main.html#!/athletesApp");
+        browser.get("https://sos1819-05.herokuapp.com/main.html#!/athletesApp");
         element.all(by.repeater("athlete in athletes"))
             .then(function(initialAthletes) {
                 element(by.model('newAthlete.city')).sendKeys('barcelona');
